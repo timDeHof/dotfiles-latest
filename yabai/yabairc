@@ -55,15 +55,15 @@ if command -v sketchybar &>/dev/null; then
     yabai -m config bottom_padding 0
     yabai -m config left_padding 0
     yabai -m config right_padding 230
-  elif [[ "$display_resolution" == *"2048 x 1280"*]]; then 
+  elif [[ "$display_resolution" == *"2048 x 1280"*]]; then
     # My macbook pro
-    yabai -m config top_padding 38
+    yabai -m config top_padding 12
     yabai -m config bottom_padding 0
     yabai -m config left_padding 0
     yabai -m config right_padding 230
-  elif [[ "$display_resolution" == *"2560 x 1440"*]]; then 
+  elif [[ "$display_resolution" == *"2560 x 1440"*]]; then
     # This matches my MSI MAG321CQR
-    yabai -m config top_padding 48
+    yabai -m config top_padding 12
     yabai -m config bottom_padding 0
     yabai -m config left_padding 0
     yabai -m config right_padding 230
