@@ -55,6 +55,18 @@ if command -v sketchybar &>/dev/null; then
     yabai -m config bottom_padding 0
     yabai -m config left_padding 0
     yabai -m config right_padding 230
+  elif [[ "$display_resolution" == *"2048 x 1280"*]]; then 
+    # My macbook pro
+    yabai -m config top_padding 38
+    yabai -m config bottom_padding 0
+    yabai -m config left_padding 0
+    yabai -m config right_padding 230
+  elif [[ "$display_resolution" == *"2560 x 1440"*]]; then 
+    # This matches my MSI MAG321CQR
+    yabai -m config top_padding 48
+    yabai -m config bottom_padding 0
+    yabai -m config left_padding 0
+    yabai -m config right_padding 230
     # Resolution for my shorts
   elif [[ "$display_resolution" == *"1536 x 2048"* ]]; then
     yabai -m config top_padding 38
@@ -91,7 +103,7 @@ if command -v sketchybar &>/dev/null; then
     # yabai -m config bottom_padding 400
   fi
 else
-  yabai -m config top_padding 02
+  yabai -m config top_padding 32
   yabai -m config bottom_padding 00
 fi
 
@@ -100,7 +112,7 @@ fi
 ###############################################################################
 
 # Top padding for felixkratz sketchybar
-# yabai -m config top_padding 39
+yabai -m config top_padding 39
 # Top padding for default sketchybar
 # yabai -m config top_padding 25
 # yabai -m config bottom_padding 05
@@ -115,7 +127,7 @@ fi
 yabai -m config window_opacity on
 # yabai -m config window_opacity off
 
-opacity_value=0.87
+opacity_value=0.90
 
 # Make the below apps transparent
 yabai -m signal --add event=window_focused app="^${apps_transparent}$" action="yabai -m config active_window_opacity $opacity_value"

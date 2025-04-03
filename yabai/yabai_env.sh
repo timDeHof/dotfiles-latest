@@ -7,7 +7,7 @@
 # yabai -m query --windows | jq -r '.[].app'
 
 # apps_transparent="(Spotify|kitty|Neovide|Google Chrome|Code|WezTerm|Ghostty)"
-apps_transparent="(Neovide|Code|Ghostty)"
+apps_transparent="(Neovide|Code|Ghostty|kitty|Google Chrome)"
 
 if [[ $(echo "$display_resolution" | grep -c "Resolution") -ge 2 ]]; then
   apps_stream="(Microsoft Edge|Google Chrome|OBS Studio|Jitsi Meet|Discord)"
