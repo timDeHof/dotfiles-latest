@@ -222,6 +222,10 @@ setopt histignorespace
 #   }
 # fi
 
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
 # Common settings and plugins
 alias ll='ls -lh'
 alias lla='ls -alh'
@@ -242,6 +246,35 @@ alias kgpo='kubectl get pods -o wide'
 
 # golang aliases
 alias coverage='go test -coverprofile=coverage.out && go tool cover -html=coverage.out'
+
+# docker aliases
+alias docker-compose="docker compose"
+
+# Useful aliases
+alias ls='ls -G'
+alias ll='ls -lh'
+alias la='ls -lah'
+alias l='ls -CF'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias md='mkdir -p'
+alias rd='rmdir'
+alias h='history'
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+# Git aliases
+alias gss='git status'
+alias gaa='git add'
+alias gcc='git commit'
+alias gpp='git push'
+alias gll='git pull'
+alias gdd='git diff'
+alias glo='git checkout'
+alias gbb='git branch'
+alias glog='git log --oneline --graph --decorate'
 
 # echo
 # echo "2"
