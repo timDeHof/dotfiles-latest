@@ -187,5 +187,6 @@
   ],
   "git.autofetch": true,
   "workbench.colorTheme": "Linkarzu Dark Eldritch",
-  "git.enableSmartCommit": true
+  "git.enableSmartCommit": true,
+  "git.confirmSync": false
 }
