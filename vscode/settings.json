@@ -188,5 +188,7 @@
   "git.autofetch": true,
   "workbench.colorTheme": "Linkarzu Dark Eldritch",
   "git.enableSmartCommit": true,
-  "git.confirmSync": false
+  "git.confirmSync": false,
+  "totalTypeScript.hideAllTips": true,
+  "totalTypeScript.hideBasicTips": false
 }

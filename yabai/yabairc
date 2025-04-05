@@ -57,13 +57,13 @@ if command -v sketchybar &>/dev/null; then
     yabai -m config right_padding 230
   elif [[ "$display_resolution" == *"2048 x 1280"*]]; then
     # My macbook pro
-    yabai -m config top_padding 12
+    yabai -m config top_padding 20
     yabai -m config bottom_padding 0
     yabai -m config left_padding 0
     yabai -m config right_padding 230
   elif [[ "$display_resolution" == *"2560 x 1440"*]]; then
     # This matches my MSI MAG321CQR
-    yabai -m config top_padding 12
+    yabai -m config top_padding 20
     yabai -m config bottom_padding 0
     yabai -m config left_padding 0
     yabai -m config right_padding 230
@@ -112,7 +112,7 @@ fi
 ###############################################################################
 
 # Top padding for felixkratz sketchybar
-yabai -m config top_padding 39
+yabai -m config top_padding 48
 # Top padding for default sketchybar
 # yabai -m config top_padding 25
 # yabai -m config bottom_padding 05
@@ -127,7 +127,7 @@ yabai -m config top_padding 39
 yabai -m config window_opacity on
 # yabai -m config window_opacity off
 
-opacity_value=0.90
+opacity_value=0.85
 
 # Make the below apps transparent
 yabai -m signal --add event=window_focused app="^${apps_transparent}$" action="yabai -m config active_window_opacity $opacity_value"
@@ -183,8 +183,8 @@ yabai -m config mouse_follows_focus off
 # "stack" - is what I use, keeps a single app on the front
 # "bsp" - binary space partitioning enables automatic tiling (partitioning)
 # "float" - default mode, windows are not managed
-yabai -m config layout stack
-# yabai -m config layout bsp
+# yabai -m config layout stack
+yabai -m config layout bsp
 # yabai -m config layout float
 
 ###############################################################################
@@ -248,7 +248,7 @@ yabai -m config \
   mouse_drop_action swap \
   external_bar all:28:0
 
-yabai -m config external_bar all:$(sketchybar --query bar | jq .height):0
+yabai -m config external_bar all:32:0
 
 # THIS IS VERY IMPORTANT
 # It ensures that when I restart yabai, all the rules (including the manage=off rules)
