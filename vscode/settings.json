@@ -1,6 +1,6 @@
 {
   "window.zoomLevel": 1,
-  "editor.fontFamily": "JetBrainsMono Nerd Font",
+  "editor.fontFamily": "MesloLGS NF",
   "editor.fontLigatures": true,
   // This is how you change the bracket pair colors
   "editor.bracketPairColorization.enabled": true,
@@ -26,7 +26,10 @@
   "[markdown]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-
+  "prettier.documentSelectors": ["**/*.astro"],
+  "[astro]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
   // "markdown-header-coloring.userDefinedHeaderColor": {
   //   "enabled": true,
   //   "Header_1": {
@@ -186,9 +189,48 @@
     }
   ],
   "git.autofetch": true,
-  "workbench.colorTheme": "Linkarzu Dark Eldritch",
   "git.enableSmartCommit": true,
   "git.confirmSync": false,
   "totalTypeScript.hideAllTips": true,
-  "totalTypeScript.hideBasicTips": false
+  "totalTypeScript.hideBasicTips": false,
+  "astro.content-intellisense": true,
+  "prettier.requireConfig": true,
+  "workbench.settings.applyToAllProfiles": ["prettier.requireConfig"],
+  "terminal.integrated.defaultProfile.osx": "zsh",
+  "[typescript]": {
+    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+  },
+  "workbench.sideBar.location": "right",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "githubPullRequests.pullBranch": "never",
+  "terminal.external.osxExec": "warp.app",
+  "roo-cline.allowedCommands": [
+    "npm test",
+    "npm install",
+    "tsc",
+    "git log",
+    "git diff",
+    "git show"
+  ],
+  "workbench.activityBar.location": "top",
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "yaml.schemas": {
+    "/Users/timothydehof/.vscode/extensions/continue.continue-1.0.7-darwin-x64/config-yaml-schema.json": [
+      ".continue/**/*.yaml"
+    ]
+  },
+  "[json]": {
+    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+  },
+  "workbench.colorTheme": "Tokyo Storm Gogh",
+  "gitlens.ai.model": "gitkraken",
+  "gitlens.ai.gitkraken.model": "gemini:gemini-2.0-flash",
+  "cline.disableBrowserTool": true
 }

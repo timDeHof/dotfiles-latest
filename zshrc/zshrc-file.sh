@@ -874,47 +874,47 @@ if [ "$OS" = 'Linux' ]; then
 
   # Initialize Starship, if installed, otherwise install it
   # Extract the last digit of $HOST
-  last_digit="${HOST: -1}"
+  # last_digit="${HOST: -1}"
   # Determine the Starship config file to use
-  case $last_digit in
-  1)
-    starship_file="starship1.toml"
-    ;;
-  2)
-    starship_file="starship2.toml"
-    ;;
-  3)
-    starship_file="starship3.toml"
-    ;;
-  *)
-    starship_file="starship4.toml"
-    ;;
-  esac
+  # case $last_digit in
+  # 1)
+  #   starship_file="starship1.toml"
+  #   ;;
+  # 2)
+  #   starship_file="starship2.toml"
+  #   ;;
+  # 3)
+  #   starship_file="starship3.toml"
+  #   ;;
+  # *)
+  #   starship_file="starship4.toml"
+  #   ;;
+  # esac
 
-  install_this_package="yes"
-  if command -v starship &>/dev/null; then
-    # This is what applies the specific profile
-    export STARSHIP_CONFIG=$HOME/github/dotfiles-latest/starship-config/$starship_file >/dev/null 2>&1
-    eval "$(starship init zsh)" >/dev/null 2>&1
-  else
-    if [ "$install_this_package" != "no" ]; then
-      echo
-      echo "Installing starship, please wait..."
-      # -y at the end answers 'yes' to any prompts
-      curl -sS https://starship.rs/install.sh | sh -s - -y 2>&1 >/dev/null
-      # Verify starship installation
-      if ! command -v starship >/dev/null 2>&1; then
-        echo -e "${boldRed}Warning: Failed to install Starship. Check this manually${noColor}"
-        # sleep 1
-      else
-        # After installing, initialize it
-        eval "$(starship init zsh)"
-        # This is what applies the specific profile
-        export STARSHIP_CONFIG=$HOME/github/dotfiles-latest/starship-config/$starship_file
-        echo "Starship installed successfully."
-      fi
-    fi
-  fi
+  # install_this_package="yes"
+  # if command -v starship &>/dev/null; then
+  #   # This is what applies the specific profile
+  #   export STARSHIP_CONFIG=$HOME/github/dotfiles-latest/starship-config/$starship_file >/dev/null 2>&1
+  #   eval "$(starship init zsh)" >/dev/null 2>&1
+  # else
+  #   if [ "$install_this_package" != "no" ]; then
+  #     echo
+  #     echo "Installing starship, please wait..."
+  #     # -y at the end answers 'yes' to any prompts
+  #     curl -sS https://starship.rs/install.sh | sh -s - -y 2>&1 >/dev/null
+  #     # Verify starship installation
+  #     if ! command -v starship >/dev/null 2>&1; then
+  #       echo -e "${boldRed}Warning: Failed to install Starship. Check this manually${noColor}"
+  #       # sleep 1
+  #     else
+  #       # After installing, initialize it
+  #       eval "$(starship init zsh)"
+  #       # This is what applies the specific profile
+  #       export STARSHIP_CONFIG=$HOME/github/dotfiles-latest/starship-config/$starship_file
+  #       echo "Starship installed successfully."
+  #     fi
+  #   fi
+  # fi
 
   # Initialize z.lua, if it is installed
   # If not installed, this will install lua and then z.lua
@@ -1165,3 +1165,5 @@ fi
 
 # Added by LM Studio CLI (lms)
 export PATH="$PATH:/Users/linkarzu/.lmstudio/bin"
+
+eval "$(oh-my-posh init zsh)"
