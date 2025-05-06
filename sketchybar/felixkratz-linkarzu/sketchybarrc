@@ -97,7 +97,33 @@ source "$ITEM_DIR/front_app.sh"
 # Shows you the value of the input volume level
 source "$ITEM_DIR/mic.sh"
 
-source "$ITEM_DIR/aerospace.sh"
+# Aerospace integration - Creates workspace indicators for Aerospace window manager across multiple monitors
+# Will create default workspace indicators even if Aerospace isn't running yet
+if [ -f "$ITEM_DIR/aerospace.sh" ]; then
+    # Check if Aerospace is installed
+    if command -v aerospace >/dev/null 2>&1; then
+        # Aerospace is installed, source the script
+        source "$ITEM_DIR/aerospace.sh"
+        
+        # Check if Aerospace server is running
+        if aerospace list-workspaces --all >/dev/null 2>&1; then
+            echo "Aerospace integration loaded and connected to server"
+        else
+            echo "Aerospace integration loaded but server not running - workspace indicators will update when server starts" >&2
+        fi
+        
+        # Trigger an initial update of workspace status
+        sketchybar --trigger aerospace_workspace_change
+        sketchybar --trigger aerospace_monitor_change
+    else
+        # Aerospace command not found, but we'll still source the script
+        # This creates default workspace indicators that will work once Aerospace is installed
+        echo "Warning: Aerospace command not found - creating default workspace indicators" >&2
+        source "$ITEM_DIR/aerospace.sh"
+    fi
+else
+    echo "Warning: Aerospace integration skipped - script missing" >&2
+fi
 
 ###############################################################################
 #                                 Center
