@@ -71,20 +71,7 @@ defaults=(
 
 sketchybar --default "${defaults[@]}"
 
-# sketchybar --add event aerospace_workspace_change
 
-# for sid in $(aerospace list-workspaces --all); do
-#     sketchybar --add item space.$sid left \
-#         --subscribe space.$sid aerospace_workspace_change \
-#         --set space.$sid \
-#         background.color=0x44ffffff \
-#         background.corner_radius=5 \
-#         background.height=20 \
-#         background.drawing=off \
-#         label="$sid" \
-#         click_script="aerospace workspace $sid" \
-#         script="$CONFIG_DIR/plugins/aerospace.sh $sid"
-# done
 
 ###############################################################################
 #                                Left side
@@ -109,6 +96,8 @@ source "$ITEM_DIR/front_app.sh"
 # If you right click it you can change the mic.
 # Shows you the value of the input volume level
 source "$ITEM_DIR/mic.sh"
+
+source "$ITEM_DIR/aerospace.sh"
 
 ###############################################################################
 #                                 Center
