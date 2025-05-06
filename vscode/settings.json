@@ -232,5 +232,14 @@
   "workbench.colorTheme": "Tokyo Storm Gogh",
   "gitlens.ai.model": "gitkraken",
   "gitlens.ai.gitkraken.model": "gemini:gemini-2.0-flash",
-  "cline.disableBrowserTool": true
+  "cline.disableBrowserTool": true,
+  "mcp": {
+    "servers": {
+      "Context7": {
+        "type": "stdio",
+        "command": "npx",
+        "args": ["-y", "@upstash/context7-mcp@latest"]
+      }
+    }
+  }
 }
