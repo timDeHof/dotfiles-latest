@@ -1,21 +1,121 @@
 {
-  "window.zoomLevel": 1,
-  "editor.fontFamily": "MesloLGS NF",
-  "editor.fontLigatures": true,
+  "workbench.colorTheme": "Tokyo Storm Gogh",
+  "workbench.activityBar.location": "bottom",
+  "workbench.editor.showTabs": "multiple",
+  "workbench.statusBar.visible": true,
+  "workbench.startupEditor": "none",
+  "workbench.tips.enabled": false,
+  "editor.minimap.enabled": false,
+  "breadcrumbs.enabled": false,
+  "workbench.iconTheme": "material-icon-theme",
+  "material-icon-theme.hidesExplorerArrows": true,
+  "workbench.tree.enableStickyScroll": false,
+  "workbench.tree.renderIndentGuides": "none",
+  "workbench.tree.indent": 16,
+  "explorer.compactFolders": false,
+  "explorer.confirmDragAndDrop": false,
+  "explorer.confirmDelete": false,
+  "explorer.decorations.badges": false,
+  "window.zoomLevel": 2,
+  "tailwindCSS.experimental.classRegex": [
+    ["className\\s*:\\s*['\"]([^'\"]*)['\"]"]
+  ],
+  "window.titleBarStyle": "native",
   // This is how you change the bracket pair colors
   "editor.bracketPairColorization.enabled": true,
   "workbench.colorCustomizations": {
-    "editorBracketHighlight.foreground1": "#EBFAFA",
-    "editorBracketHighlight.foreground2": "#EBFAFA",
-    "editorBracketHighlight.foreground3": "#EBFAFA",
-    "editorBracketHighlight.foreground4": "#EBFAFA",
-    "editorBracketHighlight.foreground5": "#EBFAFA",
-    "editorBracketHighlight.foreground6": "#EBFAFA"
+    "editorCursor.background": "#000000",
+    "editorBracketHighlight.foreground1": "#f7768e",
+    "editorBracketHighlight.foreground2": "#ff9e64",
+    "editorBracketHighlight.foreground3": "#e0af68",
+    "editorBracketHighlight.foreground4": "#9ece6a",
+    "editorBracketHighlight.foreground5": "#73daca",
+    "editorBracketHighlight.foreground6": "#7aa2f7"
   },
+  "custom-ui-style.electron": {
+    "titleBarStyle": "hiddenInset",
+    "trafficLightPosition": {
+      "x": 20,
+      "y": 16
+    }
+  },
+  "custom-ui-style.stylesheet": {
+    ".notification-toast": "box-shadow: none !important",
+    ".quick-input-widget.show-file-icons": "box-shadow: none !important",
+    ".quick-input-widget": "top: 25vh !important",
+    ".quick-input-list .scrollbar": "display: none",
+    ".monaco-action-bar.quick-input-inline-action-bar": "display: none",
+    ".editor-widget.find-widget": "box-shadow: none; border-radius: 4px",
+    ".quick-input-titlebar": "background: #100B15 !important",
+    ".monaco-workbench .part.editor > .content .editor-group-container > .title.title-border-bottom:after": "display: none",
+    ".monaco-scrollable-element > .shadow.top": "display: none",
+    ".sidebar .title-label": "padding: 0 !important",
+    ".sidebar": "border: none !important",
+    ".monaco-workbench .monaco-list:not(.element-focused):focus:before": "outline: none !important",
+    ".monaco-list-row.focused": "outline: none !important",
+    ".monaco-editor .scroll-decoration": "display: none",
+    ".title.show-file-icons .label-container .monaco-icon-label.file-icon": "justify-content: center; padding: 0 !important",
+    ".title .monaco-icon-label:after": "margin-right: 0",
+    ".monaco-workbench .part.editor > .content .editor-group-container > .title > .label-container > .title-label": "padding-left: 60px",
+    ".title .monaco-icon-label.file-icon": "margin: 0 60px",
+    ".monaco-editor .cursors-layer .cursor": "background: linear-gradient(135deg, #09203f, #00ffd2)",
+    ".monaco-scrollable-element>.shadow.top": "box-shadow: 0px 0px 10px rgba(0,0,0,.75) !important; top: -3px !important",
+    ".monaco-tree .monaco-tree-row .label-name, .monaco-list .monaco-list-row,.monaco-icon-label .label-name": "font-family: 'Hack Nerd Font Mono', monospace !important;font-size: 14px !important; font-weight: 400 !important",
+    ".composite.title": "display: flex !important;flex-direction: row !important;align-items: center !important; text-transform: uppercase; color: #bc9abc !important",
+    ".composite.title h2": "font-weight: bold !important;font-size: 12px !important;text-transform: uppercase;color: #bc9abc !important;",
+    ".composite.title h2::before": "display: inline-block; margin-right: 6px; font-size: 1.1rem;content: '🚀';"
+  },
+  "custom-ui-style.external.imports": [
+    "file:///Users/timothyDehof/custom-vscode.js"
+  ],
+  "custom-ui-style.font.sansSerif": "Hack Nerd Font Mono",
+  "custom-ui-style.font.monospace": "Hack Nerd Font Mono",
+  "editor.multiCursorModifier": "ctrlCmd",
+  "terminal.integrated.suggest.enabled": true,
+  "terminal.integrated.cursorBlinking": true,
+  "editor.cursorBlinking": "expand",
+  "editor.cursorStyle": "block",
+  "editor.cursorSmoothCaretAnimation": "on",
+  "editor.fontFamily": "Hack Nerd Font Mono",
+  "editor.fontSize": 14,
+  "editor.fontLigatures": true,
+  "editor.lineHeight": 2.25,
+  "editor.tokenColorCustomizations": {
+    "textMateRules": [
+      {
+        "scope": "comment",
+        "settings": {
+          "fontStyle": "italic",
+          "foreground": "#00ffd2"
+        }
+      }
+    ]
+  },
+  "editor.codeLens": false,
+  "editor.links": false,
+  "editor.matchBrackets": "never",
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "scm.diffDecorations": "none",
+  "editor.lineNumbers": "on",
+  "editor.tabSize": 2,
+  "editor.detectIndentation": false,
+  "editor.guides.indentation": false,
+  "editor.renderWhitespace": "none",
+  "editor.occurrencesHighlight": "off",
+  "editor.selectionHighlight": false,
+  "editor.scrollbar.horizontal": "hidden",
+  "editor.scrollbar.vertical": "hidden",
+  "editor.overviewRulerBorder": false,
+  "editor.hideCursorInOverviewRuler": true,
+  "editor.tabCompletion": "on",
+  "editor.snippetSuggestions": "top",
+  "emmet.triggerExpansionOnTab": true,
+  "files.autoSave": "afterDelay",
   "editor.accessibilitySupport": "off",
+  "terminal.integrated.fontFamily": "Hack Nerd Font Mono",
   // If you don't set this, you have to be manually autoformatting
   "editor.formatOnSave": true,
-  "editor.minimap.enabled": false,
   // I don't want a default formatter for any other file type
   "editor.defaultFormatter": null,
   // Specifically set Prettier as the formatter for jsonc
@@ -28,166 +128,8 @@
   },
   "prettier.documentSelectors": ["**/*.astro"],
   "[astro]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "astro-build.astro-vscode"
   },
-  // "markdown-header-coloring.userDefinedHeaderColor": {
-  //   "enabled": true,
-  //   "Header_1": {
-  //     "color": "#0D1116",
-  //     "backgroundColor": "background-color: #987afb;",
-  //     "textDecoration": ""
-  //   },
-  //   "Header_2": {
-  //     "color": "#0D1116",
-  //     "backgroundColor": "background-color: #37f499;",
-  //     "textDecoration": ""
-  //   },
-  //   "Header_3": {
-  //     "color": "#0D1116",
-  //     "backgroundColor": "background-color: #04d1f9;",
-  //     "textDecoration": ""
-  //   },
-  //   "Header_4": {
-  //     "color": "#0D1116",
-  //     "backgroundColor": "background-color: #949ae5;",
-  //     "textDecoration": ""
-  //   },
-  //   "Header_5": {
-  //     "color": "#0D1116",
-  //     "backgroundColor": "background-color: #19dfcf;",
-  //     "textDecoration": ""
-  //   },
-  //   "Header_6": {
-  //     "color": "#0D1116",
-  //     "backgroundColor": "background-color: #5fa9f4;",
-  //     "textDecoration": ""
-  //   }
-  // },
-
-  "markdown-header-coloring.userDefinedHeaderColor": {
-    "enabled": true,
-    "Header_1": {
-      "color": "#0D1116",
-      "backgroundColor": "background-color: #5b4996;",
-      "textDecoration": ""
-    },
-    "Header_2": {
-      "color": "#0D1116",
-      "backgroundColor": "background-color: #21925b;",
-      "textDecoration": ""
-    },
-    "Header_3": {
-      "color": "#0D1116",
-      "backgroundColor": "background-color: #027d95;",
-      "textDecoration": ""
-    },
-    "Header_4": {
-      "color": "#0D1116",
-      "backgroundColor": "background-color: #585c89;",
-      "textDecoration": ""
-    },
-    "Header_5": {
-      "color": "#0D1116",
-      "backgroundColor": "background-color: #0f857c;",
-      "textDecoration": ""
-    },
-    "Header_6": {
-      "color": "#0D1116",
-      "backgroundColor": "background-color: #396592;",
-      "textDecoration": ""
-    }
-  },
-
-  // To enable key-repeating, run the commands that the vim plugin provides at the top of its instructions
-  // After you run those commands, make sure to LOG OUT OF MACOS and then log back in
-  "vim.leader": "<Space>",
-  "vim.hlsearch": true,
-  "vim.easymotion": true,
-  "vim.incsearch": true,
-  "vim.useSystemClipboard": true,
-  // When I move down in folds through j and k I don't want the folds to expand
-  "vim.foldfix": true,
-
-  "vim.insertModeKeyBindings": [
-    // I like going out of insert mode using kj
-    { "before": ["k", "j"], "after": ["<Esc>"] }
-  ],
-
-  "vim.normalModeKeyBindingsNonRecursive": [
-    // Fold with enter
-    { "before": ["<Enter>"], "commands": ["editor.toggleFold"] },
-    {
-      "before": ["<Space>", "m", "p"],
-      "commands": ["markdown.showPreviewToSide"]
-    },
-    // splits
-    { "before": ["leader", "|"], "commands": [":vsplit"] },
-    { "before": ["leader", "-"], "commands": [":split"] },
-    // Go to beginning and end of line with gh and gl
-    { "before": ["g", "h"], "commands": ["cursorHome"] },
-    { "before": ["g", "l"], "commands": ["cursorEnd"] },
-    // Nope, disabled this as I use them for telescope buffers and snipe
-    // { "before": ["H"], "commands": ["cursorHome"] },
-    // { "before": ["L"], "commands": ["cursorEnd"] },
-    // Show and hide the sidebar
-    {
-      "before": ["leader", "e"],
-      "commands": ["workbench.action.toggleSidebarVisibility"]
-    },
-    // Search in files
-    {
-      "before": ["leader", "s", "g"],
-      "commands": ["workbench.action.findInFiles"]
-    },
-    // This is the way I find files in neovim
-    {
-      "before": ["leader", "f", "f"],
-      "commands": ["workbench.action.quickOpen"]
-    },
-    // Close the current tab
-    {
-      "before": ["leader", "b", "d"],
-      "commands": ["workbench.action.closeActiveEditor"]
-    }
-  ],
-  "vim.visualModeKeyBindings": [
-    // Stay in visual mode while indenting
-    { "before": ["<"], "commands": ["editor.action.outdentLines"] },
-    { "before": [">"], "commands": ["editor.action.indentLines"] },
-    // Move selected lines while staying in visual mode
-    { "before": ["J"], "commands": ["editor.action.moveLinesDownAction"] },
-    { "before": ["K"], "commands": ["editor.action.moveLinesUpAction"] },
-    // When in visual mode, I want to select to the beginning of the line
-    {
-      "before": ["g", "h"],
-      "commands": [
-        {
-          "command": "cursorMove",
-          "args": {
-            "to": "wrappedLineStart",
-            "by": "line",
-            "value": 1,
-            "select": true
-          }
-        }
-      ]
-    },
-    // When in visual mode, I want to select to the end of the line
-    {
-      "before": ["g", "l"],
-      "commands": [
-        {
-          "command": "cursorMove",
-          "args": {
-            "to": "wrappedLineEnd",
-            "by": "line",
-            "value": 1,
-            "select": true
-          }
-        }
-      ]
-    }
-  ],
   "git.autofetch": true,
   "git.enableSmartCommit": true,
   "git.confirmSync": false,
@@ -196,13 +138,11 @@
   "astro.content-intellisense": true,
   "prettier.requireConfig": true,
   "workbench.settings.applyToAllProfiles": ["prettier.requireConfig"],
-  "terminal.integrated.defaultProfile.osx": "zsh",
   "[typescript]": {
-    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+    "editor.defaultFormatter": "vscode.typescript-language-features"
   },
-  "workbench.sideBar.location": "right",
   "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "vscode.typescript-language-features"
   },
   "[typescriptreact]": {
     "editor.defaultFormatter": "vscode.typescript-language-features"
@@ -217,7 +157,6 @@
     "git diff",
     "git show"
   ],
-  "workbench.activityBar.location": "top",
   "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
@@ -229,10 +168,8 @@
   "[json]": {
     "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
   },
-  "workbench.colorTheme": "Tokyo Storm Gogh",
   "gitlens.ai.model": "gitkraken",
   "gitlens.ai.gitkraken.model": "gemini:gemini-2.0-flash",
-  "cline.disableBrowserTool": true,
   "mcp": {
     "servers": {
       "Context7": {
@@ -241,5 +178,100 @@
         "args": ["-y", "@upstash/context7-mcp@latest"]
       }
     }
-  }
+  },
+  "diffEditor.ignoreTrimWhitespace": false,
+  "terminal.integrated.env.osx": {
+    "Q_NEW_SESSION": "1"
+  },
+  "terminal.integrated.shell.osx": "/bin/zsh",
+  "editor.wordWrap": "on",
+  "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
+  "editor.guides.bracketPairs": true,
+  "containers.containerClient": "com.microsoft.visualstudio.containers.docker",
+  "quokka.automaticRestart": true,
+  "joplin.token": "281e9b5bb1fd560c65afff7261af488b7481fe7605314ce1bec61a26dccdba53bab3c7787bcea2906ac60a90721cb57800ae49063cf3ef4b263ab25798d49483",
+  "workbench.layoutControl.enabled": false,
+  "terminal.integrated.fontLigatures.enabled": true,
+  "terminal.integrated.fontSize": 14,
+  "terminal.integrated.hideOnStartup": "always",
+  "terminal.integrated.lineHeight": 1.125,
+  "terminal.integrated.letterSpacing": 1,
+  "code-runner.executorMap": {
+    "javascript": "clear && node",
+    "java": "cd $dir && javac $fileName && java $fileNameWithoutExt",
+    "c": "cd $dir && gcc $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+    "zig": "zig run",
+    "cpp": "cd $dir && g++ $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+    "objective-c": "cd $dir && gcc -framework Cocoa $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+    "php": "php",
+    "python": "clear && python -u",
+    "perl": "perl",
+    "perl6": "perl6",
+    "ruby": "ruby",
+    "go": "go run",
+    "lua": "lua",
+    "groovy": "groovy",
+    "powershell": "powershell -ExecutionPolicy ByPass -File",
+    "bat": "cmd /c",
+    "shellscript": "bash",
+    "fsharp": "fsi",
+    "csharp": "scriptcs",
+    "vbscript": "cscript //Nologo",
+    "typescript": "clear && ts-node",
+    "coffeescript": "coffee",
+    "scala": "scala",
+    "swift": "swift",
+    "julia": "julia",
+    "crystal": "crystal",
+    "ocaml": "ocaml",
+    "r": "Rscript",
+    "applescript": "osascript",
+    "clojure": "lein exec",
+    "haxe": "haxe --cwd $dirWithoutTrailingSlash --run $fileNameWithoutExt",
+    "rust": "cd $dir && rustc $fileName && $dir$fileNameWithoutExt",
+    "racket": "racket",
+    "scheme": "csi -script",
+    "ahk": "autohotkey",
+    "autoit": "autoit3",
+    "dart": "dart",
+    "pascal": "cd $dir && fpc $fileName && $dir$fileNameWithoutExt",
+    "d": "cd $dir && dmd $fileName && $dir$fileNameWithoutExt",
+    "haskell": "runghc",
+    "nim": "nim compile --verbosity:0 --hints:off --run",
+    "lisp": "sbcl --script",
+    "kit": "kitc --run",
+    "v": "v run",
+    "sass": "sass --style expanded",
+    "scss": "scss --style expanded",
+    "less": "cd $dir && lessc $fileName $fileNameWithoutExt.css",
+    "FortranFreeForm": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+    "fortran-modern": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+    "fortran_fixed-form": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+    "fortran": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+    "sml": "cd $dir && sml $fileName",
+    "mojo": "mojo run",
+    "erlang": "escript",
+    "spwn": "spwn build",
+    "pkl": "cd $dir && pkl eval -f yaml $fileName -o $fileNameWithoutExt.yaml",
+    "gleam": "gleam run -m $fileNameWithoutExt"
+  },
+  "code-runner.runInTerminal": true,
+  "githubPullRequests.createDefaultBaseBranch": "createdFromBranch",
+  "githubPullRequests.defaultCommentType": "single",
+  "workbench.sideBar.location": "right",
+  "workbench.editor.enablePreview": false,
+  "amazonQ.suppressPrompts": {
+    "amazonQChatDisclaimer": true
+  },
+  "amazonQ.workspaceIndex": true,
+  "kilo-code.allowedCommands": [
+    "npm test",
+    "npm install",
+    "tsc",
+    "git log",
+    "git diff",
+    "git show"
+  ],
+  "chat.commandCenter.enabled": false,
+  "typescript.updateImportsOnFileMove.enabled": "always"
 }

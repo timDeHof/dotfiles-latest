@@ -104,14 +104,14 @@ if [ -f "$ITEM_DIR/aerospace.sh" ]; then
     if command -v aerospace >/dev/null 2>&1; then
         # Aerospace is installed, source the script
         source "$ITEM_DIR/aerospace.sh"
-        
+
         # Check if Aerospace server is running
         if aerospace list-workspaces --all >/dev/null 2>&1; then
             echo "Aerospace integration loaded and connected to server"
         else
             echo "Aerospace integration loaded but server not running - workspace indicators will update when server starts" >&2
         fi
-        
+
         # Trigger an initial update of workspace status
         sketchybar --trigger aerospace_workspace_change
         sketchybar --trigger aerospace_monitor_change
@@ -175,7 +175,8 @@ source "$ITEM_DIR/volume.sh"
 # CPU usage indicator
 source "$ITEM_DIR/cpu.sh"
 
-# s
+# Network usage indicator
+source "$ITEM_DIR/network.sh"
 
 ###############################################################################
 #                            Community plugins
