@@ -273,5 +273,6 @@
     "git show"
   ],
   "chat.commandCenter.enabled": false,
-  "typescript.updateImportsOnFileMove.enabled": "always"
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "git.openRepositoryInParentFolders": "never"
 }
