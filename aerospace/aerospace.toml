@@ -72,6 +72,7 @@ outer.left = 10
 outer.bottom = 10
 outer.top = 38
 outer.right = 10
+
 [workspace-to-monitor-force-assignment]
 E = 'Built-in Retina Display'
 I = ['Built-in Retina Display', 'MSI MAG321CQR']
