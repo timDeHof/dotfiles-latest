@@ -1,6 +1,6 @@
 {
   "workbench.colorTheme": "Tokyo Storm Gogh",
-  "workbench.activityBar.location": "bottom",
+  "workbench.activityBar.location": "top",
   "workbench.editor.showTabs": "multiple",
   "workbench.statusBar.visible": true,
   "workbench.startupEditor": "none",
@@ -124,7 +124,7 @@
   },
   // Specifically set Prettier as the formatter for Markdown
   "[markdown]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "antfu.slidev"
   },
   "prettier.documentSelectors": ["**/*.astro"],
   "[astro]": {
@@ -272,7 +272,15 @@
     "git diff",
     "git show"
   ],
-  "chat.commandCenter.enabled": false,
   "typescript.updateImportsOnFileMove.enabled": "always",
-  "git.openRepositoryInParentFolders": "never"
+  "git.openRepositoryInParentFolders": "never",
+  "github.copilot.chat.commitMessageGeneration.instructions": [
+    {"text": "Follow the Conventional Commits format strictly for commit messages. Use the structure below:\n\n```\n<type>[optional scope]: <gitmoji> <description>\n\n[optional body]\n```\n\nGuidelines:\n\n1. **Type and Scope**: Choose an appropriate type (e.g., `feat`, `fix`) and optional scope to describe the affected module or feature.\n\n2. **Gitmoji**: Include a relevant `gitmoji` that best represents the nature of the change.\n\n3. **Description**: Write a concise, informative description in the header; use backticks if referencing code or specific terms.\n\n4. **Body**: For additional details, use a well-structured body section:\n   - Use bullet points (`*`) for clarity.\n   - Clearly describe the motivation, context, or technical details behind the change, if applicable.\n\nCommit messages should be clear, informative, and professional, aiding readability and project tracking."}
+  ],
+  "[svelte]": {
+    "editor.defaultFormatter": "svelte.svelte-vscode"
+  },
+  "biome.requireConfiguration": true,
+  "biome.lsp.trace.server": "messages",
+  "workbench.panel.showLabels": false
 }
