@@ -69,6 +69,13 @@ automatically-unhide-macos-hidden-apps = false
     outer.bottom =     10
     outer.top =        38
     outer.right =      10
+[workspace-to-monitor-force-assignment]
+  e = 'Built-in Retina Display'
+  i = ['Built-in Retina Display','MSI MAG321CQR']
+  n = ['Built-in Retina Display','MSI MAG321CQR']
+  s = 'Acer S231HL'
+  t = ['Built-in Retina Display','MSI MAG321CQR']
+  w = ['MSI MAG321CQR','Built-in Retina Display']
 
 # 'main' binding mode declaration
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
