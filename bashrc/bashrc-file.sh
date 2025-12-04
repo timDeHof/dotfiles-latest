@@ -159,3 +159,7 @@ fi
 # Added by LM Studio CLI (lms)
 export PATH="$PATH:/Users/linkarzu/.lmstudio/bin"
 export PATH=$PATH:$HOME/go/bin
+
+. "$HOME/.langflow/uv/env"
+
+[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path bash)"

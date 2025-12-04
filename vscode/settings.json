@@ -1,13 +1,9 @@
 {
-  "workbench.colorTheme": "Tokyo Storm Gogh",
-  "workbench.activityBar.location": "top",
   "workbench.editor.showTabs": "multiple",
   "workbench.statusBar.visible": true,
   "workbench.startupEditor": "none",
   "workbench.tips.enabled": false,
-  "editor.minimap.enabled": false,
   "breadcrumbs.enabled": false,
-  "workbench.iconTheme": "material-icon-theme",
   "material-icon-theme.hidesExplorerArrows": true,
   "workbench.tree.enableStickyScroll": false,
   "workbench.tree.renderIndentGuides": "none",
@@ -76,11 +72,31 @@
   "editor.cursorBlinking": "expand",
   "editor.cursorStyle": "block",
   "editor.cursorSmoothCaretAnimation": "on",
-  "editor.fontFamily": "Hack Nerd Font Mono",
+  "editor.fontFamily": "JetBrainsMono Nerd Font",
   "editor.fontSize": 14,
   "editor.fontLigatures": true,
   "editor.lineHeight": 2.25,
   "editor.tokenColorCustomizations": {
+    "[*Light*]": {
+      "textMateRules": [
+        {
+          "scope": "ref.matchtext",
+          "settings": {
+            "foreground": "#000"
+          }
+        }
+      ]
+    },
+    "[*Dark*]": {
+      "textMateRules": [
+        {
+          "scope": "ref.matchtext",
+          "settings": {
+            "foreground": "#fff"
+          }
+        }
+      ]
+    },
     "textMateRules": [
       {
         "scope": "comment",
@@ -88,10 +104,15 @@
           "fontStyle": "italic",
           "foreground": "#00ffd2"
         }
+      },
+      {
+        "scope": "keyword.other.dotenv",
+        "settings": {
+          "foreground": "#FF000000"
+        }
       }
     ]
   },
-  "editor.codeLens": false,
   "editor.links": false,
   "editor.matchBrackets": "never",
   "files.trimTrailingWhitespace": true,
@@ -111,20 +132,24 @@
   "editor.tabCompletion": "on",
   "editor.snippetSuggestions": "top",
   "emmet.triggerExpansionOnTab": true,
-  "files.autoSave": "afterDelay",
-  "editor.accessibilitySupport": "off",
   "terminal.integrated.fontFamily": "Hack Nerd Font Mono",
   // If you don't set this, you have to be manually autoformatting
   "editor.formatOnSave": true,
-  // I don't want a default formatter for any other file type
-  "editor.defaultFormatter": null,
   // Specifically set Prettier as the formatter for jsonc
   "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  // Specifically set Prettier as the formatter for jsonc
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  // Specifically set Prettier as the formatter for jsonc
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
   // Specifically set Prettier as the formatter for Markdown
   "[markdown]": {
-    "editor.defaultFormatter": "antfu.slidev"
+    "editor.defaultFormatter": "yzhang.markdown-all-in-one"
   },
   "prettier.documentSelectors": ["**/*.astro"],
   "[astro]": {
@@ -137,31 +162,25 @@
   "totalTypeScript.hideBasicTips": false,
   "astro.content-intellisense": true,
   "prettier.requireConfig": true,
-  "workbench.settings.applyToAllProfiles": ["prettier.requireConfig"],
-  "[typescript]": {
-    "editor.defaultFormatter": "vscode.typescript-language-features"
-  },
-  "[javascript]": {
-    "editor.defaultFormatter": "vscode.typescript-language-features"
-  },
-  "[typescriptreact]": {
-    "editor.defaultFormatter": "vscode.typescript-language-features"
-  },
+  "workbench.settings.applyToAllProfiles": [
+    "prettier.requireConfig",
+    "editor.defaultFormatter"
+  ],
   "githubPullRequests.pullBranch": "never",
   "terminal.external.osxExec": "warp.app",
   "roo-cline.allowedCommands": [
-    "npm test",
-    "npm install",
-    "tsc",
     "git log",
     "git diff",
-    "git show"
+    "git show",
+    "npm test",
+    "npm install",
+    "tsc"
   ],
   "[html]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "vscode.html-language-features"
   },
   "yaml.schemas": {
-    "/Users/timothydehof/.vscode/extensions/continue.continue-1.0.7-darwin-x64/config-yaml-schema.json": [
+    "file:///Users/timothydehof/.vscode/extensions/continue.continue-1.2.11-darwin-x64/config-yaml-schema.json": [
       ".continue/**/*.yaml"
     ]
   },
@@ -170,15 +189,6 @@
   },
   "gitlens.ai.model": "gitkraken",
   "gitlens.ai.gitkraken.model": "gemini:gemini-2.0-flash",
-  "mcp": {
-    "servers": {
-      "Context7": {
-        "type": "stdio",
-        "command": "npx",
-        "args": ["-y", "@upstash/context7-mcp@latest"]
-      }
-    }
-  },
   "diffEditor.ignoreTrimWhitespace": false,
   "terminal.integrated.env.osx": {
     "Q_NEW_SESSION": "1"
@@ -265,22 +275,88 @@
   },
   "amazonQ.workspaceIndex": true,
   "kilo-code.allowedCommands": [
-    "npm test",
-    "npm install",
-    "tsc",
     "git log",
     "git diff",
-    "git show"
+    "git show",
+    "npm test",
+    "npm install",
+    "tsc"
   ],
   "typescript.updateImportsOnFileMove.enabled": "always",
   "git.openRepositoryInParentFolders": "never",
   "github.copilot.chat.commitMessageGeneration.instructions": [
-    {"text": "Follow the Conventional Commits format strictly for commit messages. Use the structure below:\n\n```\n<type>[optional scope]: <gitmoji> <description>\n\n[optional body]\n```\n\nGuidelines:\n\n1. **Type and Scope**: Choose an appropriate type (e.g., `feat`, `fix`) and optional scope to describe the affected module or feature.\n\n2. **Gitmoji**: Include a relevant `gitmoji` that best represents the nature of the change.\n\n3. **Description**: Write a concise, informative description in the header; use backticks if referencing code or specific terms.\n\n4. **Body**: For additional details, use a well-structured body section:\n   - Use bullet points (`*`) for clarity.\n   - Clearly describe the motivation, context, or technical details behind the change, if applicable.\n\nCommit messages should be clear, informative, and professional, aiding readability and project tracking."}
+    {
+      "text": "Follow the Conventional Commits format strictly for commit messages. Use the structure below:\n\n```\n<type>[optional scope]: <gitmoji> <description>\n\n[optional body]\n```\n\nGuidelines:\n\n1. **Type and Scope**: Choose an appropriate type (e.g., `feat`, `fix`) and optional scope to describe the affected module or feature.\n\n2. **Gitmoji**: Include a relevant `gitmoji` that best represents the nature of the change.\n\n3. **Description**: Write a concise, informative description in the header; use backticks if referencing code or specific terms.\n\n4. **Body**: For additional details, use a well-structured body section:\n   - Use bullet points (`*`) for clarity.\n   - Clearly describe the motivation, context, or technical details behind the change, if applicable.\n\nCommit messages should be clear, informative, and professional, aiding readability and project tracking.\n - Body's lines must not be longer than 100 characters."
+    }
   ],
   "[svelte]": {
     "editor.defaultFormatter": "svelte.svelte-vscode"
   },
   "biome.requireConfiguration": true,
   "biome.lsp.trace.server": "messages",
-  "workbench.panel.showLabels": false
+  "workbench.panel.showLabels": false,
+  "githubPullRequests.createOnPublishBranch": "never",
+  "remote.portsAttributes": {
+    "3000": {
+      "protocol": "https"
+    }
+  },
+  "coderabbit.agentType": "Kilo Code",
+  "editor.codeActions.triggerOnFocusChange": true,
+  "eslint.format.enable": true,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "kilo-code.deniedCommands": [],
+  "terminal.integrated.suggest.runOnEnter": "always",
+  "terminal.integrated.suggest.providers": {
+    "terminal-suggest": true,
+    "pwsh-shell-integration": true,
+    "lsp": true
+  },
+  "files.associations": {
+    "turbo.json": "jsonc",
+    "tsconfig.*.json": "jsonc",
+    ".env*": "dotenv"
+  },
+  "[postcss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "workbench.secondarySideBar.defaultVisibility": "hidden",
+  "[dockercompose]": {
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2,
+    "editor.autoIndent": "advanced",
+    "editor.quickSuggestions": {
+      "other": true,
+      "comments": false,
+      "strings": true
+    },
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "[github-actions-workflow]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "terminal.integrated.defaultProfile.osx": "zsh",
+  "roo-cline.deniedCommands": [],
+  "tailwindCSS.emmetCompletions": true,
+  "tailwindCSS.experimental.configFile": "src/App.css",
+  "tailwindCSS.lint.invalidTailwindDirective": "warning",
+  "editor.quickSuggestions": {
+    "strings": "on"
+  },
+  "window.newWindowProfile": "Default",
+  "workbench.colorTheme": "Tokyo Night Gogh",
+  "editor.allowVariableLineHeights": false,
+  "workbench.iconTheme": "vscode-great-icons",
+  "cSpell.userWords": [
+    "aceternity",
+    "glassmorphism",
+    "jsonv",
+    "Liskov",
+    "nominatim",
+    "teamforward"
+  ],
+  "chat.mcp.gallery.enabled": true,
+  "github.copilot.chat.newWorkspace.useContext7": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "joplin.sortNotes": true
 }
