@@ -228,7 +228,15 @@ if.app-id = 'md.obsidian'
 run = 'move-node-to-workspace N' # mnemonics N - Notes
 
 [[on-window-detected]]
+if.app-id = 'com.google.Chrome.app.agimnkijcaahngcdmfeangaknmldooml'
+run = 'move-node-to-workspace W' # mnemonics W - Web Browser
+
+[[on-window-detected]]
 if.app-id = 'com.google.chrome'
+run = 'move-node-to-workspace W' # mnemonics W - Web Browser
+
+[[on-window-detected]]
+if.app-id = 'Cisco-Systems.Spark'
 run = 'move-node-to-workspace W' # mnemonics W - Web Browser
 
 [[on-window-detected]]
