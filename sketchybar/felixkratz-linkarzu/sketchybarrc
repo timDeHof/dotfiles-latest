@@ -197,7 +197,6 @@ sleep 0.3
 
 # Create space items (they get cleared by update otherwise)
 if command -v aerospace >/dev/null 2>&1 && aerospace list-workspaces --all >/dev/null 2>&1; then
-  echo "Creating space items before update..."
   # Aerospace is running, get workspace info
   monitors=$(aerospace list-monitors 2>/dev/null)
   
@@ -211,18 +210,16 @@ if command -v aerospace >/dev/null 2>&1 && aerospace list-workspaces --all >/dev
       workspace_id=$(echo "$workspace_id" | tr -d '[:space:]')
       [ -z "$workspace_id" ] && continue
       item_id="space.${monitor_id}.${workspace_id}"
-      echo "Adding item: $item_id"
       
       sketchybar --add item "$item_id" left \
         --set "$item_id" \
         label="$monitor_id:$workspace_id" \
         label.font="$FONT:Regular:12.0" \
         label.color=$WHITE \
-        background.drawing=off \
+        script="$PLUGIN_DIR/aerospace.sh" \
         click_script="aerospace workspace $workspace_id"
     done
   done
-  echo "Done creating space items"
 fi
 
 # Forcing all item scripts to run (never do this outside of sketchybarrc)
@@ -245,7 +242,7 @@ if command -v aerospace >/dev/null 2>&1 && aerospace list-workspaces --all >/dev
         label="$monitor_id:$workspace_id" \
         label.font="$FONT:Regular:12.0" \
         label.color=$WHITE \
-        background.drawing=off \
+        script="$PLUGIN_DIR/aerospace.sh" \
         click_script="aerospace workspace $workspace_id"
     done
   done
