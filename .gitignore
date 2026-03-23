@@ -53,6 +53,10 @@ luac.out
 *.x86_64
 *.hex
 
+# Sketchybar helper binary (compiled per-machine)
+felixkratz/helper/helper
+felixkratz-linkarzu/helper/helper
+
 # Python
 
 # Environments
