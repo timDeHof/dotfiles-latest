@@ -1,5 +1,35 @@
 #!/bin/bash
 
+# Network items (added first so they appear on the right side after CPU)
+network_down=(
+	padding_left=8
+	y_offset=0
+	label.font="$FONT:Semibold:12.0"
+	label.color="$WHITE"
+	icon="$NETWORK_DOWN"
+	icon.font="$FONT:Bold:13.0"
+	icon.color="$GREEN"
+	script="$PLUGIN_DIR/stats/scripts/network.sh"
+	display=1
+)
+
+network_up=(
+	padding_right=8
+	y_offset=0
+	label.font="$FONT:Semibold:12.0"
+	label.color="$WHITE"
+	icon="$NETWORK_UP"
+	icon.font="$FONT:Bold:13.0"
+	icon.color=0xfff5a97f
+	display=1
+)
+
+sketchybar --add item network.down right \
+						--set network.down "${network_down[@]}" \
+						--add item network.up right \
+						--set network.up "${network_up[@]}"
+
+# CPU items (added after network so they appear on the left of network on right side)
 cpu_top=(
   label.font="$FONT:Semibold:7"
   label=CPU
@@ -43,40 +73,9 @@ cpu_user=(
 
 sketchybar --add item cpu.top right              \
            --set cpu.top "${cpu_top[@]}"         \
-                                                 \
            --add item cpu.percent right          \
            --set cpu.percent "${cpu_percent[@]}" \
-                                                 \
            --add graph cpu.sys right 75          \
            --set cpu.sys "${cpu_sys[@]}"         \
-                                                 \
            --add graph cpu.user right 75         \
            --set cpu.user "${cpu_user[@]}"
-
-network_down=(
-	padding_left=8
-	y_offset=0
-	label.font="$FONT:Semibold:12.0"
-	label.color="$WHITE"
-	icon="$NETWORK_DOWN"
-	icon.font="$FONT:Bold:13.0"
-	icon.color="$GREEN"
-	script="$PLUGIN_DIR/stats/scripts/network.sh"
-	display=1
-)
-
-network_up=(
-	padding_right=8
-	y_offset=0
-	label.font="$FONT:Semibold:12.0"
-	label.color="$WHITE"
-	icon="$NETWORK_UP"
-	icon.font="$FONT:Bold:13.0"
-	icon.color=0xfff5a97f
-	display=1
-)
-
-sketchybar 	--add item network.down right 						\
-						--set network.down "${network_down[@]}" 	\
-						--add item network.up right 							\
-						--set network.up "${network_up[@]}"
