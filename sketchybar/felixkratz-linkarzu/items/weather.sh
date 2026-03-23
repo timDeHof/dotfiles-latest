@@ -7,7 +7,8 @@ weather=(
   padding_left=5
   label.font="$FONT:Bold:12.0"
   label.color="$WHITE"
-  update_freq=900
+  # Update every 30 minutes (1800 seconds)
+  update_freq=1800
   script="$PLUGIN_DIR/weather.sh"
 )
 

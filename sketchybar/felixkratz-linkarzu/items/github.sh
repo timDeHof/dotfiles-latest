@@ -7,7 +7,8 @@ github_bell=(
   padding_left=2
   label.padding_left=2
   label.padding_right=0
-  update_freq=180
+  # Update every 5 minutes (300 seconds)
+  update_freq=300
   icon=$BELL
   icon.font="$FONT:Bold:15.0"
   icon.color=$GREY
