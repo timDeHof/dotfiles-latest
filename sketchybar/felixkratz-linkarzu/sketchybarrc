@@ -197,7 +197,11 @@ sleep 0.3
 
 # Create space items (they get cleared by update otherwise)
 if command -v aerospace >/dev/null 2>&1 && aerospace list-workspaces --all >/dev/null 2>&1; then
-  # Aerospace is running, get workspace info
+  # Get visible workspace for each monitor
+  MON1=$(aerospace list-workspaces --monitor 1 --visible 2>/dev/null | tr -d '[:space:]')
+  MON2=$(aerospace list-workspaces --monitor 2 --visible 2>/dev/null | tr -d '[:space:]')
+  MON3=$(aerospace list-workspaces --monitor 3 --visible 2>/dev/null | tr -d '[:space:]')
+  
   monitors=$(aerospace list-monitors 2>/dev/null)
   
   # Parse monitors line by line
@@ -205,21 +209,35 @@ if command -v aerospace >/dev/null 2>&1 && aerospace list-workspaces --all >/dev
     monitor_id=$(echo "$monitor_id" | tr -d '[:space:]')
     [ -z "$monitor_id" ] && continue
     
+    # Get focused workspace for this monitor
+    case $monitor_id in
+      1) focused=$MON1 ;;
+      2) focused=$MON2 ;;
+      3) focused=$MON3 ;;
+    esac
+    
     # Get workspaces for this monitor
     for workspace_id in $(aerospace list-workspaces --monitor "$monitor_id" 2>/dev/null); do
       workspace_id=$(echo "$workspace_id" | tr -d '[:space:]')
       [ -z "$workspace_id" ] && continue
-      item_id="space.${monitor_id}.${workspace_id}"
+      item_id="ws${monitor_id}${workspace_id}"
+      
+      # Set color based on focus
+      if [ "$workspace_id" = "$focused" ]; then
+        color=$GREEN
+      else
+        color=$WHITE
+      fi
       
       sketchybar --add item "$item_id" left \
         --subscribe "$item_id" aerospace_workspace_change aerospace_monitor_change \
         --set "$item_id" \
-        label="$monitor_id:$workspace_id" \
+        label="$workspace_id" \
         label.font="$FONT:Regular:12.0" \
-        label.color=$WHITE \
+        label.color="$color" \
         updates=on \
         script="$PLUGIN_DIR/aerospace.sh" \
-        click_script="aerospace workspace $workspace_id"
+        click_script="aerospace workspace $workspace_id; sketchybar --trigger aerospace_workspace_change"
     done
   done
 fi
@@ -230,41 +248,49 @@ sketchybar --update
 # Create space items again after update (they get cleared by update)
 sleep 0.2
 if command -v aerospace >/dev/null 2>&1 && aerospace list-workspaces --all >/dev/null 2>&1; then
+  # Get visible workspace for each monitor
+  MON1=$(aerospace list-workspaces --monitor 1 --visible 2>/dev/null | tr -d '[:space:]')
+  MON2=$(aerospace list-workspaces --monitor 2 --visible 2>/dev/null | tr -d '[:space:]')
+  MON3=$(aerospace list-workspaces --monitor 3 --visible 2>/dev/null | tr -d '[:space:]')
+  
   monitors=$(aerospace list-monitors 2>/dev/null)
   for monitor_id in $(echo "$monitors" | cut -d'|' -f1); do
     monitor_id=$(echo "$monitor_id" | tr -d '[:space:]')
     [ -z "$monitor_id" ] && continue
+    
+    # Get focused workspace for this monitor
+    case $monitor_id in
+      1) focused=$MON1 ;;
+      2) focused=$MON2 ;;
+      3) focused=$MON3 ;;
+    esac
+    
     for workspace_id in $(aerospace list-workspaces --monitor "$monitor_id" 2>/dev/null); do
       workspace_id=$(echo "$workspace_id" | tr -d '[:space:]')
       [ -z "$workspace_id" ] && continue
-      item_id="space.${monitor_id}.${workspace_id}"
+      item_id="ws${monitor_id}${workspace_id}"
+      
+      # Set color based on focus
+      if [ "$workspace_id" = "$focused" ]; then
+        color=$GREEN
+      else
+        color=$WHITE
+      fi
       
       sketchybar --add item "$item_id" left \
         --subscribe "$item_id" aerospace_workspace_change aerospace_monitor_change \
         --set "$item_id" \
-        label="$monitor_id:$workspace_id" \
+        label="$workspace_id" \
         label.font="$FONT:Regular:12.0" \
-        label.color=$WHITE \
+        label.color="$color" \
         updates=on \
         script="$PLUGIN_DIR/aerospace.sh" \
-        click_script="aerospace workspace $workspace_id"
+        click_script="aerospace workspace $workspace_id; sketchybar --trigger aerospace_workspace_change"
     done
   done
 fi
 
 # Reorder left-side items so apple is first
-sketchybar --reorder apple.logo space.1.S space.2.W space.3.E space.3.I space.3.N space.3.T front_app mic 2>/dev/null || true
-
-# Run aerospace script for all space items to set focus colors
-sleep 0.3
-for monitor_id in $(aerospace list-monitors 2>/dev/null | cut -d'|' -f1); do
-  monitor_id=$(echo "$monitor_id" | tr -d '[:space:]')
-  for ws in $(aerospace list-workspaces --monitor "$monitor_id" 2>/dev/null); do
-    ws=$(echo "$ws" | tr -d '[:space:]')
-    [ -z "$ws" ] && continue
-    item_id="space.${monitor_id}.${ws}"
-    NAME="$item_id" CONFIG_DIR="$CONFIG_DIR" bash "$PLUGIN_DIR/aerospace.sh" 2>/dev/null
-  done
-done
+sketchybar --reorder apple.logo ws1S ws2W ws3E ws3I ws3N ws3T front_app mic 2>/dev/null || true
 
 echo "sketchybar configuation loaded.."
