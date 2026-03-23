@@ -1,22 +1,64 @@
 #!/usr/bin/env bash
 
-UPDOWN=$(ifstat -i "en0" -b 0.1 1 | tail -n1)
-DOWN=$(echo "$UPDOWN" | awk "{ print \$1 }" | cut -f1 -d ".")
-UP=$(echo "$UPDOWN" | awk "{ print \$2 }" | cut -f1 -d ".")
+# Network stats for sketchybar - uses macOS netstat
+# This script updates network.down and network.up items
 
-DOWN_FORMAT=""
-if [ "$DOWN" -gt "999" ]; then
-	DOWN_FORMAT=$(echo "$DOWN" | awk '{ printf "%03.0f Mbps", $1 / 1000}')
-else
-	DOWN_FORMAT=$(echo "$DOWN" | awk '{ printf "%03.0f kbps", $1}')
+get_network_stats() {
+  local interface="${1:-en0}"
+  
+  # Get bytes transferred from netstat
+  local stats=$(netstat -ib | grep -m 1 "^$interface")
+  
+  if [ -z "$stats" ]; then
+    echo "0 0"
+    return
+  fi
+  
+  local ibytes=$(echo "$stats" | awk '{print $7}')
+  local obytes=$(echo "$stats" | awk '{print $10}')
+  
+  echo "$ibytes $obytes"
+}
+
+# Calculate and format speeds
+read -r cur_in cur_out < <(get_network_stats en0)
+
+# Get previous values from sketchybar state (or use current as baseline)
+prev_in=${PREV_NET_IN:-0}
+prev_out=${PREV_NET_OUT:-0}
+
+# Calculate delta
+delta_in=$((cur_in - prev_in))
+delta_out=$((cur_out - prev_out))
+
+# Handle wrap-around (when system reboots counters)
+if [ "$delta_in" -lt 0 ] || [ "$delta_in" -gt 1000000000 ]; then
+  delta_in=0
+fi
+if [ "$delta_out" -lt 0 ] || [ "$delta_out" -gt 1000000000 ]; then
+  delta_out=0
 fi
 
-UP_FORMAT=""
-if [ "$UP" -gt "999" ]; then
-	UP_FORMAT=$(echo "$UP" | awk '{ printf "%03.0f Mbps", $1 / 1000}')
+# Convert to kbps (bytes * 8 / 1000 / seconds)
+in_kbps=$((delta_in * 8 / 1000))
+out_kbps=$((delta_out * 8 / 1000))
+
+# Format output
+if [ "$in_kbps" -ge 1000 ]; then
+  in_str="$(echo "scale=1; $in_kbps / 1000" | bc)m"
 else
-	UP_FORMAT=$(echo "$UP" | awk '{ printf "%03.0f kbps", $1}')
+  in_str="${in_kbps}k"
 fi
 
-sketchybar -m --set network.down label="$DOWN_FORMAT" icon.highlight=$(if [ "$DOWN" -gt "0" ]; then echo "on"; else echo "off"; fi) \
-	--set network.up label="$UP_FORMAT" icon.highlight=$(if [ "$UP" -gt "0" ]; then echo "on"; else echo "off"; fi)
+if [ "$out_kbps" -ge 1000 ]; then
+  out_str="$(echo "scale=1; $out_kbps / 1000" | bc)m"
+else
+  out_str="${out_kbps}k"
+fi
+
+sketchybar --set network.down label="$in_str" \
+           --set network.up label="$out_str"
+
+# Export for next run
+export PREV_NET_IN=$cur_in
+export PREV_NET_OUT=$cur_out

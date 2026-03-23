@@ -54,27 +54,24 @@ sketchybar --add item cpu.top right              \
            --set cpu.user "${cpu_user[@]}"
 
 network_down=(
-	y_offset=-7
-	label.font="$FONT:Heavy:10"
-	label.color="$TEXT"
+	padding_left=8
+	y_offset=0
+	label.font="$FONT:Semibold:12.0"
+	label.color="$WHITE"
 	icon="$NETWORK_DOWN"
-	icon.font="$NERD_FONT:Bold:16.0"
+	icon.font="$FONT:Bold:13.0"
 	icon.color="$GREEN"
-	icon.highlight_color="$BLUE"
-	update_freq=1
+	script="$PLUGIN_DIR/stats/scripts/network.sh"
 )
 
 network_up=(
-	background.padding_right=-70
-	y_offset=7
-	label.font="$FONT:Heavy:10"
-	label.color="$TEXT"
+	padding_right=8
+	y_offset=0
+	label.font="$FONT:Semibold:12.0"
+	label.color="$WHITE"
 	icon="$NETWORK_UP"
-	icon.font="$NERD_FONT:Bold:16.0"
-	icon.color="$GREEN"
-	icon.highlight_color="$BLUE"
-	update_freq=1
-	script="$PLUGIN_DIR/stats/scripts/network.sh"
+	icon.font="$FONT:Bold:13.0"
+	icon.color=0xfff5a97f
 )
 
 sketchybar 	--add item network.down right 						\

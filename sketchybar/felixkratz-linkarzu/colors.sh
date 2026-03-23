@@ -104,3 +104,11 @@ export LABEL_COLOR=$WHITE # Color of all labels
 export POPUP_BACKGROUND_COLOR=$BAR_COLOR
 export POPUP_BORDER_COLOR=$WHITE
 export SHADOW_COLOR=$BLACK
+export TEXT=$WHITE
+
+# Weather icons (using common text characters)
+export WEATHER_SUNNY="*"
+export WEATHER_CLOUDY="☁"
+export WEATHER_RAINY="⌇"
+export WEATHER_SNOWY="❄"
+export WEATHER_DEFAULT="○"

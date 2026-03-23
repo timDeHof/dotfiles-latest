@@ -155,7 +155,7 @@ source "$ITEM_DIR/calendar.sh"
 source "$ITEM_DIR/brew.sh"
 
 # DND not working with sonoma, will figure it out later (hopefully)
-source "$ITEM_DIR/dnd.sh"
+# source "$ITEM_DIR/dnd.sh"
 
 # Shows github notifications via gh cli, mine aren't working properly
 # `gh api notifications` shows nothing but `gh status` does
@@ -163,6 +163,9 @@ source "$ITEM_DIR/github.sh"
 
 # Shows the SSID you're connected to, and the IP address assigned
 source "$ITEM_DIR/wifi.sh"
+
+# Weather indicator (updates every 15 minutes)
+source "$ITEM_DIR/weather.sh"
 
 # By default the icon will only show when on battery and if it's 50% or less,
 # you can change "plugins/battery.sh" if needed to modify the behavior
@@ -175,8 +178,8 @@ source "$ITEM_DIR/volume.sh"
 # CPU usage indicator
 source "$ITEM_DIR/cpu.sh"
 
-# Network usage indicator
-source "$ITEM_DIR/network.sh"
+# Network usage indicator (handled by cpu.sh with background script)
+# source "$ITEM_DIR/network.sh"
 
 ###############################################################################
 #                            Community plugins

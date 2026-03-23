@@ -1,40 +1,37 @@
 {
-  "workbench.editor.showTabs": "multiple",
-  "workbench.statusBar.visible": true,
+  // ============ Visuals ============
+  "editor.cursorSmoothCaretAnimation": "on",
+  "editor.fontFamily": "JetBrainsMono Nerd Font",
+  "editor.guides.bracketPairs": true,
+  "editor.lineNumbers": "on",
+  "editor.renderWhitespace": "boundary",
+  "workbench.colorTheme": "Tokyo Storm AltSynt",
+  "workbench.editor.tabActionLocation": "left",
+  "workbench.fontAliasing": "antialiased",
+  "workbench.iconTheme": "vscode-great-icons",
+  "workbench.list.smoothScrolling": true,
+  "workbench.preferredDarkColorTheme": "Tokyo Night AltSynt",
+  "workbench.preferredLightColorTheme": "Tokyo Storm AltSynt",
+  "workbench.productIconTheme": "icons-carbon",
+  "workbench.tree.expandMode": "singleClick",
   "workbench.startupEditor": "none",
-  "workbench.tips.enabled": false,
-  "breadcrumbs.enabled": false,
-  "material-icon-theme.hidesExplorerArrows": true,
-  "workbench.tree.enableStickyScroll": false,
-  "workbench.tree.renderIndentGuides": "none",
-  "workbench.tree.indent": 16,
-  "explorer.compactFolders": false,
-  "explorer.confirmDragAndDrop": false,
-  "explorer.confirmDelete": false,
-  "explorer.decorations.badges": false,
-  "window.zoomLevel": 2,
-  "tailwindCSS.experimental.classRegex": [
-    ["className\\s*:\\s*['\"]([^'\"]*)['\"]"]
-  ],
-  "window.titleBarStyle": "native",
-  // This is how you change the bracket pair colors
+  "workbench.tree.indent": 10,
   "editor.bracketPairColorization.enabled": true,
   "workbench.colorCustomizations": {
+    "errorLens.hintForeground": "#ffc600A1",
+    "errorLens.hintBackground": "#ffc60003",
+    "errorLens.errorBackground": "#ff000005",
     "editorCursor.background": "#000000",
     "editorBracketHighlight.foreground1": "#f7768e",
     "editorBracketHighlight.foreground2": "#ff9e64",
     "editorBracketHighlight.foreground3": "#e0af68",
     "editorBracketHighlight.foreground4": "#9ece6a",
     "editorBracketHighlight.foreground5": "#73daca",
-    "editorBracketHighlight.foreground6": "#7aa2f7"
+    "editorBracketHighlight.foreground6": "#7aa2f7",
+    "scrollbar.shadow": "#0000002D",
   },
-  "custom-ui-style.electron": {
-    "titleBarStyle": "hiddenInset",
-    "trafficLightPosition": {
-      "x": 20,
-      "y": 16
-    }
-  },
+
+  // ============ Custom CSS =============
   "custom-ui-style.stylesheet": {
     ".notification-toast": "box-shadow: none !important",
     ".quick-input-widget.show-file-icons": "box-shadow: none !important",
@@ -59,21 +56,72 @@
     ".monaco-tree .monaco-tree-row .label-name, .monaco-list .monaco-list-row,.monaco-icon-label .label-name": "font-family: 'Hack Nerd Font Mono', monospace !important;font-size: 14px !important; font-weight: 400 !important",
     ".composite.title": "display: flex !important;flex-direction: row !important;align-items: center !important; text-transform: uppercase; color: #bc9abc !important",
     ".composite.title h2": "font-weight: bold !important;font-size: 12px !important;text-transform: uppercase;color: #bc9abc !important;",
-    ".composite.title h2::before": "display: inline-block; margin-right: 6px; font-size: 1.1rem;content: '🚀';"
+    ".composite.title h2::before": "display: inline-block; margin-right: 6px; font-size: 1.1rem;content: '🚀';",
   },
   "custom-ui-style.external.imports": [
-    "file:///Users/timothyDehof/custom-vscode.js"
+    "file:///Users/timothyDehof/custom-vscode.js",
   ],
-  "custom-ui-style.font.sansSerif": "Hack Nerd Font Mono",
-  "custom-ui-style.font.monospace": "Hack Nerd Font Mono",
-  "editor.multiCursorModifier": "ctrlCmd",
+  "custom-ui-style.font.sansSerif": "JetBrainsMono Nerd Font",
+  "custom-ui-style.font.monospace": "JetBrainsMono Nerd Font",
+  "custom-ui-style.electron": {
+    "titleBarStyle": "hiddenInset",
+    "trafficLightPosition": {
+      "x": 20,
+      "y": 16,
+    },
+  },
+  // ============ Terminal ============
+  "terminal.integrated.fontFamily": "JetBrainsMono Nerd Font",
   "terminal.integrated.suggest.enabled": true,
   "terminal.integrated.cursorBlinking": true,
+
+  // ============ Editor ============
+  "debug.onTaskErrors": "debugAnyway",
+  "diffEditor.ignoreTrimWhitespace": false,
+  "editor.wordSeparators": "`~!@#%^&*()=+[{]}\\|;:'\",.<>/?",
+  "editor.find.addExtraSpaceOnTop": false,
+  "workbench.statusBar.visible": true,
+  "workbench.tips.enabled": false,
+  "breadcrumbs.enabled": false,
+  "workbench.tree.enableStickyScroll": false,
+  "workbench.tree.renderIndentGuides": "none",
+
+  // ========= File Explorer =======
+  "explorer.compactFolders": false,
+  "explorer.confirmDragAndDrop": false,
+  "explorer.confirmDelete": false,
+  "explorer.decorations.badges": false,
+  "window.zoomLevel": 2,
+  "tailwindCSS.experimental.classRegex": [
+    ["className\\s*:\\s*['\"]([^'\"]*)['\"]"],
+  ],
+  // ======== Global Level Config ========
+  "window.dialogStyle": "custom",
+  "window.nativeTabs": true,
+  "window.title": "${rootName}",
+  "window.titleBarStyle": "custom",
+  "extensions.autoUpdate": "onlyEnabledExtensions",
+
+  // ======== Extension Configs ========
+  // This is how you change the bracket pair colors
+  "errorLens.fontSize": "12",
+  "errorLens.onSave": true,
+  "errorLens.enabledDiagnosticLevels": ["error", "warning", "hint"],
+  "errorLens.editorHoverPartsEnabled": {
+    "messageEnabled": false,
+    "buttonsEnabled": false,
+  },
+  "errorLens.excludeByMessage": [
+    "never (read|used)",
+    "unknown word",
+    "Delete `",
+  ],
+  "css.validate": false,
+  "less.validate": false,
+  "scss.validate": false,
+  "editor.multiCursorModifier": "ctrlCmd",
   "editor.cursorBlinking": "expand",
   "editor.cursorStyle": "block",
-  "editor.cursorSmoothCaretAnimation": "on",
-  "editor.fontFamily": "JetBrainsMono Nerd Font",
-  "editor.fontSize": 14,
   "editor.fontLigatures": true,
   "editor.lineHeight": 2.25,
   "editor.tokenColorCustomizations": {
@@ -82,47 +130,45 @@
         {
           "scope": "ref.matchtext",
           "settings": {
-            "foreground": "#000"
-          }
-        }
-      ]
+            "foreground": "#000",
+          },
+        },
+      ],
     },
     "[*Dark*]": {
       "textMateRules": [
         {
           "scope": "ref.matchtext",
           "settings": {
-            "foreground": "#fff"
-          }
-        }
-      ]
+            "foreground": "#fff",
+          },
+        },
+      ],
     },
     "textMateRules": [
       {
         "scope": "comment",
         "settings": {
           "fontStyle": "italic",
-          "foreground": "#00ffd2"
-        }
+          "foreground": "#00ffd2",
+        },
       },
       {
         "scope": "keyword.other.dotenv",
         "settings": {
-          "foreground": "#FF000000"
-        }
-      }
-    ]
+          "foreground": "#FF000000",
+        },
+      },
+    ],
   },
   "editor.links": false,
   "editor.matchBrackets": "never",
   "files.trimTrailingWhitespace": true,
   "files.insertFinalNewline": true,
   "scm.diffDecorations": "none",
-  "editor.lineNumbers": "on",
   "editor.tabSize": 2,
   "editor.detectIndentation": false,
   "editor.guides.indentation": false,
-  "editor.renderWhitespace": "none",
   "editor.occurrencesHighlight": "off",
   "editor.selectionHighlight": false,
   "editor.scrollbar.horizontal": "hidden",
@@ -131,75 +177,68 @@
   "editor.hideCursorInOverviewRuler": true,
   "editor.tabCompletion": "on",
   "editor.snippetSuggestions": "top",
-  "emmet.triggerExpansionOnTab": true,
-  "terminal.integrated.fontFamily": "Hack Nerd Font Mono",
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit",
+  },
+  "emmet.showSuggestionsAsSnippets": true,
+  "emmet.triggerExpansionOnTab": false,
   // If you don't set this, you have to be manually autoformatting
   "editor.formatOnSave": true,
   // Specifically set Prettier as the formatter for jsonc
   "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   // Specifically set Prettier as the formatter for jsonc
   "[javascriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   // Specifically set Prettier as the formatter for jsonc
   "[typescriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
   },
   // Specifically set Prettier as the formatter for Markdown
   "[markdown]": {
-    "editor.defaultFormatter": "yzhang.markdown-all-in-one"
+    "editor.defaultFormatter": "yzhang.markdown-all-in-one",
   },
   "prettier.documentSelectors": ["**/*.astro"],
   "[astro]": {
-    "editor.defaultFormatter": "astro-build.astro-vscode"
+    "editor.defaultFormatter": "astro-build.astro-vscode",
+  },
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features",
+  },
+  "[json]": {
+    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
+  },
+  "[svelte]": {
+    "editor.defaultFormatter": "svelte.svelte-vscode",
   },
   "git.autofetch": true,
   "git.enableSmartCommit": true,
   "git.confirmSync": false,
   "totalTypeScript.hideAllTips": true,
   "totalTypeScript.hideBasicTips": false,
-  "astro.content-intellisense": true,
-  "prettier.requireConfig": true,
   "workbench.settings.applyToAllProfiles": [
     "prettier.requireConfig",
-    "editor.defaultFormatter"
+    "editor.defaultFormatter",
+    "workbench.panel.defaultLocation",
   ],
   "githubPullRequests.pullBranch": "never",
-  "terminal.external.osxExec": "warp.app",
-  "roo-cline.allowedCommands": [
-    "git log",
-    "git diff",
-    "git show",
-    "npm test",
-    "npm install",
-    "tsc"
-  ],
-  "[html]": {
-    "editor.defaultFormatter": "vscode.html-language-features"
-  },
+  "terminal.external.osxExec": "xterm",
   "yaml.schemas": {
-    "file:///Users/timothydehof/.vscode/extensions/continue.continue-1.2.11-darwin-x64/config-yaml-schema.json": [
-      ".continue/**/*.yaml"
-    ]
-  },
-  "[json]": {
-    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+    "file:///c%3A/Users/Tyler/.vscode/extensions/continue.continue-1.2.11-win32-x64/config-yaml-schema.json": [
+      ".continue/**/*.yaml",
+    ],
   },
   "gitlens.ai.model": "gitkraken",
   "gitlens.ai.gitkraken.model": "gemini:gemini-2.0-flash",
-  "diffEditor.ignoreTrimWhitespace": false,
   "terminal.integrated.env.osx": {
     "Q_NEW_SESSION": "1"
   },
   "terminal.integrated.shell.osx": "/bin/zsh",
   "editor.wordWrap": "on",
   "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
-  "editor.guides.bracketPairs": true,
   "containers.containerClient": "com.microsoft.visualstudio.containers.docker",
-  "quokka.automaticRestart": true,
-  "joplin.token": "281e9b5bb1fd560c65afff7261af488b7481fe7605314ce1bec61a26dccdba53bab3c7787bcea2906ac60a90721cb57800ae49063cf3ef4b263ab25798d49483",
   "workbench.layoutControl.enabled": false,
   "terminal.integrated.fontLigatures.enabled": true,
   "terminal.integrated.fontSize": 14,
@@ -263,15 +302,14 @@
     "erlang": "escript",
     "spwn": "spwn build",
     "pkl": "cd $dir && pkl eval -f yaml $fileName -o $fileNameWithoutExt.yaml",
-    "gleam": "gleam run -m $fileNameWithoutExt"
+    "gleam": "gleam run -m $fileNameWithoutExt",
   },
   "code-runner.runInTerminal": true,
   "githubPullRequests.createDefaultBaseBranch": "createdFromBranch",
   "githubPullRequests.defaultCommentType": "single",
-  "workbench.sideBar.location": "right",
   "workbench.editor.enablePreview": false,
   "amazonQ.suppressPrompts": {
-    "amazonQChatDisclaimer": true
+    "amazonQChatDisclaimer": true,
   },
   "amazonQ.workspaceIndex": true,
   "kilo-code.allowedCommands": [
@@ -280,26 +318,20 @@
     "git show",
     "npm test",
     "npm install",
-    "tsc"
+    "tsc",
   ],
   "typescript.updateImportsOnFileMove.enabled": "always",
   "git.openRepositoryInParentFolders": "never",
   "github.copilot.chat.commitMessageGeneration.instructions": [
     {
-      "text": "Follow the Conventional Commits format strictly for commit messages. Use the structure below:\n\n```\n<type>[optional scope]: <gitmoji> <description>\n\n[optional body]\n```\n\nGuidelines:\n\n1. **Type and Scope**: Choose an appropriate type (e.g., `feat`, `fix`) and optional scope to describe the affected module or feature.\n\n2. **Gitmoji**: Include a relevant `gitmoji` that best represents the nature of the change.\n\n3. **Description**: Write a concise, informative description in the header; use backticks if referencing code or specific terms.\n\n4. **Body**: For additional details, use a well-structured body section:\n   - Use bullet points (`*`) for clarity.\n   - Clearly describe the motivation, context, or technical details behind the change, if applicable.\n\nCommit messages should be clear, informative, and professional, aiding readability and project tracking.\n - Body's lines must not be longer than 100 characters."
-    }
+      "text": "Follow the Conventional Commits format strictly for commit messages. Use the structure below:\n\n```\n<type>[optional scope]: <gitmoji> <description>\n\n[optional body]\n```\n\nGuidelines:\n\n1. **Type and Scope**: Choose an appropriate type (e.g., `feat`, `fix`) and optional scope to describe the affected module or feature.\n\n2. **Gitmoji**: Include a relevant `gitmoji` that best represents the nature of the change.\n\n3. **Description**: Write a concise, informative description in the header; use backticks if referencing code or specific terms.\n\n4. **Body**: For additional details, use a well-structured body section:\n   - Use bullet points (`*`) for clarity.\n   - Clearly describe the motivation, context, or technical details behind the change, if applicable.\n\nCommit messages should be clear, informative, and professional, aiding readability and project tracking.\n   -header must not be longer than 100 characters.\n   - Body's lines must not be longer than 100 characters.\n   - Body must not be longer than 100 characters.",
+    },
   ],
-  "[svelte]": {
-    "editor.defaultFormatter": "svelte.svelte-vscode"
-  },
-  "biome.requireConfiguration": true,
-  "biome.lsp.trace.server": "messages",
-  "workbench.panel.showLabels": false,
   "githubPullRequests.createOnPublishBranch": "never",
   "remote.portsAttributes": {
     "3000": {
-      "protocol": "https"
-    }
+      "protocol": "https",
+    },
   },
   "coderabbit.agentType": "Kilo Code",
   "editor.codeActions.triggerOnFocusChange": true,
@@ -308,17 +340,15 @@
   "kilo-code.deniedCommands": [],
   "terminal.integrated.suggest.runOnEnter": "always",
   "terminal.integrated.suggest.providers": {
-    "terminal-suggest": true,
-    "pwsh-shell-integration": true,
-    "lsp": true
+    "lsp": true,
   },
   "files.associations": {
     "turbo.json": "jsonc",
     "tsconfig.*.json": "jsonc",
-    ".env*": "dotenv"
+    ".env*": "dotenv",
   },
   "[postcss]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
   },
   "workbench.secondarySideBar.defaultVisibility": "hidden",
   "[dockercompose]": {
@@ -328,12 +358,12 @@
     "editor.quickSuggestions": {
       "other": true,
       "comments": false,
-      "strings": true
+      "strings": true,
     },
-    "editor.defaultFormatter": "redhat.vscode-yaml"
+    "editor.defaultFormatter": "redhat.vscode-yaml",
   },
   "[github-actions-workflow]": {
-    "editor.defaultFormatter": "redhat.vscode-yaml"
+    "editor.defaultFormatter": "redhat.vscode-yaml",
   },
   "terminal.integrated.defaultProfile.osx": "zsh",
   "roo-cline.deniedCommands": [],
@@ -341,22 +371,38 @@
   "tailwindCSS.experimental.configFile": "src/App.css",
   "tailwindCSS.lint.invalidTailwindDirective": "warning",
   "editor.quickSuggestions": {
-    "strings": "on"
+    "strings": "on",
   },
   "window.newWindowProfile": "Default",
-  "workbench.colorTheme": "Tokyo Storm AltSynt",
   "editor.allowVariableLineHeights": false,
-  "workbench.iconTheme": "vscode-great-icons",
   "cSpell.userWords": [
     "aceternity",
+    "Gamified",
     "glassmorphism",
     "jsonv",
     "Liskov",
     "nominatim",
-    "teamforward"
+    "teamforward",
   ],
   "chat.mcp.gallery.enabled": true,
+  "github.copilot.enable": {
+    "*": true,
+    "markdown": true,
+    "plaintext": false,
+  },
   "github.copilot.chat.newWorkspace.useContext7": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "joplin.sortNotes": true
+  "application.shellEnvironmentResolutionTimeout": 20,
+  "workbench.panel.defaultLocation": "right",
+  "workbench.panel.showLabels": false,
+  "workbench.editor.empty.hint": "hidden",
+  "workbench.activityBar.location": "top",
+  "diffEditor.maxComputationTime": 0,
+  "kilo-code.debug": false,
+  "ollama-commit.apiUrl": "https://ollama.dehott.link/api/generate",
+  "workbench.editor.editorActionsLocation": "titleBar",
+  "workbench.editor.highlightModifiedTabs": true,
+  "chat.tools.terminal.outputLocation": "terminal",
+  "terminal.explorerKind": "external",
+  "git.ignoreRebaseWarning": true,
 }
