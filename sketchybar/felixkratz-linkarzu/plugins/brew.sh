@@ -2,9 +2,14 @@
 
 # Filename: ~/github/dotfiles-latest/sketchybar/felixkratz-linkarzu/plugins/brew.sh
 
-source "$CONFIG_DIR/colors.sh"
+# Ensure CONFIG_DIR is set
+if [ -z "$CONFIG_DIR" ]; then
+  CONFIG_DIR="$(dirname "$(dirname "$0")")"
+fi
 
-COUNT="$(brew outdated | wc -l | tr -d ' ')"
+source "$CONFIG_DIR/colors.sh" 2>/dev/null || true
+
+COUNT="$(brew outdated 2>/dev/null | wc -l | tr -d ' ')"
 
 COLOR=$RED
 

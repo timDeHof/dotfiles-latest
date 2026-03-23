@@ -3,9 +3,14 @@
 # Simplified GitHub notifications for sketchybar
 # Only shows count - fast and efficient
 
+# Ensure CONFIG_DIR is set
+if [ -z "$CONFIG_DIR" ]; then
+  CONFIG_DIR="$(dirname "$(dirname "$0")")"
+fi
+
 update() {
-  source "$CONFIG_DIR/colors.sh"
-  source "$CONFIG_DIR/icons.sh"
+  source "$CONFIG_DIR/colors.sh" 2>/dev/null || true
+  source "$CONFIG_DIR/icons.sh" 2>/dev/null || true
 
   # Get notification count (timeout after 5 seconds to prevent hanging)
   COUNT=$(gh api notifications --jq 'length' 2>/dev/null || echo "0")
