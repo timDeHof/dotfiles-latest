@@ -196,4 +196,11 @@ source "$ITEM_DIR/notification.sh"
 
 sketchybar --hotload on
 
+# Force scripts to run on startup
+sleep 0.5
+NAME=brew SENDER=routine /bin/bash "$PLUGIN_DIR/brew.sh"
+NAME=github.bell SENDER=routine /bin/bash "$PLUGIN_DIR/github.sh"
+NAME=weather /bin/bash "$PLUGIN_DIR/weather.sh"
+sketchybar --trigger brew_update
+
 echo "sketchybar configuration loaded.."
