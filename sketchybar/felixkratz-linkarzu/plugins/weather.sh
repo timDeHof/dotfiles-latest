@@ -3,7 +3,12 @@
 # Weather script for sketchybar
 # Uses OpenWeatherMap API
 
-source "$CONFIG_DIR/icons.sh"
+# Ensure CONFIG_DIR is set
+if [ -z "$CONFIG_DIR" ]; then
+  CONFIG_DIR="$(dirname "$(dirname "$0")")"
+fi
+
+source "$CONFIG_DIR/icons.sh" 2>/dev/null || true
 
 API_KEY="42cfde031be7db0bba631600af4edbe0"
 CITY="Jacksonville"
