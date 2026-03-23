@@ -62,6 +62,7 @@ network_down=(
 	icon.font="$FONT:Bold:13.0"
 	icon.color="$GREEN"
 	script="$PLUGIN_DIR/stats/scripts/network.sh"
+	display=1
 )
 
 network_up=(
@@ -72,6 +73,7 @@ network_up=(
 	icon="$NETWORK_UP"
 	icon.font="$FONT:Bold:13.0"
 	icon.color=0xfff5a97f
+	display=1
 )
 
 sketchybar 	--add item network.down right 						\
