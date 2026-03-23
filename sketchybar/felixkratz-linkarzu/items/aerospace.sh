@@ -24,11 +24,11 @@ create_workspace_item() {
   local item_id="space.${aero_monitor}.${workspace_id}"
   
   # Map aerospace monitor to sketchybar display
-  # Based on: aerospace monitor 1=Acer→sketchybar 3, monitor 2=MSI→sketchybar 2, monitor 3=Built-in→sketchybar 1
+  # Based on: monitor 1=Acer→sketchybar 2, monitor 2=MSI→sketchybar 3, monitor 3=Built-in→sketchybar 1
   local sketchybar_display
   case "$aero_monitor" in
-    1) sketchybar_display=3 ;;
-    2) sketchybar_display=2 ;;
+    1) sketchybar_display=2 ;;
+    2) sketchybar_display=3 ;;
     3) sketchybar_display=1 ;;
     *) sketchybar_display="$aero_monitor" ;;
   esac
