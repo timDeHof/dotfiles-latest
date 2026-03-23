@@ -14,6 +14,7 @@ github_bell=(
   label=0
   script="$PLUGIN_DIR/github.sh"
   click_script="open 'https://github.com/notifications'"
+  display=1
 )
 
 sketchybar --add item github.bell right \
