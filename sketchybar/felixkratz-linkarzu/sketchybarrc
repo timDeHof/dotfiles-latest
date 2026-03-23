@@ -195,4 +195,9 @@ sketchybar --hotload on
 # Forcing all item scripts to run (never do this outside of sketchybarrc)
 sketchybar --update
 
+# Reorder left-side items so apple is first
+# The order is: apple.logo first, then all others in their current order
+sleep 0.3
+sketchybar --reorder apple.logo front_app mic 2>/dev/null || true
+
 echo "sketchybar configuation loaded.."
