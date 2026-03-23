@@ -3,8 +3,9 @@
 # Aerospace workspace focus indicator
 # Highlights the focused workspace with a different color
 
-# Extract workspace from item name (e.g., ws_E -> E)
-WORKSPACE=$(echo "$NAME" | sed 's/ws_//')
+# Extract workspace from item name (e.g., space.1.E -> E)
+# Handles both old format (ws_E) and new format (space.X.Y)
+WORKSPACE=$(echo "$NAME" | sed -E 's/^space\.[^.]+\.//; s/^ws_//')
 
 # Source colors
 source "$CONFIG_DIR/colors.sh" 2>/dev/null
