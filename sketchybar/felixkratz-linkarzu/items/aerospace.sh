@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Register the aerospace workspace change event with sketchybar
 sketchybar --add event aerospace_workspace_change
@@ -11,6 +11,7 @@ aerospace_workspace=(
   background.height=20
   background.drawing=off
   label.font="$FONT:Regular:12.0"
+  label.color=$WHITE
   padding_left=5
   padding_right=5
   script="$PLUGIN_DIR/aerospace.sh"
@@ -34,21 +35,25 @@ create_workspace_item() {
     --subscribe "$item_id" aerospace_workspace_change aerospace_monitor_change \
     --set "$item_id" "${aerospace_workspace[@]}" \
     label="$display_label" \
-    monitor_id="$monitor_id" \
-    workspace_id="$workspace_id" \
     click_script="aerospace workspace $workspace_id 2>/dev/null || echo 'Failed to switch workspace'"
 }
 
+# Default workspaces to create as placeholders
+DEFAULT_MONITORS=("1" "2" "3")
+DEFAULT_WORKSPACES_EIN=("E" "I" "N")
+
 # Get monitors and workspaces and create items for each
 if command -v aerospace >/dev/null 2>&1; then
+  # Give aerospace a moment to respond after sketchybar reload
+  sleep 0.2
+  
   # Check if Aerospace server is running by testing a command
   if ! aerospace list-workspaces --all >/dev/null 2>&1; then
     echo "Warning: Aerospace server not running, creating default workspace items" >&2
     
     # Create default workspace items for a single monitor setup
-    # These will work once Aerospace starts running
-    for workspace_id in {1..6}; do
-      create_workspace_item "$workspace_id" "main"
+    for workspace_id in "${DEFAULT_WORKSPACES_EIN[@]}"; do
+      create_workspace_item "$workspace_id" "1"
     done
   else
     # Aerospace is running, try to get monitor information
@@ -58,29 +63,23 @@ if command -v aerospace >/dev/null 2>&1; then
       echo "Warning: No aerospace monitors found, using default single monitor" >&2
       
       # Create workspace items for default workspaces
-      mapfile -t all_workspaces < <(aerospace list-workspaces --all 2>/dev/null || echo -e "1\n2\n3\n4\n5\n6")
-      for workspace_id in "${all_workspaces[@]}"; do
-        create_workspace_item "$workspace_id" "main"
+      for workspace_id in "${DEFAULT_WORKSPACES_EIN[@]}"; do
+        create_workspace_item "$workspace_id" "1"
       done
     else
-      # Store monitors in an array for better handling
-      mapfile -t monitor_list < <(echo "$monitors")
-      
-      # For each monitor, get its workspaces and create items
-      for monitor_id in "${monitor_list[@]}"; do
-        # Get workspaces for this monitor
-        mapfile -t monitor_workspaces < <(aerospace list-workspaces --monitor "$monitor_id" 2>/dev/null || echo -e "1\n2\n3")
+      # Parse monitors using while read (zsh compatible)
+      echo "$monitors" | cut -d'|' -f1 | while IFS= read -r monitor_id; do
+        # Trim whitespace from monitor_id
+        monitor_id=$(echo "$monitor_id" | tr -d '[:space:]')
+        [ -z "$monitor_id" ] && continue
         
-        # Create items for each workspace on this monitor
-        for workspace_id in "${monitor_workspaces[@]}"; do
+        # Get workspaces for this monitor
+        aerospace list-workspaces --monitor "$monitor_id" 2>/dev/null | while IFS= read -r workspace_id; do
+          # Trim whitespace from workspace_id
+          workspace_id=$(echo "$workspace_id" | tr -d '[:space:]')
+          [ -z "$workspace_id" ] && continue
           create_workspace_item "$workspace_id" "$monitor_id"
         done
-      done
-      
-      # Also add all workspaces regardless of monitor for easy access
-      mapfile -t all_workspaces < <(aerospace list-workspaces --all 2>/dev/null | sort -n)
-      for workspace_id in "${all_workspaces[@]}"; do
-        create_workspace_item "$workspace_id" "main"
       done
     fi
   fi
@@ -88,7 +87,9 @@ else
   echo "Warning: aerospace command not found" >&2
   
   # Create default workspace items that will work once Aerospace is installed
-  for workspace_id in {1..6}; do
-    create_workspace_item "$workspace_id" "main"
+  for monitor_id in "${DEFAULT_MONITORS[@]}"; do
+    for workspace_id in "${DEFAULT_WORKSPACES_EIN[@]}"; do
+      create_workspace_item "$workspace_id" "$monitor_id"
+    done
   done
 fi

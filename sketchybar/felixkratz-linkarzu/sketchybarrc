@@ -192,12 +192,66 @@ source "$ITEM_DIR/notification.sh"
 
 sketchybar --hotload on
 
+# Give sketchybar a moment to initialize
+sleep 0.3
+
+# Create space items (they get cleared by update otherwise)
+if command -v aerospace >/dev/null 2>&1 && aerospace list-workspaces --all >/dev/null 2>&1; then
+  echo "Creating space items before update..."
+  # Aerospace is running, get workspace info
+  monitors=$(aerospace list-monitors 2>/dev/null)
+  
+  # Parse monitors line by line
+  for monitor_id in $(echo "$monitors" | cut -d'|' -f1); do
+    monitor_id=$(echo "$monitor_id" | tr -d '[:space:]')
+    [ -z "$monitor_id" ] && continue
+    
+    # Get workspaces for this monitor
+    for workspace_id in $(aerospace list-workspaces --monitor "$monitor_id" 2>/dev/null); do
+      workspace_id=$(echo "$workspace_id" | tr -d '[:space:]')
+      [ -z "$workspace_id" ] && continue
+      item_id="space.${monitor_id}.${workspace_id}"
+      echo "Adding item: $item_id"
+      
+      sketchybar --add item "$item_id" left \
+        --set "$item_id" \
+        label="$monitor_id:$workspace_id" \
+        label.font="$FONT:Regular:12.0" \
+        label.color=$WHITE \
+        background.drawing=off \
+        click_script="aerospace workspace $workspace_id"
+    done
+  done
+  echo "Done creating space items"
+fi
+
 # Forcing all item scripts to run (never do this outside of sketchybarrc)
 sketchybar --update
 
+# Create space items again after update (they get cleared by update)
+sleep 0.2
+if command -v aerospace >/dev/null 2>&1 && aerospace list-workspaces --all >/dev/null 2>&1; then
+  monitors=$(aerospace list-monitors 2>/dev/null)
+  for monitor_id in $(echo "$monitors" | cut -d'|' -f1); do
+    monitor_id=$(echo "$monitor_id" | tr -d '[:space:]')
+    [ -z "$monitor_id" ] && continue
+    for workspace_id in $(aerospace list-workspaces --monitor "$monitor_id" 2>/dev/null); do
+      workspace_id=$(echo "$workspace_id" | tr -d '[:space:]')
+      [ -z "$workspace_id" ] && continue
+      item_id="space.${monitor_id}.${workspace_id}"
+      
+      sketchybar --add item "$item_id" left \
+        --set "$item_id" \
+        label="$monitor_id:$workspace_id" \
+        label.font="$FONT:Regular:12.0" \
+        label.color=$WHITE \
+        background.drawing=off \
+        click_script="aerospace workspace $workspace_id"
+    done
+  done
+fi
+
 # Reorder left-side items so apple is first
-# The order is: apple.logo first, then all others in their current order
-sleep 0.3
-sketchybar --reorder apple.logo front_app mic 2>/dev/null || true
+sketchybar --reorder apple.logo space.1.S space.2.W space.3.E space.3.I space.3.N space.3.T front_app mic 2>/dev/null || true
 
 echo "sketchybar configuation loaded.."
