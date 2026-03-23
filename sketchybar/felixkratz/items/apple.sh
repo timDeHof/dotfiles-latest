@@ -6,6 +6,7 @@ POPUP_CLICK_SCRIPT='sketchybar --set $NAME popup.drawing=toggle'
 apple_logo=(
   icon=$APPLE
   icon.font="$FONT:Black:16.0"
+  # Here you can change the icon color
   icon.color=$GREEN
   padding_right=15
   label.drawing=off
@@ -16,7 +17,7 @@ apple_logo=(
 apple_prefs=(
   icon=$PREFERENCES
   label="Preferences"
-  click_script="open -a 'System Preferences'; $POPUP_OFF"
+  click_script="open -a 'System Settings'; $POPUP_OFF"
 )
 
 apple_activity=(
@@ -28,17 +29,17 @@ apple_activity=(
 apple_lock=(
   icon=$LOCK
   label="Lock Screen"
-  click_script="pmset displaysleepnow; $POPUP_OFF"
+  click_script="/System/Library/CoreServices/Menu\\ Extras/User.menu/Contents/Resources/CGSession -suspend; $POPUP_OFF"
 )
 
-sketchybar --add item apple.logo left                  \
-           --set apple.logo "${apple_logo[@]}"         \
-                                                       \
-           --add item apple.prefs popup.apple.logo     \
-           --set apple.prefs "${apple_prefs[@]}"       \
-                                                       \
-           --add item apple.activity popup.apple.logo  \
-           --set apple.activity "${apple_activity[@]}" \
-                                                       \
-           --add item apple.lock popup.apple.logo      \
-           --set apple.lock "${apple_lock[@]}"
+sketchybar --add item apple.logo left \
+  --set apple.logo "${apple_logo[@]}" \
+  \
+  --add item apple.prefs popup.apple.logo \
+  --set apple.prefs "${apple_prefs[@]}" \
+  \
+  --add item apple.activity popup.apple.logo \
+  --set apple.activity "${apple_activity[@]}" \
+  \
+  --add item apple.lock popup.apple.logo \
+  --set apple.lock "${apple_lock[@]}"

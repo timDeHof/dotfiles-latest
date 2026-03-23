@@ -1,10 +1,13 @@
 #!/bin/bash
 
+# Filename: ~/github/dotfiles-latest/sketchybar/felixkratz/items/volume.sh
+
 volume_slider=(
   script="$PLUGIN_DIR/volume.sh"
   updates=on
   label.drawing=off
   icon.drawing=off
+  padding_right=3
   slider.highlight_color=$BLUE
   slider.background.height=5
   slider.background.corner_radius=3
@@ -31,13 +34,13 @@ status_bracket=(
   background.border_color=$BACKGROUND_2
 )
 
-sketchybar --add slider volume right            \
-           --set volume "${volume_slider[@]}"   \
-           --subscribe volume volume_change     \
-                              mouse.clicked     \
-                                                \
-           --add item volume_icon right         \
-           --set volume_icon "${volume_icon[@]}"
+sketchybar --add slider volume right \
+  --set volume "${volume_slider[@]}" \
+  --subscribe volume volume_change \
+  mouse.clicked \
+  \
+  --add item volume_icon right \
+  --set volume_icon "${volume_icon[@]}"
 
 sketchybar --add bracket status brew github.bell wifi volume_icon \
-           --set status "${status_bracket[@]}"
+  --set status "${status_bracket[@]}"

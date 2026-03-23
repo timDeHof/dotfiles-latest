@@ -11,7 +11,8 @@ cpu_top=(
 
 cpu_percent=(
   label.font="$FONT:Heavy:12"
-  label=CPU
+  label=CPU%
+  label.color=$WHITE
   y_offset=-4
   padding_right=15
   width=55
@@ -51,3 +52,29 @@ sketchybar --add item cpu.top right              \
                                                  \
            --add graph cpu.user right 75         \
            --set cpu.user "${cpu_user[@]}"
+
+network_down=(
+	padding_left=8
+	y_offset=0
+	label.font="$FONT:Semibold:12.0"
+	label.color="$WHITE"
+	icon="$NETWORK_DOWN"
+	icon.font="$FONT:Bold:13.0"
+	icon.color="$GREEN"
+	script="$PLUGIN_DIR/stats/scripts/network.sh"
+)
+
+network_up=(
+	padding_right=8
+	y_offset=0
+	label.font="$FONT:Semibold:12.0"
+	label.color="$WHITE"
+	icon="$NETWORK_UP"
+	icon.font="$FONT:Bold:13.0"
+	icon.color=0xfff5a97f
+)
+
+sketchybar 	--add item network.down right 						\
+						--set network.down "${network_down[@]}" 	\
+						--add item network.up right 							\
+						--set network.up "${network_up[@]}"

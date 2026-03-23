@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Filename: ~/github/dotfiles-latest/sketchybar/felixkratz/icons.sh
+
 # General Icons
 LOADING=􀖇
 APPLE=􀣺
@@ -8,6 +10,8 @@ ACTIVITY=􀒓
 LOCK=􀒳
 BELL=􀋚
 BELL_DOT=􀝗
+BLUETOOTH=
+RESTART=
 
 # Git Icons
 GIT_ISSUE=􀍷
@@ -48,6 +52,11 @@ VOLUME_0=􀊣
 # WiFi
 WIFI_CONNECTED=􀙇
 WIFI_DISCONNECTED=􀙈
+ETHERNET_CONNECTED=󰈀
+
+# Network
+NETWORK_DOWN="↓DL:"
+NETWORK_UP="↑UL:"
 
 # svim
 MODE_NORMAL=􀂯
@@ -55,3 +64,16 @@ MODE_INSERT=􀂥
 MODE_VISUAL=􀂿
 MODE_CMD=􀂙
 MODE_PENDING=􀈏
+
+# Weather Icons (Nerd Fonts e300-e3e3)
+WEATHER_SUN=
+WEATHER_MOON=
+WEATHER_CLOUD_SUN=
+WEATHER_CLOUD_MOON=
+WEATHER_CLOUD=
+WEATHER_CLOUDS=
+WEATHER_RAIN=
+WEATHER_RAIN_LIGHT=
+WEATHER_LIGHTNING=
+WEATHER_SNOW=
+WEATHER_FOG=
