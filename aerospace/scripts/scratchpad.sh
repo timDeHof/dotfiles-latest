@@ -9,9 +9,9 @@ fi
 
 # Check if a scratchpad window already exists
 if kitty @ ls 2>/dev/null | grep -q "scratchpad"; then
-  # Focus existing scratchpad window
-  kitty @ focus-window --match title:scratchpad 2>/dev/null || kitty @ close-window --match title:scratchpad
+  # Close existing scratchpad window
+  kitty @ close-window --match title:scratchpad 2>/dev/null
 else
-  # Create new scratchpad window
-  kitty --title scratchpad --hold --single-instance -e bash -c 'echo "--- SCRATCHPAD ---"; exec bash' &
+  # Create new scratchpad window with --norc to avoid shell config errors
+  kitty --title scratchpad --single-instance -e /bin/bash --norc -c 'exec bash' &
 fi
