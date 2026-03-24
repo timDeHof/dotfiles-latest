@@ -1,20 +1,17 @@
 #!/bin/bash
-# Scratchpad - quick floating terminal for notes/calculations
+# Scratchpad - quick floating terminal using kitty
 
-SCRATCHPAD_ID="com.aerospace.scratchpad"
+# Check if kitty is installed
+if ! command -v kitty &> /dev/null; then
+  osascript -e "tell application \"Terminal\" to activate"
+  exit 1
+fi
 
-# Check if scratchpad window exists
-if aerospace list-windows --workspace $(aerospace list-workspaces --focused) 2>/dev/null | grep -q "$SCRATCHPAD_ID"; then
-  # Window exists, close it
-  osascript -e "tell application \"Terminal\" to do script \"exit\""
+# Check if a scratchpad window already exists
+if kitty @ ls 2>/dev/null | grep -q "scratchpad"; then
+  # Focus existing scratchpad window
+  kitty @ focus-window --match title:scratchpad 2>/dev/null || kitty @ close-window --match title:scratchpad
 else
-  # Create new scratchpad
-  osascript -e "tell application \"Terminal\"" \
-            -e "  activate" \
-            -e "  do script \"echo '--- SCRATCHPAD ---'\"" \
-            -e "end tell" &
-  sleep 0.3
-  # Get window ID and make it floating
-  osascript -e "tell application \"System Events\" to tell process \"Terminal\" to set miniaturized of first window to true"
-  osascript -e "tell application \"System Events\" to tell process \"Terminal\" to set frontmost to true"
+  # Create new scratchpad window
+  kitty --title scratchpad --hold --single-instance -e bash -c 'echo "--- SCRATCHPAD ---"; exec bash' &
 fi
