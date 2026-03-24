@@ -105,6 +105,9 @@ alt-1 = 'layout tiling'
 alt-2 = 'layout tiling'
 alt-3 = 'layout accordion'
 
+# Scratchpad (floating terminal)
+alt-z = 'exec-and-forget /Users/timothydehof/.config/aerospace/scripts/scratchpad.sh'
+
 # Service mode toggle
 alt-shift-semicolon = 'mode service'
 
