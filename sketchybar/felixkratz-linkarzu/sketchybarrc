@@ -204,3 +204,17 @@ NAME=weather /bin/bash "$PLUGIN_DIR/weather.sh"
 sketchybar --trigger brew_update
 
 echo "sketchybar configuration loaded.."
+
+# Borders toggle event
+sketchybar --add event borders_toggle
+
+# Borders toggle script
+cat > ~/.config/sketchybar/plugins/borders_toggle.sh << 'SCRIPT'
+#!/bin/bash
+if pgrep -x "borders" > /dev/null; then
+  pkill borders
+else
+  borders active_color=0xffe1e3e4 inactive_color=0xff494d64 width=5.0 &
+fi
+SCRIPT
+chmod +x ~/.config/sketchybar/plugins/borders_toggle.sh

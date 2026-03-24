@@ -100,15 +100,13 @@ alt-q = 'close'
 # Toggle floating layout
 alt-f = ['layout floating tiling', 'mode main']
 
-# Reset layout to tiling
-alt-enter = 'layout tiling'
+# Layout presets
+alt-1 = 'layout tiling'
+alt-2 = 'layout tiling'
+alt-3 = 'layout accordion'
 
 # Service mode toggle
 alt-shift-semicolon = 'mode service'
-
-# Layout switching
-alt-slash = 'layout tiles horizontal vertical'
-alt-comma = 'layout accordion horizontal vertical'
 
 # Join with neighbor (service mode)
 [mode.service.binding]
