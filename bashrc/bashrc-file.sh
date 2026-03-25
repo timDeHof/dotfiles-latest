@@ -163,3 +163,22 @@ export PATH=$PATH:$HOME/go/bin
 . "$HOME/.langflow/uv/env"
 
 [[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path bash)"
+
+# Agentbox Orchestrator - Auto-routing for OpenCode
+# Installed: Tue Mar 24 11:11:22 EDT 2026
+alias opencode='/Users/timothydehof/.config/opencode/skills/agentbox-orchestrator/opencode-agentbox-wrapper.sh'
+
+# Ticket → Code Pipeline - Convert issues to code
+alias ticket-to-code='/Users/timothydehof/.config/opencode/skills/ticket-to-code/ticket-to-code.sh'
+
+# Secret Scanner - Detect API keys and secrets
+alias secret-scan='/Users/timothydehof/.config/opencode/skills/secret-scanner/secret-scan.sh'
+
+# Johnny Decimal commands
+alias jd='/Users/timothydehof/.config/opencode/skills/johnny-decimal/johnny-decimal.sh'
+
+# JD Create command
+alias jd-create="/Users/timothydehof/.config/opencode/skills/johnny-decimal/jd-create.sh"
+alias jdc="jd-create"
+alias jd="source /Users/timothydehof/.config/opencode/skills/johnny-decimal/johnny-decimal.sh"
+alias jdcreate="/Users/timothydehof/.config/opencode/skills/johnny-decimal/jd-create.sh"
