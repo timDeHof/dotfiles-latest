@@ -46,11 +46,11 @@ outer.right = 10
 # Workspace to monitor assignments
 [workspace-to-monitor-force-assignment]
 E = 'Built-in Retina Display'
-I = ['Built-in Retina Display', 'MSI MAG321CQR']
-N = ['Built-in Retina Display', 'MSI MAG321CQR']
+I = 'Built-in Retina Display'
+N = 'Built-in Retina Display'
 S = 'Acer S231HL'
-T = ['Built-in Retina Display', 'MSI MAG321CQR']
-W = ['MSI MAG321CQR', 'Built-in Retina Display']
+T = 'Built-in Retina Display'
+W = 'MSI MAG321CQR'
 
 # Main binding mode
 [mode.main.binding]
@@ -72,6 +72,9 @@ alt-shift-l = 'move right'
 # Resize
 alt-minus = 'resize smart -50'
 alt-equal = 'resize smart +50'
+
+# Reset/flatten layout
+alt-r = 'flatten-workspace-tree'
 
 # Workspace switching (with window)
 alt-e = 'workspace E'
