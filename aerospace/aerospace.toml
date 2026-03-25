@@ -22,7 +22,7 @@ enable-normalization-opposite-orientation-for-nested-containers = true
 
 # Layout settings
 accordion-padding = 30
-default-root-container-layout = 'tiles'
+default-root-container-layout = 'tiles' # tiles|accordion
 default-root-container-orientation = 'auto'
 
 # Mouse follows focus
@@ -34,14 +34,13 @@ automatically-unhide-macos-hidden-apps = false
 
 [key-mapping]
 preset = 'qwerty'
-
 # Gaps
 [gaps]
 inner.horizontal = 10
 inner.vertical = 10
 outer.left = 10
 outer.bottom = 10
-outer.top = 38
+outer.top = 40
 outer.right = 10
 
 # Workspace to monitor assignments
@@ -55,6 +54,8 @@ W = ['MSI MAG321CQR', 'Built-in Retina Display']
 
 # Main binding mode
 [mode.main.binding]
+alt-slash = 'layout tiles horizontal vertical'
+alt-comma = 'layout accordion horizontal vertical'
 
 # Focus navigation (vim-style)
 alt-h = 'focus left'
@@ -79,14 +80,18 @@ alt-n = 'workspace N'
 alt-t = 'workspace T'
 alt-s = 'workspace S'
 alt-w = 'workspace W'
+alt-a = 'workspace prev'
+alt-d = 'workspace next'
 
 # Move node to workspace
-alt-shift-e = 'move-node-to-workspace E'
-alt-shift-i = 'move-node-to-workspace I'
-alt-shift-n = 'move-node-to-workspace N'
-alt-shift-s = 'move-node-to-workspace S'
-alt-shift-t = 'move-node-to-workspace T'
-alt-shift-w = 'move-node-to-workspace W'
+alt-shift-e = ['move-node-to-workspace E', 'workspace E']
+alt-shift-i = ['move-node-to-workspace I', 'workspace I']
+alt-shift-n = ['move-node-to-workspace N', 'workspace N']
+alt-shift-s = ['move-node-to-workspace S', 'workspace S']
+alt-shift-t = ['move-node-to-workspace T', 'workspace T']
+alt-shift-w = ['move-node-to-workspace W', 'workspace W']
+alt-shift-a = ['move-node-to-workspace prev', 'workspace prev']
+alt-shift-d = ['move-node-to-workspace next', 'workspace next']
 
 # Workspace back and forth
 alt-tab = 'workspace-back-and-forth'
@@ -94,33 +99,33 @@ alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
 
 # --- Productivity Bindings ---
 
-# Close window
-alt-q = 'close'
+# # Close window
+# alt-q = 'close'
 
-# Toggle floating layout
-alt-f = ['layout floating tiling', 'mode main']
+# # Toggle floating layout
+# alt-f = ['layout floating tiling', 'mode main']
 
-# Layout presets
-alt-1 = 'layout tiling'
-alt-2 = 'layout tiling'
-alt-3 = 'layout accordion'
+# # Layout presets
+# f6 = 'layout tiling'
+# f5 = 'layout accordion'
 
-# Scratchpad (floating terminal)
-ctrl-shift-z = 'exec-and-forget /Users/timothydehof/.config/aerospace/scripts/scratchpad.sh'
+# # Scratchpad (floating terminal)
+# ctrl-alt-shift-z = 'exec-and-forget /Users/timothydehof/.config/aerospace/scripts/scratchpad.sh'
 
 # Service mode toggle
-alt-shift-semicolon = 'mode service'
+ctrl-alt-shift-cmd-semicolon = 'mode service'
 
 # Join with neighbor (service mode)
 [mode.service.binding]
 esc = ['reload-config', 'mode main']
-r = ['flatten-workspace-tree', 'mode main']
-f = ['layout floating tiling', 'mode main']
+r = ['flatten-workspace-tree', 'mode main'] # reset layout
+#s = ['flatten-workspace-tree', 'mode main'] # sticky is not yet supported
+f = ['layout floating tiling', 'mode main'] # Toggle between floating and tiling layout
 backspace = ['close-all-windows-but-current', 'mode main']
-h = ['join-with left', 'mode main']
-j = ['join-with down', 'mode main']
-k = ['join-with up', 'mode main']
-l = ['join-with right', 'mode main']
+alt-shift-h = ['join-with left', 'mode main']
+alt-shift-j = ['join-with down', 'mode main']
+alt-shift-k = ['join-with up', 'mode main']
+alt-shift-l = ['join-with right', 'mode main']
 
 # Volume controls
 down = 'volume down'
