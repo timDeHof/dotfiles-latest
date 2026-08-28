@@ -48,7 +48,9 @@ outer.right = 10
 E = 'Built-in Retina Display'
 I = 'Built-in Retina Display'
 N = 'Built-in Retina Display'
-S = 'Acer S231HL'
+# Portrait display reports no name to AeroSpace, so it cannot be matched by
+# name; 1 is its left-to-right ordinal.
+S = 1
 T = 'Built-in Retina Display'
 W = 'MSI MAG321CQR'
 
