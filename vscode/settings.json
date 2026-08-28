@@ -159,6 +159,30 @@
           "foreground": "#FF000000",
         },
       },
+      {
+        "scope": "entity.name.type.interface.cs",
+        "settings": {
+          "foreground": "#b8ce82",
+        },
+      },
+      {
+        "scope": "entity.name.type.enum.cs",
+        "settings": {
+          "foreground": "#b8ce82",
+        },
+      },
+      {
+        "scope": "entity.name.type.struct.cs",
+        "settings": {
+          "foreground": "#86C691",
+        },
+      },
+      {
+        "scope": "variable.other.enummember.cs",
+        "settings": {
+          "foreground": "#4FC1FF",
+        },
+      },
     ],
   },
   "editor.links": false,
@@ -233,7 +257,7 @@
   "gitlens.ai.model": "gitkraken",
   "gitlens.ai.gitkraken.model": "gemini:gemini-2.0-flash",
   "terminal.integrated.env.osx": {
-    "Q_NEW_SESSION": "1"
+    "Q_NEW_SESSION": "1",
   },
   "terminal.integrated.shell.osx": "/bin/zsh",
   "editor.wordWrap": "on",
@@ -310,6 +334,7 @@
   "workbench.editor.enablePreview": false,
   "amazonQ.suppressPrompts": {
     "amazonQChatDisclaimer": true,
+    "amazonQChatPairProgramming": true,
   },
   "amazonQ.workspaceIndex": true,
   "kilo-code.allowedCommands": [
@@ -333,7 +358,7 @@
       "protocol": "https",
     },
   },
-  "coderabbit.agentType": "Kilo Code",
+  "coderabbit.agentType": "opencode",
   "editor.codeActions.triggerOnFocusChange": true,
   "eslint.format.enable": true,
   "javascript.updateImportsOnFileMove.enabled": "always",
@@ -377,12 +402,17 @@
   "editor.allowVariableLineHeights": false,
   "cSpell.userWords": [
     "aceternity",
+    "cmdk",
+    "cognidocs",
     "Gamified",
     "glassmorphism",
     "jsonv",
     "Liskov",
     "nominatim",
+    "precaching",
+    "tanstack",
     "teamforward",
+    "vaul",
   ],
   "chat.mcp.gallery.enabled": true,
   "github.copilot.enable": {
@@ -403,6 +433,54 @@
   "workbench.editor.editorActionsLocation": "titleBar",
   "workbench.editor.highlightModifiedTabs": true,
   "chat.tools.terminal.outputLocation": "terminal",
-  "terminal.explorerKind": "external",
   "git.ignoreRebaseWarning": true,
+  "terminal.integrated.commandsToSkipShell": [
+    "kilo-code.new.agentManagerOpen",
+    "kilo-code.new.agentManager.showTerminal",
+    "kilo-code.new.agentManager.runScript",
+  ],
+  "kilo-code.new.autocomplete.enableAutoTrigger": true,
+  "kilo-code.new.autocomplete.enableChatAutocomplete": true,
+  "githubPullRequests.pullRequestDescription": "Copilot",
+  "fallow.autoDownload": false,
+  "fallow.issueTypes": {
+    "unused-files": true,
+    "unused-exports": true,
+    "unused-types": true,
+    "unused-dependencies": true,
+    "unused-dev-dependencies": true,
+    "unused-enum-members": true,
+    "unused-class-members": true,
+    "unresolved-imports": true,
+    "unlisted-dependencies": true,
+    "duplicate-exports": true,
+    "type-only-dependencies": true,
+    "circular-dependencies": true,
+  },
+  "workbench.editorAssociations": {
+    "*.copilotmd": "vscode.markdown.preview.editor",
+    "*.svg": "default",
+  },
+  "chat.viewSessions.orientation": "stacked",
+  "workbench.externalBrowser": "chrome",
+  "liveServer.settings.CustomBrowser": "chrome",
+  "workbench.browser.openLocalhostLinks": false,
+  "[csharp]": {
+    "editor.defaultFormatter": "ms-dotnettools.csharp",
+  },
+  "editor.accessibilitySupport": "off",
+  "liveServer.settings.donotShowInfoMsg": true,
+  "debug.inlineValues": false,
+  "editor.semanticTokenColorCustomizations": {
+    "rules": {
+      "interface": {
+        "foreground": "#b8ce82",
+      },
+      "namespace": "#cccccc",
+      "enum": "#b8ce82",
+      "struct": {
+        "foreground": "#86C691",
+      },
+    },
+  },
 }
