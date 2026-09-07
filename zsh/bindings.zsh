@@ -24,6 +24,14 @@ zvm_after_init() {
   # Ctrl+F -> fzf file picker (no hidden files)
   bindkey '^F' _fzf_file_no_hidden
 
+  # fzf's own bindings are registered when key-bindings.zsh is sourced at the
+  # top of .zshrc — i.e. before zsh-vi-mode loads and wipes the keymap. The
+  # widgets survive; only the bindkeys are lost, so re-register them here.
+  # Without this, Ctrl+R silently falls back to zsh's builtin
+  # history-incremental-search-backward, which looks similar enough to hide it.
+  bindkey '^R' fzf-history-widget
+  bindkey '^T' fzf-file-widget
+
   # Ctrl+\ -> toggle autosuggestions (useful for screen recordings)
   bindkey '^\' autosuggest-toggle
 
