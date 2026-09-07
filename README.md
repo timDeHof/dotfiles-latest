@@ -10,7 +10,7 @@
 - [You like my content and want to support me?](#you-like-my-content-and-want-to-support-me)
 - [How do you manage your passwords?](#how-do-you-manage-your-passwords)
 - [Some of my YouTube videos](#some-of-my-youtube-videos)
-- [Point my `~/.zshrc` file to the desired repo](#point-my-zshrc-file-to-the-desired-repo)
+- [Create the symlinks into this repo](#create-the-symlinks-into-this-repo)
 
 <!-- tocstop -->
 
@@ -303,22 +303,24 @@ alias neobean='NVIM_APPNAME=linkarzu/dotfiles-latest/neovim/neobean nvim'
     </a>
 </div>
 
-## Point my `~/.zshrc` file to the desired repo
+## Create the symlinks into this repo
 
 <!-- prettier-ignore -->
 > [!NOTE]
 > These instructions are for me, GTFO
 
-- Commands below will create all the files if they don't yet exist, if they do,
-  it will update them.
-- `-n` allows the link to be treated as a normal file if it is a symlink to a
-  directory
-- `-f` "force" overwrites without warning if it already exists
+- Creates any symlink that doesn't exist yet and updates the ones that do.
+- Skips entries whose tool isn't installed, and never removes an existing link.
+- Backs up any real file it replaces to `<name>_backup_<timestamp>`.
 
 ```bash
-ln -snf ~/github/dotfiles-latest/zshrc/zshrc-file.sh ~/.zshrc >/dev/null 2>&1
-source ~/.zshrc
+# Provisions every symlink in this repo. Idempotent; --dry-run to preview.
+~/github/dotfiles-latest/bin/link-dotfiles.sh
 ```
+
+Note there is no `~/.zshrc` symlink: `~/.zshenv` sets `ZDOTDIR` to
+`~/.config/zsh`, so zsh reads its config from there. That directory is
+tracked as `zsh/` in this repo.
 
 ```bash
 # This is on the other repo where I keep my ssh config files

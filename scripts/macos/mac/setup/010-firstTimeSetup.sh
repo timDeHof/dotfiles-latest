@@ -417,7 +417,10 @@ echo "This section will:"
 echo "- Fix all the brew caveats"
 echo "- Create all the symlinks that point to my dotfiles"
 
-ln -snf ~/github/dotfiles-latest/zshrc/zshrc-file.sh ~/.zshrc >/dev/null 2>&1
+# Symlinks are provisioned by bin/link-dotfiles.sh now. It is idempotent
+# and supports --dry-run. The old zshrc-file.sh has been removed: zsh reads
+# ~/.config/zsh (via ZDOTDIR), so a ~/.zshrc symlink would never be sourced.
+~/github/dotfiles-latest/bin/link-dotfiles.sh
 
 echo
 echo -e "${boldPurple}>>>>>>>>>>>>>>>>>>>>>>>>>>${noColor}"
