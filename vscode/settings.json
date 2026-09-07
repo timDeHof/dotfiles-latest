@@ -497,4 +497,5 @@
   "terminal.integrated.env.linux": {},
   "chat.titleBar.openInAgentsWindow.enabled": false,
   "workbench.activityBar.compact": true,
+  "makefile.configureOnOpen": true,
 }
