@@ -31,9 +31,7 @@ return {
         markdown = true,
       },
     },
-    config = function(_, opts)
-      require("catppuccin").setup(opts)
-      vim.cmd.colorscheme("catppuccin-macchiato")
-    end,
+    -- no config function needed: LazyVim applies the colorscheme via its
+    -- `colorscheme` opt in lua/config/lazy.lua
   },
 }

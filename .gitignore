@@ -114,3 +114,8 @@ zsh/plugins/
 zsh/.zsh_sessions/
 zsh/.zcompdump*
 zsh/.zsh_history
+
+# ...but do pin the default nvim config's plugin versions. Without this the
+# lazy-lock.json rule above applies and a fresh machine installs latest-
+# everything, which is exactly how a working config drifts into a broken one.
+!neovim/nvim/lazy-lock.json
