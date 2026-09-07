@@ -20,6 +20,7 @@ source "$ZDOTDIR/completion.zsh"    # Completion system
 source "$ZDOTDIR/zoxide.zsh"        # Smart directory navigation
 source "$ZDOTDIR/env.zsh"           # Environment variables & PATH
 source "$ZDOTDIR/aliases.zsh"       # Aliases
+source "$ZDOTDIR/secrets.zsh"      # Per-command secret injection
 source "$ZDOTDIR/plugins.zsh"       # Plugin manager & plugins
 source "$ZDOTDIR/bindings.zsh"      # Keybindings (depends on plugins)
 source "$ZDOTDIR/prompt.zsh"        # Prompt / theme

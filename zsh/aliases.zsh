@@ -111,7 +111,7 @@ alias stream='mpv av://v4l2:/dev/video4 --fullscreen --demuxer-lavf-o=input_form
 # =============================================================================
 
 alias logwork='"/Users/timothydehof/Dev/vaults/00-09-System/07-Scripts/log-repo.sh"'
-alias logsync='"/Users/timothydehof/Dev/vaults/00-09-System/07-Scripts/sync-to-daily.sh"'
+# logsync is a function in secrets.zsh — it needs GEMINI_API_KEY scoped to it
 alias loghistory='"/Users/timothydehof/Dev/vaults/00-09-System/07-Scripts/log-history.sh"'
 alias synchistory='"/Users/timothydehof/Dev/vaults/00-09-System/07-Scripts/sync-history.sh"'
 alias watchinbox='"/Users/timothydehof/Dev/vaults/00-09-System/07-Scripts/inbox-watcher.sh"'

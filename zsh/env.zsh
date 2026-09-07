@@ -71,7 +71,7 @@ export PATH="/Users/timothydehof/.antigravity/antigravity/bin:$PATH"
 
 # Google Stitch MCP
 export GOOGLE_CLOUD_PROJECT="clever-passage-492016-h4"
-[[ -f ~/.config/secrets/stitch_api_key ]] && export STITCH_API_KEY="$(<~/.config/secrets/stitch_api_key)"
+# STITCH_API_KEY is not exported: opencode reads ~/.config/opencode/.env.
 
 # =============================================================================
 # GitHub Forwarding
@@ -82,4 +82,4 @@ export GITHUB_USER_EMAIL="ttdehof@gmail.com"
 # =============================================================================
 # Gemini API (for logsync daily note summaries)
 # =============================================================================
-[[ -f ~/.config/secrets/gemini_api_key ]] && export GEMINI_API_KEY="$(<~/.config/secrets/gemini_api_key)"
+# GEMINI_API_KEY is not exported globally; see secrets.zsh (logsync wrapper).
