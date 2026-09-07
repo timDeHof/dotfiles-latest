@@ -107,3 +107,10 @@ neovim/neobean/lua/.DS_Store
 # Secrets
 openweather/api_key
 secrets/
+
+# zsh runtime state — plugins/ is re-cloned automatically by zsh/plugins.zsh,
+# the rest is per-machine cache zsh regenerates on its own.
+zsh/plugins/
+zsh/.zsh_sessions/
+zsh/.zcompdump*
+zsh/.zsh_history

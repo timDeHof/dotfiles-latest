@@ -45,13 +45,16 @@ fi
 #   path:/abs   require that path to exist
 # A failed guard SKIPS the entry. It never removes an existing link.
 #
-# NOTE: there is intentionally no ~/.zshrc entry. ~/.zshenv on this machine
-# sets ZDOTDIR=$XDG_CONFIG_HOME/zsh, so zsh reads ~/.config/zsh/.zshrc and
-# ~/.zshrc is never sourced. Linking it would be a silent no-op, and pointing
-# this repo's zshrc-file.sh at $ZDOTDIR/.zshrc would clobber the modular zsh
-# config that actually runs. Manage ~/.config/zsh separately.
+# NOTE: there is intentionally no ~/.zshrc entry. ZDOTDIR points zsh at
+# ~/.config/zsh, so ~/.zshrc is never sourced and linking it would be a silent
+# no-op. The real zsh config is the zsh/ directory below; this repo's legacy
+# zshrc/zshrc-file.sh is NOT linked anywhere and would clobber it.
 # ─────────────────────────────────────────────────────────────────────────────
 ENTRIES=(
+  # zsh. zshenv-home MUST land at ~/.zshenv: zsh reads that from $HOME before
+  # it knows about ZDOTDIR, and it is what points zsh at ~/.config/zsh.
+  "zsh/zshenv-home|$HOME/.zshenv|"
+  "zsh|$HOME/.config/zsh|"
   "vimrc/vimrc-file|$HOME/.vimrc|"
   "vimrc/vimrc-file|$HOME/github/obsidian_main/.obsidian.vimrc|"
   "bashrc/bashrc-file.sh|$HOME/.bashrc|"

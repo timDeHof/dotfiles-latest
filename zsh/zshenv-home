@@ -1,0 +1,17 @@
+# Symlinked to ~/.zshenv
+#
+# This is the ONE file that cannot live in $ZDOTDIR: zsh reads ~/.zshenv from
+# $HOME before it knows where anything else is. Its only job is to point zsh
+# at ~/.config/zsh; everything after that is in .zshenv/.zshrc inside that dir.
+#
+# Note this runs for EVERY zsh (scripts included), so keep it minimal.
+
+if [[ -z "$XDG_CONFIG_HOME" ]]
+then
+	export XDG_CONFIG_HOME="$HOME/.config"
+fi
+
+if [[ -d "$XDG_CONFIG_HOME/zsh" ]]
+then
+	export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+fi
