@@ -55,6 +55,8 @@ ENTRIES=(
   # it knows about ZDOTDIR, and it is what points zsh at ~/.config/zsh.
   "zsh/zshenv-home|$HOME/.zshenv|"
   "zsh|$HOME/.config/zsh|"
+  # starship.toml is referenced by zsh/prompt.zsh via $STARSHIP_CONFIG
+  "starship/starship.toml|$HOME/.config/starship.toml|cmd:starship"
   "vimrc/vimrc-file|$HOME/.vimrc|"
   "vimrc/vimrc-file|$HOME/github/obsidian_main/.obsidian.vimrc|"
   "bashrc/bashrc-file.sh|$HOME/.bashrc|"
