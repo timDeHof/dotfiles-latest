@@ -77,6 +77,8 @@ ENTRIES=(
   ".prettierrc.yaml|$HOME/.prettierrc.yaml|"
   "vscode/settings.json|$HOME/Library/Application Support/Code/User/settings.json|cmd:code"
   "lazygit/config.yml|$HOME/Library/Application Support/lazygit/config.yml|cmd:lazygit"
+  # the default config (no NVIM_APPNAME); the rest are alternate appnames
+  "neovim/nvim|$HOME/.config/nvim|cmd:nvim"
   "neovim/neobean|$HOME/.config/neobean|cmd:nvim"
   "neovim/quarto-nvim-kickstarter|$HOME/.config/quarto-nvim-kickstarter|cmd:nvim"
   "neovim/kickstart.nvim|$HOME/.config/kickstart.nvim|cmd:nvim"
