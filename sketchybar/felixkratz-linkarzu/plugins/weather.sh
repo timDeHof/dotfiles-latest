@@ -15,7 +15,9 @@ CACHE_FILE="/tmp/sketchybar_weather_cache"
 CACHE_MAX_AGE=1800  # 30 minutes
 
 # API settings
-API_KEY="42cfde031be7db0bba631600af4edbe0"
+# Key lives outside the repo; if the file is missing the API rejects the
+# request and the item shows "N/A"
+API_KEY="$(cat "$HOME/.config/secrets/openweathermap_api_key" 2>/dev/null)"
 CITY="Jacksonville"
 UNITS="imperial"
 
@@ -67,18 +69,17 @@ update_weather() {
 
 # Check cache
 if [ -f "$CACHE_FILE" ]; then
-  local cache_age=$(($(date +%s) - $(stat -f %m "$CACHE_FILE" 2>/dev/null || stat -c %Y "$CACHE_FILE" 2>/dev/null)))
-  
+  cache_age=$(($(date +%s) - $(stat -f %m "$CACHE_FILE" 2>/dev/null || stat -c %Y "$CACHE_FILE" 2>/dev/null)))
+
   if [ "$cache_age" -lt "$CACHE_MAX_AGE" ]; then
     # Use cached data
-    local cached_response=$(cat "$CACHE_FILE")
+    cached_response=$(cat "$CACHE_FILE")
     update_weather "$cached_response"
     exit 0
   fi
 fi
 
 # Fetch fresh data
-local fresh_response
 fresh_response=$(get_weather)
 
 if [ -n "$fresh_response" ]; then
@@ -88,7 +89,7 @@ if [ -n "$fresh_response" ]; then
 else
   # Try to use stale cache if fetch failed
   if [ -f "$CACHE_FILE" ]; then
-    local cached_response=$(cat "$CACHE_FILE")
+    cached_response=$(cat "$CACHE_FILE")
     update_weather "$cached_response"
   else
     sketchybar --set "$NAME" label="N/A" 2>/dev/null
