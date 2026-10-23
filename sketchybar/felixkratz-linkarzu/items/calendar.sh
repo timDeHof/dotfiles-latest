@@ -5,7 +5,8 @@
 calendar=(
 	icon=cal
 	# Using "JetBrainsMono Nerd Font"
-	icon.font="$FONT:Black:14.0"
+	# No Black style is installed; it falls back to Helvetica (see apple.sh)
+	icon.font="$FONT:ExtraBold:14.0"
 	# Using default "SF Pro"
 	# icon.font="$FONT:Black:12.0"
 	icon.padding_right=0
