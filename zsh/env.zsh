@@ -36,6 +36,9 @@ export PATH=$PATH:$HOME/.local/opt/go/bin
 export PATH=$PATH:$HOME/go/bin
 export PATH="$(brew --prefix)/opt/openjdk/bin:$PATH"
 
+# .NET global tools (/etc/paths.d/dotnet-cli-tools adds a literal ~ that zsh does not expand)
+path+=("$HOME/.dotnet/tools")
+
 # =============================================================================
 # Databases
 # =============================================================================
