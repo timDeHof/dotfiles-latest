@@ -54,8 +54,8 @@ luac.out
 *.hex
 
 # Sketchybar helper binary (compiled per-machine)
-felixkratz/helper/helper
-felixkratz-linkarzu/helper/helper
+sketchybar/felixkratz/helper/helper
+sketchybar/felixkratz-linkarzu/helper/helper
 
 # Python
 
