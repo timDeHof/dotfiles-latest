@@ -19,10 +19,3 @@ _secret() {
   local f="$HOME/.config/secrets/$1"
   [[ -r "$f" ]] && printf '%s' "$(<"$f")"
 }
-
-# sync-to-daily.sh is the only vault script that reads GEMINI_API_KEY.
-# Assignment-prefix form: the variable exists for this command only.
-logsync() {
-  GEMINI_API_KEY="$(_secret gemini_api_key)" \
-    "$HOME/Dev/vaults/00-09-System/07-Scripts/sync-to-daily.sh" "$@"
-}
