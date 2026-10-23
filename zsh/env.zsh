@@ -32,7 +32,6 @@ export PATH="$HOME/.bun/bin:$PATH"
 # Languages
 # =============================================================================
 
-export PATH=$PATH:$HOME/.local/opt/go/bin
 export PATH=$PATH:$HOME/go/bin
 export PATH="$(brew --prefix)/opt/openjdk/bin:$PATH"
 
