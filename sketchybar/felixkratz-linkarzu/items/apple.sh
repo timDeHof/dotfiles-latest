@@ -5,7 +5,9 @@ POPUP_CLICK_SCRIPT='sketchybar --set $NAME popup.drawing=toggle'
 
 apple_logo=(
   icon=$APPLE
-  icon.font="$FONT:Black:16.0"
+  # JetBrainsMono Nerd Font has no Black style; CoreText falls back to
+  # Helvetica, which lacks the Apple glyph and draws a "?" box instead
+  icon.font="$FONT:ExtraBold:16.0"
   # Here you can change the icon color
   icon.color=$GREEN
   padding_right=15
