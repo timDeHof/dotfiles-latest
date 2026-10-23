@@ -91,6 +91,10 @@ alias ni="npm install"
 alias nrd="npm run dev"
 alias nrb="npm run build"
 
+# .NET global tools built for older runtimes; roll forward to the installed .NET 10.
+alias dotnet-metrics='DOTNET_ROLL_FORWARD=Major "$HOME/.dotnet/tools/dotnet-metrics"'
+alias httprepl='DOTNET_ROLL_FORWARD=Major "$HOME/.dotnet/tools/httprepl"'
+
 # =============================================================================
 # Utilities
 # =============================================================================
