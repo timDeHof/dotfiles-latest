@@ -95,7 +95,7 @@ alias nrb="npm run build"
 # Utilities
 # =============================================================================
 
-alias fc='cd /Users/timothydehof/Dev/Projects/Tools/flashcardConverter && uv run python main.py'
+alias flashcards='cd $HOME/Dev/Projects/Tools/flashcardConverter && uv run python main.py'
 alias weather='curl v2.wttr.in?format=1'
 alias reload="source ~/.config/zsh/.zshrc"
 
@@ -110,14 +110,10 @@ alias stream='mpv av://v4l2:/dev/video4 --fullscreen --demuxer-lavf-o=input_form
 # Gemini Vault Automations
 # =============================================================================
 
-alias logwork='"/Users/timothydehof/Dev/vaults/00-09-System/07-Scripts/log-repo.sh"'
-# logsync is a function in secrets.zsh — it needs GEMINI_API_KEY scoped to it
-alias loghistory='"/Users/timothydehof/Dev/vaults/00-09-System/07-Scripts/log-history.sh"'
-alias synchistory='"/Users/timothydehof/Dev/vaults/00-09-System/07-Scripts/sync-history.sh"'
-alias watchinbox='"/Users/timothydehof/Dev/vaults/00-09-System/07-Scripts/inbox-watcher.sh"'
-alias dsadaily='"/Users/timothydehof/Dev/vaults/00-09-System/07-Scripts/update-dsa-daily.sh"'
+alias watchinbox='"$HOME/Dev/vaults/00-09-System/07-Scripts/inbox-watcher.sh"'
+alias dsadaily='"$HOME/Dev/vaults/00-09-System/07-Scripts/update-dsa-daily.sh"'
 
 # =============================================================================
 # OpenCode
 # =============================================================================
-alias oc='"/Users/timothydehof/Dev/opencode-docker/run.sh"'
+alias oc='"$HOME/Dev/opencode-docker/run.sh"'

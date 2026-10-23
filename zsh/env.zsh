@@ -17,7 +17,7 @@ export NVM_DIR="$HOME/.nvm"
 # =============================================================================
 
 # pnpm
-export PNPM_HOME="/Users/timothydehof/Library/pnpm"
+export PNPM_HOME="$HOME/Library/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
@@ -26,7 +26,7 @@ esac
 export PATH=~/.npm-global/bin:$PATH
 
 # Bun
-export PATH="/Users/timothydehof/.bun/bin:$PATH"
+export PATH="$HOME/.bun/bin:$PATH"
 
 # =============================================================================
 # Languages
@@ -47,6 +47,10 @@ export PATH="/Library/PostgreSQL/16/bin:$PATH"
 # =============================================================================
 
 export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+export PATH="$PATH:/Applications/Obsidian.app/Contents/MacOS"
+
+# Docker Desktop CLI tools (docker-compose, kubectl, credential helpers)
+export PATH="$PATH:$HOME/.docker/bin"
 
 # =============================================================================
 # Terminal integrations
@@ -66,8 +70,8 @@ source "${HOME}/.local/bin/agentbox/agentbox.completion"
 # Misc tooling
 # =============================================================================
 
-# Antigravity
-export PATH="/Users/timothydehof/.antigravity/antigravity/bin:$PATH"
+# Antigravity IDE
+export PATH="$HOME/.antigravity-ide/antigravity-ide/bin:$PATH"
 
 # Google Stitch MCP
 export GOOGLE_CLOUD_PROJECT="clever-passage-492016-h4"
@@ -78,8 +82,3 @@ export GOOGLE_CLOUD_PROJECT="clever-passage-492016-h4"
 # =============================================================================
 export GITHUB_USER_NAME="timDeHof"
 export GITHUB_USER_EMAIL="ttdehof@gmail.com"
-
-# =============================================================================
-# Gemini API (for logsync daily note summaries)
-# =============================================================================
-# GEMINI_API_KEY is not exported globally; see secrets.zsh (logsync wrapper).

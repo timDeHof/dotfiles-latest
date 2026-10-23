@@ -408,7 +408,7 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 # -----------------------------------------------------------------------------
 
 echo "########################################################################"
-echo "Source ~/.zshrc file"
+echo "Source ~/.config/zsh/.zshrc file"
 echo "########################################################################"
 
 echo
@@ -424,13 +424,14 @@ echo "- Create all the symlinks that point to my dotfiles"
 
 echo
 echo -e "${boldPurple}>>>>>>>>>>>>>>>>>>>>>>>>>>${noColor}"
-echo "Sourcing ~/.zshrc file, please wait..."
+echo "Sourcing ~/.config/zsh/.zshrc file, please wait..."
 # Source your zshrc in a new Zsh shell to pull dotfiles-latest
 # Run it in a new zsh process as show below or you'll get a lot of errors
-zsh -c "source ~/.zshrc"
+# Single quotes: ZDOTDIR is set by ~/.zshenv inside the new zsh, not here
+zsh -c 'source "${ZDOTDIR:-$HOME}/.zshrc"'
 echo
 echo -e "${boldPurple}>>>>>>>>>>>>>>>>>>>>>>>>>>${noColor}"
-echo "Sourced ~/.zshrc file"
+echo "Sourced ~/.config/zsh/.zshrc file"
 
 # -----------------------------------------------------------------------------
 # -----------------------------------------------------------------------------
