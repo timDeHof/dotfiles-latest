@@ -1,0 +1,10 @@
+new_tab dotfiles
+layout tall
+cd ~/github/dotfiles-latest
+launch --title editor nvim
+launch --title shell
+
+new_tab notes
+cd ~/Dev/vaults
+launch
+focus
