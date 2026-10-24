@@ -24,7 +24,6 @@ return {
       ensure_installed = {
         "stylua",
         "prettier",
-        "typescript-language-server",
         "eslint-lsp",
         "lua-language-server",
       },
