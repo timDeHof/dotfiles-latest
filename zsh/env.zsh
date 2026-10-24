@@ -23,8 +23,6 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 
-export PATH=~/.npm-global/bin:$PATH
-
 # Bun
 export PATH="$HOME/.bun/bin:$PATH"
 
