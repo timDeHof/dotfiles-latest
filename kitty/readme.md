@@ -18,8 +18,8 @@ don't like typing in obsidian anymore
 brew install --cask kitty
 ```
 
-- Press `fn+ctrl+shift+f2` in kitty to open its fully commented sample config
-  file in your text editor
+- Press `fn+ctrl+shift+f2` in kitty to open `kitty.conf` in nvim, set by
+  `editor nvim` in `kitty.conf`
 
 ## See themes
 
@@ -45,4 +45,15 @@ rm -rf ~/github/dotfiles-latest/kitty/themes/.git/
 rm -rf ~/github/dotfiles-latest/kitty/themes/.github/
 ```
 
-- Then just include the file in my kitty.conf file and the theme gets applied
+- Then include the theme file in `kitty.conf`. It currently uses Catppuccin
+  Mocha:
+
+```conf
+include ~/github/dotfiles-latest/kitty/themes/themes/Catppuccin-Mocha.conf
+```
+
+- The path is absolute because only `kitty.conf` is symlinked into
+  `~/.config/kitty`, and kitty resolves relative includes from there
+- Settings after the include override the theme
+- To switch themes, change the include path and reload with `ctrl+shift+f5`.
+  `zshrc/colorscheme-set.sh` does not manage kitty colors
