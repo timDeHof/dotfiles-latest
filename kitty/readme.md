@@ -18,8 +18,8 @@ don't like typing in obsidian anymore
 brew install --cask kitty
 ```
 
-- Press `fn+ctrl+shift+f2` in kitty to open its fully commented sample config
-  file in your text editor
+- Press `fn+ctrl+shift+f2` in kitty to open `kitty.conf` in nvim, set by
+  `editor nvim` in `kitty.conf`
 
 ## See themes
 
