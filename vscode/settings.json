@@ -118,7 +118,7 @@
   "less.validate": false,
   "scss.validate": false,
   "editor.multiCursorModifier": "ctrlCmd",
-  "editor.cursorBlinking": "expand",
+  "editor.cursorBlinking": "smooth",
   "editor.cursorStyle": "block",
   "editor.fontLigatures": true,
   "editor.lineHeight": 2.25,
@@ -213,10 +213,18 @@
   // Specifically set Prettier as the formatter for jsonc
   "[javascriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
   },
   // Specifically set Prettier as the formatter for jsonc
-  "[typescriptreact]": {
-    "editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+  },
+  "[python]": {
+    "editor.formatOnSave": true,
+    "editor.rulers": [88],
+    "diffEditor.ignoreTrimWhitespace": false,
+    "editor.defaultColorDecorators": "never",
   },
   // Specifically set Prettier as the formatter for Markdown
   "[markdown]": {
