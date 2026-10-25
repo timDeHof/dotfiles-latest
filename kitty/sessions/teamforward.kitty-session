@@ -1,0 +1,31 @@
+# Tab 1: code
+# nvim on the left, a shell on the right. stack lets nvim go full screen.
+new_tab code
+enabled_layouts tall:bias=65,stack
+layout tall
+cd ~/Dev/Projects/teamforward-monorepo
+launch --title "teamforward" nvim
+launch --title "shell"
+
+# Tab 2: claude
+# cd and layout are per tab, so set them again
+new_tab claude
+layout tall
+cd ~/Dev/Projects/teamforward-monorepo
+launch --hold --title "claude" claude
+
+# Tab 3: dev
+# A shell for pnpm dev. A dev server may already be running, so start it by hand.
+new_tab dev
+layout tall
+cd ~/Dev/Projects/teamforward-monorepo
+launch --title "dev"
+
+# Tab 4: git
+new_tab git
+layout tall
+cd ~/Dev/Projects/teamforward-monorepo
+launch --hold --title "lazygit" lazygit
+
+focus_tab title:claude
+focus_os_window
