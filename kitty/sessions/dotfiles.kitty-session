@@ -1,10 +1,32 @@
+# # Create a new OS window
+# # Any definitions specified before the first new_os_window will apply to first OS window.
+# new_os_window
+# # Set the --class for the new OS window
+# os_window_class mywindow
+# # Change the OS window state to normal, fullscreen, maximized or minimized
+# os_window_state normal
+
+# Tab 1: dotfiles
 new_tab dotfiles
+
+# This defines how new windows (split panes will be open)
+# https://sw.kovidgoyal.net/kitty/layouts/#arrange-windows
+layout tall
+
+cd ~/github/dotfiles-latest
+
+# How to get the title from within kitty:
+# kitten @ ls | jq -r '.[] | select(.is_focused) | .tabs[] | select(.is_focused) | .windows[] | select(.is_focused) | .title'
+# launch --title "dotfiles"
+
+launch --title "dotfiles" nvim
+
+# Tab 2: claude
+# cd and layout are per tab, so set them again
+new_tab claude
 layout tall
 cd ~/github/dotfiles-latest
-launch --title editor nvim
-launch --title shell
-
-new_tab notes
-cd ~/Dev/vaults
-launch
+launch --hold --title "claude" claude
+# focus applies to the last launched window, so the claude tab ends up active
 focus
+focus_os_window
