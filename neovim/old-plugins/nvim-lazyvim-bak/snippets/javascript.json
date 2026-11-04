@@ -1,0 +1,172 @@
+{
+  "Console Log": {
+    "prefix": "cl",
+    "body": ["console.log('${1:message}');"],
+    "description": "Console log"
+  },
+  "Console Log Variable": {
+    "prefix": "clv",
+    "body": ["console.log('${1:variable}', ${1:variable});"],
+    "description": "Console log with variable"
+  },
+  "Async Function": {
+    "prefix": "af",
+    "body": ["async function ${1:name}(${2:params}) {", "    ${3:// code}", "    return ${4:result};", "}"],
+    "description": "Async function"
+  },
+  "Arrow Function": {
+    "prefix": "afn",
+    "body": ["const ${1:name} = (${2:params}) => {", "    ${3:// code}", "};"],
+    "description": "Arrow function"
+  },
+  "Async Arrow Function": {
+    "prefix": "aafn",
+    "body": ["const ${1:name} = async (${2:params}) => {", "    ${3:// code}", "    return ${4:result};", "};"],
+    "description": "Async arrow function"
+  },
+  "Try Catch": {
+    "prefix": "try",
+    "body": ["try {", "    ${1:// code}", "} catch (error) {", "    console.error('${2:Error}:', error);", "}"],
+    "description": "Try-catch block"
+  },
+  "Try Catch Async": {
+    "prefix": "trya",
+    "body": ["try {", "    await ${1:// promise}", "} catch (error) {", "    console.error('${2:Error}:', error);", "}"],
+    "description": "Try-catch for async"
+  },
+  "For Each": {
+    "prefix": "fe",
+    "body": ["${1:array}.forEach((${2:item}) => {", "    ${3:// code}", "});"],
+    "description": "forEach loop"
+  },
+  "Map": {
+    "prefix": "map",
+    "body": ["${1:array}.map((${2:item}) => {", "    ${3:// code}", "});"],
+    "description": "Map function"
+  },
+  "Filter": {
+    "prefix": "filter",
+    "body": ["${1:array}.filter((${2:item}) => ${3:condition});"],
+    "description": "Filter function"
+  },
+  "Find": {
+    "prefix": "find",
+    "body": ["${1:array}.find((${2:item}) => ${3:condition});"],
+    "description": "Find function"
+  },
+  "Reduce": {
+    "prefix": "reduce",
+    "body": ["${1:array}.reduce((acc, ${2:item}) => {", "    ${3:// code}", "    return acc;", "}, ${4:initial});"],
+    "description": "Reduce function"
+  },
+  "Destructure Object": {
+    "prefix": "destr",
+    "body": ["const { ${1:property} } = ${2:object};"],
+    "description": "Object destructuring"
+  },
+  "Destructure Array": {
+    "prefix": "destra",
+    "body": ["const [ ${1:first}, ${2:second} ] = ${3:array};"],
+    "description": "Array destructuring"
+  },
+  "Import": {
+    "prefix": "imp",
+    "body": ["import { ${1:module} } from '${2:module-path}';"],
+    "description": "Import statement"
+  },
+  "Import Default": {
+    "prefix": "impd",
+    "body": ["import ${1:module} from '${2:module-path}';"],
+    "description": "Default import"
+  },
+  "Export": {
+    "prefix": "exp",
+    "body": ["export const ${1:name} = ${2:value};"],
+    "description": "Export const"
+  },
+  "Export Default": {
+    "prefix": "expd",
+    "body": ["export default ${1:name};"],
+    "description": "Export default"
+  },
+  "React Component": {
+    "prefix": "rfc",
+    "body": [
+      "function ${1:Component}({ ${2:props} }) {",
+      "    return (",
+      "        <div>",
+      "            ${3:// JSX}",
+      "        </div>",
+      "    );",
+      "}",
+      "",
+      "export default ${1:Component};"
+    ],
+    "description": "React functional component"
+  },
+  "React Arrow Component": {
+    "prefix": "rfca",
+    "body": [
+      "const ${1:Component} = ({ ${2:props} }) => {",
+      "    return (",
+      "        <div>",
+      "            ${3:// JSX}",
+      "        </div>",
+      "    );",
+      "};",
+      "",
+      "export default ${1:Component};"
+    ],
+    "description": "React arrow function component"
+  },
+  "useState": {
+    "prefix": "useState",
+    "body": ["const [${1:state}, set${1/(.*)/${1:/capitalize}/}] = useState(${2:initialValue});"],
+    "description": "React useState hook"
+  },
+  "useEffect": {
+    "prefix": "useEffect",
+    "body": ["useEffect(() => {", "    ${1:// effect}", "    return () => {", "        ${2:// cleanup}", "    };", "}, [${3:dependencies}]);"],
+    "description": "React useEffect hook"
+  },
+  "Fetch API": {
+    "prefix": "fetch",
+    "body": [
+      "const response = await fetch('${1:url}', {",
+      "    method: '${2:GET}',",
+      "    headers: {",
+      "        'Content-Type': 'application/json',",
+      "    },",
+      "    ${3:body: JSON.stringify(data),}",
+      "});",
+      "",
+      "const data = await response.json();"
+    ],
+    "description": "Fetch API call"
+  },
+  "AWS Lambda Handler": {
+    "prefix": "awslambda",
+    "body": [
+      "export const handler = async (event, context) => {",
+      "    try {",
+      "        console.log('Event:', JSON.stringify(event, null, 2));",
+      "        ",
+      "        return {",
+      "            statusCode: 200,",
+      "            body: JSON.stringify({",
+      "                message: 'Hello from Lambda!',",
+      "                event,",
+      "            }),",
+      "        };",
+      "    } catch (error) {",
+      "        console.error('Error:', error);",
+      "        return {",
+      "            statusCode: 500,",
+      "            body: JSON.stringify({ error: error.message }),",
+      "        };",
+      "    }",
+      "};"
+    ],
+    "description": "AWS Lambda handler"
+  }
+}

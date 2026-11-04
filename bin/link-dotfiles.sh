@@ -80,9 +80,6 @@ ENTRIES=(
   # the default config (no NVIM_APPNAME); the rest are alternate appnames
   "neovim/nvim|$HOME/.config/nvim|cmd:nvim"
   "neovim/neobean|$HOME/.config/neobean|cmd:nvim"
-  "neovim/quarto-nvim-kickstarter|$HOME/.config/quarto-nvim-kickstarter|cmd:nvim"
-  "neovim/kickstart.nvim|$HOME/.config/kickstart.nvim|cmd:nvim"
-  "neovim/lazyvim|$HOME/.config/lazyvim|cmd:nvim"
   "neovide|$HOME/.config/neovide|cmd:neovide"
   "yazi|$HOME/.config/yazi|cmd:yazi"
   "btop|$HOME/.config/btop|cmd:btop"

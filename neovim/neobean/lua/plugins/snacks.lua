@@ -163,17 +163,12 @@ return {
       -- Documentation for the picker
       -- https://github.com/folke/snacks.nvim/blob/main/docs/picker.md
       picker = {
-        -- My ~/github/dotfiles-latest/neovim/lazyvim/lua/config/keymaps.lua
-        -- file was always showing at the top, I needed a way to decrease its
-        -- score, in frecency you could use :FrecencyDelete to delete a file
-        -- from the database, here you can decrease it's score
+        -- Adjust a file's picker score here. In frecency you could use
+        -- :FrecencyDelete to delete a file from the database, here you can
+        -- raise or lower its score
         transform = function(item)
           if not item.file then
             return item
-          end
-          -- Demote the "lazyvim" keymaps file:
-          if item.file:match("lazyvim/lua/config/keymaps%.lua") then
-            item.score_add = (item.score_add or 0) - 30
           end
           -- Boost the "neobean" keymaps file:
           -- if item.file:match("neobean/lua/config/keymaps%.lua") then
