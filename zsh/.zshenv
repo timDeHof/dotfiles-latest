@@ -16,6 +16,10 @@ export VISUAL="vim"
 export GPG_TTY=$(tty)
 
 # ---------- PATH ---------------
+# Keep only the first copy of each PATH entry. env.zsh prepends ~/.local/bin
+# again after path_helper reorders PATH, and that copy must win.
+# Both names are needed: -U on path alone does not dedupe `PATH=...` assignments.
+typeset -U PATH path
 # Personal binaries/scripts
 export PATH="$HOME/.local/bin:$PATH"
 
