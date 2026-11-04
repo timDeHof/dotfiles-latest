@@ -135,7 +135,7 @@ for entry in "${ENTRIES[@]}"; do
 
   if [[ -L "$target" ]]; then
     # compare with trailing slashes stripped: an older link written as
-    # ".../neovim/neobean/" is functionally identical to ".../neovim/neobean"
+    # ".../fastfetch/" is functionally identical to ".../fastfetch"
     current="$(readlink "$target")"
     if [[ "${current%/}" == "$src" ]]; then
       printf "%-52s ${GREEN}%s${OFF}\n" "$label" "ok"

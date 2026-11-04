@@ -383,11 +383,6 @@ else
   exit 1
 fi
 
-# Remove any cached files that may exist from a previous config
-echo
-echo -e "${boldPurple}>>>>>>>>>>>>>>>>>>>>>>>>>>${noColor}"
-echo "removing backup files.."
-
 # -----------------------------------------------------------------------------
 # -----------------------------------------------------------------------------
 
