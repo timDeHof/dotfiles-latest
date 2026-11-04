@@ -387,9 +387,6 @@ fi
 echo
 echo -e "${boldPurple}>>>>>>>>>>>>>>>>>>>>>>>>>>${noColor}"
 echo "removing backup files.."
-mv ~/.local/share/nvim{,.bak} >/dev/null 2>&1
-mv ~/.local/state/nvim{,.bak} >/dev/null 2>&1
-mv ~/.cache/nvim{,.bak} >/dev/null 2>&1
 
 # -----------------------------------------------------------------------------
 # -----------------------------------------------------------------------------

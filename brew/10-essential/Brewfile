@@ -13,7 +13,6 @@ cask "font-meslo-lg-nerd-font"
 cask "sf-symbols"
 cask "font-jetbrains-mono-nerd-font"
 
-brew "neovim"
 brew "gnu-sed"
 # brew "jesseduffield/lazygit/lazygit" errored out
 # So adding the tap on the top to see if it makes a difference
@@ -49,7 +48,6 @@ brew "pkgconf"
 cask "mouseless"
 cask "homerow"
 cask "chatgpt"
-cask "neovide"
 brew "btop"
 cask "winbox"
 cask "keycastr"
