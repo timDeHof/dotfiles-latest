@@ -4,6 +4,10 @@
 # $HOME before it knows where anything else is. Its only job is to point zsh
 # at ~/.config/zsh; everything after that is in .zshenv/.zshrc inside that dir.
 #
+# zsh reads .zshenv only once per startup. Setting ZDOTDIR here redirects
+# .zprofile/.zshrc/.zlogin, but not .zshenv, so this file sources it. Shells
+# that inherit ZDOTDIR skip this file and read $ZDOTDIR/.zshenv directly.
+#
 # Note this runs for EVERY zsh (scripts included), so keep it minimal.
 
 if [[ -z "$XDG_CONFIG_HOME" ]]
@@ -14,4 +18,8 @@ fi
 if [[ -d "$XDG_CONFIG_HOME/zsh" ]]
 then
 	export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+	if [[ -r "$ZDOTDIR/.zshenv" ]]
+	then
+		source "$ZDOTDIR/.zshenv"
+	fi
 fi
