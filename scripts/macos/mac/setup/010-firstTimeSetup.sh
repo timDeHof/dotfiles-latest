@@ -346,21 +346,6 @@ fi
 # -----------------------------------------------------------------------------
 
 echo
-echo "########################################################################"
-echo "Configure neovim"
-echo "########################################################################"
-
-# echo
-# echo -e "${boldPurple}>>>>>>>>>>>>>>>>>>>>>>>>>>${noColor}"
-# echo "Installing lazygit"
-# brew install jesseduffield/lazygit/lazygit
-
-# echo
-# echo -e "${boldPurple}>>>>>>>>>>>>>>>>>>>>>>>>>>${noColor}"
-# echo "Installing nerdfonts"
-# brew install --cask font-meslo-lg-nerd-font
-
-echo
 echo -e "${boldPurple}>>>>>>>>>>>>>>>>>>>>>>>>>>${noColor}"
 echo "Validating installed font..."
 if fc-list | grep -i "MesloLGM Nerd Font Mono"; then
@@ -368,18 +353,6 @@ if fc-list | grep -i "MesloLGM Nerd Font Mono"; then
 else
   echo -e "${boldPurple}>>>>>>>>>>>>>>>>>>>>>>>>>>${noColor}"
   echo "Font not found. Exiting."
-  exit 1
-fi
-
-# Validate C compiler for nvim-treesitter
-if gcc --version >/dev/null 2>&1 || clang --version >/dev/null 2>&1; then
-  echo
-  echo -e "${boldPurple}>>>>>>>>>>>>>>>>>>>>>>>>>>${noColor}"
-  echo "C compiler validated."
-else
-  echo
-  echo -e "${boldPurple}>>>>>>>>>>>>>>>>>>>>>>>>>>${noColor}"
-  echo "C compiler not found. Please install gcc or clang."
   exit 1
 fi
 
