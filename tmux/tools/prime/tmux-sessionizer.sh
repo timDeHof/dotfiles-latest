@@ -104,9 +104,9 @@ fi
 # I'm also making sure that the name is NOT equal to "$current_username-${username_suffix}"
 # I don't want to start neovim in my home directory
 if [[ "$selected_name" != "$current_username-${username_suffix}" ]] && ! tmux list-panes -t "$selected_name" -F "#{pane_current_command}" | grep -q "nvim"; then
-  # Set NVIM_APPNAME variable to load config and start it in the selected tmux session.
+  # Start neovim (default config) in the selected tmux session.
   # C-m presses enter
-  tmux send-keys -t "$selected_name" "NVIM_APPNAME=neobean nvim" C-m
+  tmux send-keys -t "$selected_name" "nvim" C-m
 
   # Send the "s" key in Neovim to restore the session after Neovim starts.
   # I use "s" to restore the session in nvimdev/dashboard-nvim
