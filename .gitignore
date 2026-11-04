@@ -71,7 +71,6 @@ venv.bak/
 plugin/packer_compiled.lua
 karabiner/yarn.lock
 karabiner/package-lock.json
-nvim-lazyvim/lazyvim.json
 brew/essential/Brewfile.lock.json
 karabiner/mxstbr/yarn.lock
 brew/10-essential/Brewfile.lock.json
@@ -95,8 +94,3 @@ zsh/plugins/
 zsh/.zsh_sessions/
 zsh/.zcompdump*
 zsh/.zsh_history
-
-# ...but do pin the default nvim config's plugin versions. Without this the
-# lazy-lock.json rule above applies and a fresh machine installs latest-
-# everything, which is exactly how a working config drifts into a broken one.
-!neovim/nvim/lazy-lock.json

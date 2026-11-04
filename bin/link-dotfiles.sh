@@ -77,9 +77,6 @@ ENTRIES=(
   ".prettierrc.yaml|$HOME/.prettierrc.yaml|"
   "vscode/settings.json|$HOME/Library/Application Support/Code/User/settings.json|cmd:code"
   "lazygit/config.yml|$HOME/Library/Application Support/lazygit/config.yml|cmd:lazygit"
-  # the default config (no NVIM_APPNAME)
-  "neovim/nvim|$HOME/.config/nvim|cmd:nvim"
-  "neovide|$HOME/.config/neovide|cmd:neovide"
   "yazi|$HOME/.config/yazi|cmd:yazi"
   "btop|$HOME/.config/btop|cmd:btop"
   "fastfetch|$HOME/.config/fastfetch|cmd:fastfetch"
@@ -138,7 +135,7 @@ for entry in "${ENTRIES[@]}"; do
 
   if [[ -L "$target" ]]; then
     # compare with trailing slashes stripped: an older link written as
-    # ".../neovim/neobean/" is functionally identical to ".../neovim/neobean"
+    # ".../fastfetch/" is functionally identical to ".../fastfetch"
     current="$(readlink "$target")"
     if [[ "${current%/}" == "$src" ]]; then
       printf "%-52s ${GREEN}%s${OFF}\n" "$label" "ok"

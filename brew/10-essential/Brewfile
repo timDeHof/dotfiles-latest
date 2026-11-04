@@ -1,23 +1,18 @@
 # /Users/krishna/github/dotfiles-latest/brew/10-essential/Brewfile
 # https://github.com/linkarzu/dotfiles-latest/blob/main/brew/10-essential/Brewfile
 
-# Best editor of all times Neovim
-
 # Adding taps (repos) on top
 tap "homebrew/bundle"
 tap "homebrew/services"
 tap "jesseduffield/lazygit"
 
-# I'll install the following fonts from neovim script
 cask "font-meslo-lg-nerd-font"
 cask "sf-symbols"
 cask "font-jetbrains-mono-nerd-font"
 
-brew "neovim"
 brew "gnu-sed"
 # brew "jesseduffield/lazygit/lazygit" errored out
 # So adding the tap on the top to see if it makes a difference
-# Otherwise, its installed by the neovim script
 brew "jesseduffield/lazygit/lazygit"
 brew "ripgrep"
 brew "fd"
@@ -49,7 +44,6 @@ brew "pkgconf"
 cask "mouseless"
 cask "homerow"
 cask "chatgpt"
-cask "neovide"
 brew "btop"
 cask "winbox"
 cask "keycastr"
