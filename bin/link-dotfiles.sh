@@ -77,9 +77,8 @@ ENTRIES=(
   ".prettierrc.yaml|$HOME/.prettierrc.yaml|"
   "vscode/settings.json|$HOME/Library/Application Support/Code/User/settings.json|cmd:code"
   "lazygit/config.yml|$HOME/Library/Application Support/lazygit/config.yml|cmd:lazygit"
-  # the default config (no NVIM_APPNAME); the rest are alternate appnames
+  # the default config (no NVIM_APPNAME)
   "neovim/nvim|$HOME/.config/nvim|cmd:nvim"
-  "neovim/neobean|$HOME/.config/neobean|cmd:nvim"
   "neovide|$HOME/.config/neovide|cmd:neovide"
   "yazi|$HOME/.config/yazi|cmd:yazi"
   "btop|$HOME/.config/btop|cmd:btop"
