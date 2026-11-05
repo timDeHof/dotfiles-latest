@@ -48,6 +48,9 @@ vim.o.foldmethod = "expr"
 vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.o.foldlevel = 99
 
+vim.o.showtabline = 1
+vim.o.tabline = "%!v:lua.Dehottdog.tabline.render()"
+
 require("vim._core.ui2").enable({
 	msg = {
 		target = "msg",
