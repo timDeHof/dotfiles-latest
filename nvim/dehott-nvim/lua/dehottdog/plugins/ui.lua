@@ -38,6 +38,21 @@ require("lualine").setup({
 	},
 })
 
+require("incline").setup({
+	hide = { cursorline = "focused_win" },
+	render = function(props)
+		local path = vim.api.nvim_buf_get_name(props.buf)
+		local name = path ~= "" and vim.fn.fnamemodify(path, ":t") or "[No Name]"
+		local icon, icon_hl = MiniIcons.get("file", name)
+		return {
+			vim.bo[props.buf].modified and "[+] " or "",
+			{ icon, group = icon_hl },
+			" ",
+			name,
+		}
+	end,
+})
+
 require("tiny-cmdline").setup({
 	position = { x = "50%", y = "20%" },
 })
