@@ -23,3 +23,17 @@ vim.api.nvim_create_autocmd("WinLeave", {
 		vim.wo.cursorline = false
 	end,
 })
+
+vim.api.nvim_create_autocmd("PackChanged", {
+	group = group,
+	desc = "Update Treesitter parsers when nvim-treesitter updates",
+	callback = function(ev)
+		if ev.data.spec.name ~= "nvim-treesitter" or ev.data.kind ~= "update" then
+			return
+		end
+		if not ev.data.active then
+			vim.cmd.packadd("nvim-treesitter")
+		end
+		vim.cmd("TSUpdate")
+	end,
+})

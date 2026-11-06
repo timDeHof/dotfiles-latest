@@ -5,6 +5,7 @@ vim.pack.add({
 	"https://github.com/b0o/incline.nvim",
 	"https://github.com/folke/snacks.nvim",
 	"https://github.com/stevearc/oil.nvim",
+	{ src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
 	"https://github.com/rachartier/tiny-cmdline.nvim",
 })
 
@@ -12,4 +13,5 @@ require("dehottdog.plugins.colorscheme")
 require("dehottdog.plugins.snacks")
 require("dehottdog.plugins.ui")
 require("dehottdog.plugins.explorer")
+require("dehottdog.plugins.syntax")
 require("dehottdog.plugins.keymaps")
