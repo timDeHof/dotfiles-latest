@@ -3,5 +3,6 @@ require("snacks").setup({
 	indent = { enabled = true },
 	statuscolumn = { enabled = true },
 	words = { enabled = true },
+	picker = { enabled = true },
 	scroll = { enabled = false },
 })
