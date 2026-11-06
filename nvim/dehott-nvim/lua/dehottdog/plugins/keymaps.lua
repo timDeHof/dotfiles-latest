@@ -28,3 +28,16 @@ end, { desc = "Notification history" })
 map("n", ";h", function()
 	Snacks.picker.git_diff()
 end, { desc = "Git hunks" })
+
+map("n", "sf", function()
+	require("oil").open_float(nil, { preview = {} })
+end, { desc = "File explorer" })
+vim.api.nvim_create_autocmd("FileType", {
+	group = vim.api.nvim_create_augroup("dehottdog.oil", { clear = true }),
+	pattern = "oil",
+	desc = "Oil buffer keymaps",
+	callback = function(ev)
+		map("n", "h", require("oil").open, { buffer = ev.buf, desc = "Parent directory" })
+		map("n", "q", require("oil").close, { buffer = ev.buf, desc = "Close oil" })
+	end,
+})

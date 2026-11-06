@@ -42,6 +42,12 @@ local function tab_label(tab)
 	local name, icon
 	if vim.bo[buf].buftype == "terminal" then
 		name = "[Terminal]"
+	elseif vim.bo[buf].filetype == "oil" then
+		local dir = require("oil").get_current_dir(buf) or path
+		name = vim.fn.fnamemodify(dir, ":~"):gsub("(.)/$", "%1")
+		if vim.fn.strchars(name) > MAX_NAME then
+			name = "…" .. vim.fn.strcharpart(name, vim.fn.strchars(name) - CUT_NAME)
+		end
 	elseif path == "" then
 		name = "[No Name]"
 	else
