@@ -51,3 +51,11 @@ vim.api.nvim_create_autocmd("FileType", {
 		vim.bo[ev.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 	end,
 })
+
+require("todo-comments").setup()
+
+vim.lsp.document_color.enable(false)
+require("nvim-highlight-colors").setup({
+	enable_named_colors = false,
+	enable_tailwind = false,
+})
