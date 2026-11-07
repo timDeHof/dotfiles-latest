@@ -165,6 +165,8 @@ end, { desc = "Stage or unstage buffer" })
 map("n", "<leader>gh", function()
 	require("gitsigns").stage_hunk()
 end, { desc = "Stage or unstage hunk" })
+-- gitlinker asks which remote whenever there's more than one, so name it
+map({ "n", "x" }, "<leader>gl", "<cmd>GitLink remote=origin<CR>", { desc = "Copy GitHub link" })
 
 map("n", "<leader>gd", function()
 	MiniDiff.toggle_overlay(0)
