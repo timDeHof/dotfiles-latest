@@ -38,3 +38,5 @@ require("codediff").setup({
 		compact_sync_folds = true,
 	},
 })
+
+require("gitlinker").setup()
