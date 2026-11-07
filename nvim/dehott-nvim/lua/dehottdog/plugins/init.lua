@@ -10,6 +10,7 @@ vim.pack.add({
 	{ src = "https://github.com/craftzdog/mini.diff", version = "feat/grouping" },
 	"https://github.com/esmuellert/codediff.nvim",
 	"https://github.com/linrongbin16/gitlinker.nvim",
+	"https://github.com/zbirenbaum/copilot.lua",
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
 	"https://github.com/nvim-lua/plenary.nvim",
 	"https://github.com/folke/todo-comments.nvim",
@@ -33,4 +34,5 @@ require("dehottdog.plugins.completion")
 require("dehottdog.plugins.coding")
 require("dehottdog.plugins.formatting")
 require("dehottdog.plugins.git")
+require("dehottdog.plugins.ai")
 require("dehottdog.plugins.keymaps")
