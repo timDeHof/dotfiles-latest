@@ -165,3 +165,20 @@ end, { desc = "Stage or unstage buffer" })
 map("n", "<leader>gh", function()
 	require("gitsigns").stage_hunk()
 end, { desc = "Stage or unstage hunk" })
+
+map("n", "<leader>gd", function()
+	MiniDiff.toggle_overlay(0)
+end, { desc = "Toggle diff overlay" })
+-- In diff mode, ]c / [c keep their built-in meaning
+map("n", "]c", function()
+	if vim.wo.diff then
+		return vim.cmd.normal({ "]c", bang = true })
+	end
+	MiniDiff.goto_hunk("next")
+end, { desc = "Next hunk" })
+map("n", "[c", function()
+	if vim.wo.diff then
+		return vim.cmd.normal({ "[c", bang = true })
+	end
+	MiniDiff.goto_hunk("prev")
+end, { desc = "Previous hunk" })

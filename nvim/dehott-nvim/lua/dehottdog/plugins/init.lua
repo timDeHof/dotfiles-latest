@@ -7,6 +7,7 @@ vim.pack.add({
 	"https://github.com/folke/snacks.nvim",
 	"https://github.com/stevearc/oil.nvim",
 	"https://github.com/lewis6991/gitsigns.nvim",
+	{ src = "https://github.com/craftzdog/mini.diff", version = "feat/grouping" },
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
 	"https://github.com/nvim-lua/plenary.nvim",
 	"https://github.com/folke/todo-comments.nvim",
