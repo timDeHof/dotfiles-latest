@@ -205,3 +205,9 @@ map("n", "<leader>dv", function()
 end, { desc = "Toggle diff view" })
 map("n", "<leader>dh", "<cmd>CodeDiff history %<CR>", { desc = "File history" })
 map("n", "<leader>dH", "<cmd>CodeDiff history<CR>", { desc = "Repo history" })
+
+map("n", ";g", function()
+	-- Read back by lazygit's edit command to open files in this window
+	vim.g.dehottdog_lazygit_win = vim.api.nvim_get_current_win()
+	Snacks.lazygit()
+end, { desc = "Lazygit" })
