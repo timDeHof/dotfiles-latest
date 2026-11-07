@@ -39,7 +39,7 @@ vim.o.writebackup = false
 vim.o.undofile = true
 vim.o.undodir = vim.fn.expand("~/.cache/nvim/undodir")
 vim.o.updatetime = 300
-vim.o.timeoutlen = 500
+vim.o.timeoutlen = 1000
 vim.o.ttimeoutlen = 0
 
 vim.o.splitbelow = true
