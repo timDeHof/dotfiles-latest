@@ -211,3 +211,22 @@ map("n", ";g", function()
 	vim.g.dehottdog_lazygit_win = vim.api.nvim_get_current_win()
 	Snacks.lazygit()
 end, { desc = "Lazygit" })
+
+map("n", "<leader>ac", "<cmd>ClaudeCode<CR>", { desc = "Toggle Claude" })
+map("n", "<leader>af", "<cmd>ClaudeCodeFocus<CR>", { desc = "Focus Claude" })
+map("n", "<leader>ar", "<cmd>ClaudeCode --resume<CR>", { desc = "Resume Claude" })
+map("n", "<leader>aC", "<cmd>ClaudeCode --continue<CR>", { desc = "Continue Claude" })
+map("n", "<leader>am", "<cmd>ClaudeCodeSelectModel<CR>", { desc = "Select Claude model" })
+map("n", "<leader>ab", "<cmd>ClaudeCodeAdd %<CR>", { desc = "Add buffer to Claude" })
+map("x", "<leader>as", "<cmd>ClaudeCodeSend<CR>", { desc = "Send selection to Claude" })
+map("n", "<leader>aa", "<cmd>ClaudeCodeDiffAccept<CR>", { desc = "Accept Claude diff" })
+map("n", "<leader>ad", "<cmd>ClaudeCodeDiffDeny<CR>", { desc = "Reject Claude diff" })
+-- vim.pack has no ft key, so add the oil keymap per buffer
+vim.api.nvim_create_autocmd("FileType", {
+	group = vim.api.nvim_create_augroup("dehottdog.claudecode", { clear = true }),
+	pattern = "oil",
+	desc = "Add the file under the cursor to Claude",
+	callback = function(ev)
+		map("n", "<leader>as", "<cmd>ClaudeCodeTreeAdd<CR>", { buffer = ev.buf, desc = "Add file to Claude" })
+	end,
+})

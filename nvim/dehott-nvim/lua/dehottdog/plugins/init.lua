@@ -11,6 +11,7 @@ vim.pack.add({
 	"https://github.com/esmuellert/codediff.nvim",
 	"https://github.com/linrongbin16/gitlinker.nvim",
 	"https://github.com/zbirenbaum/copilot.lua",
+	"https://github.com/coder/claudecode.nvim",
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
 	"https://github.com/nvim-lua/plenary.nvim",
 	"https://github.com/folke/todo-comments.nvim",

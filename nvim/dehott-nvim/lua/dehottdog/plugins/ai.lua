@@ -20,3 +20,9 @@ require("copilot").setup({
 		help = true,
 	},
 })
+
+-- Defaults: snacks terminal on the right at 30%, runs `claude` from PATH
+require("claudecode").setup({
+	-- "info" echoes the server port on every start
+	log_level = "warn",
+})

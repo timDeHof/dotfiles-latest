@@ -39,3 +39,14 @@ vim.api.nvim_create_autocmd("PackChanged", {
 })
 
 vim.filetype.add({ extension = { mdx = "mdx" } })
+
+-- Claude writes files from a terminal inside Neovim, so focus never leaves to trigger a check
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "TermLeave" }, {
+	group = group,
+	desc = "Reload files changed outside Neovim",
+	callback = function()
+		if vim.fn.getcmdwintype() == "" then
+			vim.cmd.checktime()
+		end
+	end,
+})
