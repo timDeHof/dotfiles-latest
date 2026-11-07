@@ -34,3 +34,21 @@ map("n", "<leader>bd", function()
 		end
 	end
 end, { desc = "Close hidden buffers except unsaved" })
+
+-- Copies `<path>#L<line>` for pasting into an agent's prompt
+local function copy_path_with_line(modifier)
+	local path = vim.api.nvim_buf_get_name(0)
+	if path == "" then
+		return vim.notify("Buffer has no file", vim.log.levels.WARN)
+	end
+	local text = ("%s#L%d"):format(vim.fn.fnamemodify(path, modifier), vim.api.nvim_win_get_cursor(0)[1])
+	vim.fn.setreg("+", text)
+	vim.notify("Copied " .. text)
+end
+
+map("n", "<leader>yf", function()
+	copy_path_with_line(":.")
+end, { desc = "Copy relative path with line" })
+map("n", "<leader>yp", function()
+	copy_path_with_line(":p")
+end, { desc = "Copy absolute path with line" })
