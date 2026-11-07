@@ -44,4 +44,20 @@ require("lazydev").setup({
 	},
 })
 
+local diagnostic_icons = Dehottdog.icons.diagnostics
+vim.diagnostic.config({
+	underline = true,
+	update_in_insert = false,
+	severity_sort = true,
+	virtual_text = { prefix = "●", source = "if_many" },
+	signs = {
+		text = {
+			[vim.diagnostic.severity.ERROR] = diagnostic_icons.Error,
+			[vim.diagnostic.severity.WARN] = diagnostic_icons.Warn,
+			[vim.diagnostic.severity.HINT] = diagnostic_icons.Hint,
+			[vim.diagnostic.severity.INFO] = diagnostic_icons.Info,
+		},
+	},
+})
+
 vim.lsp.enable({ "eslint", "oxlint", "lua_ls", "cssls", "vtsls", "tailwindcss", "rust_analyzer" })

@@ -2,6 +2,7 @@ require("mini.icons").setup()
 MiniIcons.mock_nvim_web_devicons()
 
 local statusline = Dehottdog.statusline
+local diagnostic_icons = Dehottdog.icons.diagnostics
 
 require("lualine").setup({
 	options = {
@@ -32,7 +33,19 @@ require("lualine").setup({
 			{ "filetype", icon_only = true, separator = "", padding = { left = 1, right = 0 } },
 			statusline.pretty_path,
 		},
-		lualine_x = { statusline.macro_recording, "diagnostics", "diff" },
+		lualine_x = {
+			statusline.macro_recording,
+			{
+				"diagnostics",
+				symbols = {
+					error = diagnostic_icons.Error,
+					warn = diagnostic_icons.Warn,
+					info = diagnostic_icons.Info,
+					hint = diagnostic_icons.Hint,
+				},
+			},
+			"diff",
+		},
 		lualine_y = { "progress" },
 		lualine_z = { "location" },
 	},
