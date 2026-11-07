@@ -13,6 +13,7 @@ vim.pack.add({
 	"https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim",
 	"https://github.com/neovim/nvim-lspconfig",
 	"https://github.com/folke/lazydev.nvim",
+	{ src = "https://github.com/saghen/blink.cmp", version = vim.version.range("^1") },
 	"https://github.com/rachartier/tiny-cmdline.nvim",
 })
 
@@ -22,4 +23,5 @@ require("dehottdog.plugins.ui")
 require("dehottdog.plugins.explorer")
 require("dehottdog.plugins.syntax")
 require("dehottdog.plugins.lsp")
+require("dehottdog.plugins.completion")
 require("dehottdog.plugins.keymaps")
