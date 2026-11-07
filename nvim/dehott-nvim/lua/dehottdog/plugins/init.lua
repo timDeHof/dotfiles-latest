@@ -12,6 +12,7 @@ vim.pack.add({
 	"https://github.com/brenoprata10/nvim-highlight-colors",
 	"https://github.com/mason-org/mason.nvim",
 	"https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim",
+	"https://github.com/stevearc/conform.nvim",
 	"https://github.com/neovim/nvim-lspconfig",
 	"https://github.com/folke/lazydev.nvim",
 	{ src = "https://github.com/saghen/blink.cmp", version = vim.version.range("^1") },
@@ -26,4 +27,5 @@ require("dehottdog.plugins.syntax")
 require("dehottdog.plugins.lsp")
 require("dehottdog.plugins.completion")
 require("dehottdog.plugins.coding")
+require("dehottdog.plugins.formatting")
 require("dehottdog.plugins.keymaps")

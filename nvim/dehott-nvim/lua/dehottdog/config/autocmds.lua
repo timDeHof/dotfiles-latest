@@ -37,3 +37,5 @@ vim.api.nvim_create_autocmd("PackChanged", {
 		vim.cmd("TSUpdate")
 	end,
 })
+
+vim.filetype.add({ extension = { mdx = "mdx" } })
