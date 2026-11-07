@@ -182,3 +182,26 @@ map("n", "[c", function()
 	end
 	MiniDiff.goto_hunk("prev")
 end, { desc = "Previous hunk" })
+
+-- codediff has no toggle command, so track its explorer tab to close it again
+local codediff_tab
+vim.api.nvim_create_autocmd("User", {
+	group = vim.api.nvim_create_augroup("dehottdog.codediff", { clear = true }),
+	pattern = { "CodeDiffOpen", "CodeDiffClose" },
+	desc = "Track the codediff explorer tab",
+	callback = function(ev)
+		if ev.data.mode ~= "explorer" then
+			return
+		end
+		codediff_tab = ev.match == "CodeDiffOpen" and ev.data.tabpage or nil
+	end,
+})
+map("n", "<leader>dv", function()
+	if codediff_tab and vim.api.nvim_tabpage_is_valid(codediff_tab) then
+		vim.cmd.tabclose(vim.api.nvim_tabpage_get_number(codediff_tab))
+	else
+		vim.cmd("CodeDiff")
+	end
+end, { desc = "Toggle diff view" })
+map("n", "<leader>dh", "<cmd>CodeDiff history %<CR>", { desc = "File history" })
+map("n", "<leader>dH", "<cmd>CodeDiff history<CR>", { desc = "Repo history" })

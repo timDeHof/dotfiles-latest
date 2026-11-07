@@ -25,3 +25,16 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 	desc = "Keep mini.diff from coloring line numbers",
 	callback = clear_number_colors,
 })
+
+require("codediff").setup({
+	explorer = {
+		view_mode = "tree",
+		width = 50,
+		auto_open_on_cursor = true,
+		line_stats = { enabled = true },
+	},
+	diff = {
+		compact_context_lines = 8,
+		compact_sync_folds = true,
+	},
+})
