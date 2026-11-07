@@ -1,5 +1,9 @@
 require("blink.cmp").setup({
-	keymap = { preset = "enter" },
+	keymap = {
+		preset = "enter",
+		-- <C-k> is signature help from the LSP keymaps
+		["<C-k>"] = false,
+	},
 	appearance = {
 		kind_icons = Dehottdog.icons.kinds,
 	},
