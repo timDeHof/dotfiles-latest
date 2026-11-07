@@ -39,6 +39,8 @@ require("nvim-treesitter").install({
 	"yaml",
 })
 
+vim.treesitter.language.register("markdown", "mdx")
+
 vim.api.nvim_create_autocmd("FileType", {
 	group = vim.api.nvim_create_augroup("dehottdog.treesitter", { clear = true }),
 	desc = "Start Treesitter highlighting and indent when a parser exists",
