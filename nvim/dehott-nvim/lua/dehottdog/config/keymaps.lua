@@ -52,3 +52,61 @@ end, { desc = "Copy relative path with line" })
 map("n", "<leader>yp", function()
 	copy_path_with_line(":p")
 end, { desc = "Copy absolute path with line" })
+
+-- Inkdrop's short names; other filetypes use their own name
+local code_block_langs = { typescriptreact = "tsx", javascriptreact = "jsx", typescript = "ts", javascript = "js" }
+
+map("x", "<leader>cc", function()
+	local path = vim.api.nvim_buf_get_name(0)
+	if path == "" then
+		return vim.notify("Buffer has no file", vim.log.levels.WARN)
+	end
+	local first, last = vim.fn.line("v"), vim.fn.line(".")
+	if first > last then
+		first, last = last, first
+	end
+	vim.api.nvim_feedkeys(vim.keycode("<Esc>"), "nx", false)
+	local lang = code_block_langs[vim.bo.filetype] or vim.bo.filetype
+	local lines = vim.api.nvim_buf_get_lines(0, first - 1, last, false)
+	local header = ('```%s filename="%s" line=%d'):format(lang, vim.fn.fnamemodify(path, ":."), first)
+	vim.fn.setreg("+", table.concat({ header, table.concat(lines, "\n"), "```" }, "\n"))
+	vim.notify(("Copied %d lines as a code block"):format(#lines))
+end, { desc = "Copy selection as a code block" })
+
+map("n", "<leader>j", function()
+	local root = vim.fs.root(0, "package.json")
+	if not root then
+		return vim.notify("No package.json found", vim.log.levels.WARN)
+	end
+	local buf = vim.fn.bufadd(root .. "/package.json")
+	vim.fn.bufload(buf)
+	local width, height = math.floor(vim.o.columns * 0.8), math.floor(vim.o.lines * 0.8)
+	local win = vim.api.nvim_open_win(buf, true, {
+		relative = "editor",
+		width = width,
+		height = height,
+		col = math.floor((vim.o.columns - width) / 2),
+		row = math.floor((vim.o.lines - height) / 2),
+		border = "rounded",
+		title = " package.json ",
+		title_pos = "center",
+	})
+	local function close()
+		if vim.api.nvim_win_is_valid(win) then
+			vim.api.nvim_win_close(win, false)
+		end
+	end
+	for _, key in ipairs({ "q", "<Esc>" }) do
+		map("n", key, close, { buffer = buf, desc = "Close package.json float" })
+	end
+	-- Drop q / <Esc> again, so the buffer opened normally keeps their usual meaning
+	vim.api.nvim_create_autocmd("WinClosed", {
+		pattern = tostring(win),
+		once = true,
+		callback = function()
+			for _, key in ipairs({ "q", "<Esc>" }) do
+				pcall(vim.keymap.del, "n", key, { buffer = buf })
+			end
+		end,
+	})
+end, { desc = "Open package.json in a float" })
