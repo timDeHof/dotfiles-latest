@@ -5,7 +5,7 @@ git:
   autoFetch: false
   diffRenderers:
     - colorArg: always
-      command: delta --dark --paging=never --syntax-theme="Solarized (dark)"
+      command: delta --dark --paging=never --syntax-theme="Catppuccin Macchiato"
 customCommands:
   - key: C
     context: files
