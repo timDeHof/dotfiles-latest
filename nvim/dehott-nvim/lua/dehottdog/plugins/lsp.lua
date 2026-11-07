@@ -41,6 +41,7 @@ vim.lsp.config("*", {
 require("lazydev").setup({
 	library = {
 		{ path = "snacks.nvim", words = { "Snacks" } },
+		{ path = "mini.diff", words = { "MiniDiff" } },
 	},
 })
 
