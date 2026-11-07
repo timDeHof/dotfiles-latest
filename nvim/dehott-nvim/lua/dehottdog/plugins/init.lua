@@ -6,6 +6,7 @@ vim.pack.add({
 	"https://github.com/b0o/incline.nvim",
 	"https://github.com/folke/snacks.nvim",
 	"https://github.com/stevearc/oil.nvim",
+	"https://github.com/lewis6991/gitsigns.nvim",
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
 	"https://github.com/nvim-lua/plenary.nvim",
 	"https://github.com/folke/todo-comments.nvim",
@@ -28,4 +29,5 @@ require("dehottdog.plugins.lsp")
 require("dehottdog.plugins.completion")
 require("dehottdog.plugins.coding")
 require("dehottdog.plugins.formatting")
+require("dehottdog.plugins.git")
 require("dehottdog.plugins.keymaps")

@@ -112,3 +112,56 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		bmap("n", "<leader>cl", "<cmd>checkhealth vim.lsp<CR>", { desc = "LSP info" })
 	end,
 })
+
+-- Opens the file as it was in the commit that last touched the cursor line
+local function open_line_commit()
+	local file = vim.api.nvim_buf_get_name(0)
+	local lnum = vim.api.nvim_win_get_cursor(0)[1]
+	local res = vim.system(
+		{ "git", "blame", "--porcelain", "-L", lnum .. "," .. lnum, "--contents", "-", "--", file },
+		{
+			cwd = vim.fs.dirname(file),
+			stdin = vim.api.nvim_buf_get_lines(0, 0, -1, false),
+			text = true,
+		}
+	)
+		:wait()
+	if res.code ~= 0 then
+		return vim.notify(vim.trim(res.stderr), vim.log.levels.WARN)
+	end
+	local sha, orig_lnum = res.stdout:match("^(%x+) (%d+)")
+	local path = res.stdout:match("\nfilename ([^\n]+)")
+	if not sha or sha:match("^0+$") then
+		return vim.notify("Line is not committed yet", vim.log.levels.WARN)
+	end
+	require("gitsigns").show(sha .. ":" .. path, { open = "tabnew" }, function(err)
+		if err then
+			return vim.notify(err, vim.log.levels.ERROR)
+		end
+		vim.schedule(function()
+			-- show() reports some failures without an err, so only move the cursor in the revision buffer
+			if vim.api.nvim_buf_get_name(0):match("^gitsigns://") then
+				pcall(vim.api.nvim_win_set_cursor, 0, { tonumber(orig_lnum), 0 })
+			end
+		end)
+	end)
+end
+
+map("n", "<leader>gb", function()
+	require("gitsigns").blame_line()
+end, { desc = "Blame line" })
+map("n", "<leader>gB", function()
+	require("gitsigns").blame()
+end, { desc = "Blame buffer" })
+map("n", "<leader>go", open_line_commit, { desc = "Open file at line's last commit" })
+map("n", "<leader>gs", function()
+	local gitsigns = require("gitsigns")
+	if #(gitsigns.get_hunks() or {}) > 0 then
+		gitsigns.stage_buffer()
+	else
+		gitsigns.reset_buffer_index()
+	end
+end, { desc = "Stage or unstage buffer" })
+map("n", "<leader>gh", function()
+	require("gitsigns").stage_hunk()
+end, { desc = "Stage or unstage hunk" })
