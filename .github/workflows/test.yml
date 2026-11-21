@@ -1,0 +1,22 @@
+name: tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    # macOS: the helpers and link-dotfiles.sh target it (lsof, BSD tools, Homebrew bash)
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Run tests/
+        run: |
+          status=0
+          for t in tests/*.test.zsh; do echo "== $t"; zsh "$t" || status=1; done
+          for t in tests/*.test.sh; do echo "== $t"; bash "$t" || status=1; done
+          exit $status

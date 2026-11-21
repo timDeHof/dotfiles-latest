@@ -12,8 +12,7 @@ export XDG_STATE_HOME="$HOME/.local/state"
 export EDITOR="vim"
 export VISUAL="vim"
 
-# ---------- GPG ----------------
-export GPG_TTY=$(tty)
+# GPG_TTY is set in .zshrc: .zshenv runs for every zsh, scripts included
 
 # ---------- PATH ---------------
 # Keep only the first copy of each PATH entry. env.zsh prepends ~/.local/bin
