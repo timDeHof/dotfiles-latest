@@ -13,7 +13,7 @@ _ide_bad_path() {
   local LC_ALL=C
   [[ $1 == *[[:cntrl:]\$]* || $1 == *$'\xe2\x80\xa8'* || $1 == *$'\xe2\x80\xa9'* || $1 == *$'\xc2\x85'* ]]
 }
-typeset -g _IDE_SESSION=${${(%):-%x}:A:h:h}/kitty/sessions/dev.kitty-session   # repo copy, found from this file's real path
+typeset -g _IDE_SESSION=${${(%):-%x}:A:h:h}/kitty/ide-session.tmpl   # repo copy, found from this file's real path
 # ide [path...]: open the kitty dev layout, one tab per directory
 #   ide                 current directory
 #   ide ~/Dev/app       one directory
@@ -25,7 +25,7 @@ ide() {
   local -a paths
   local d tpl
   [[ -r $_IDE_SESSION ]] || { print -u2 "ide: session file not found: $_IDE_SESSION"; return 1; }
-  for d in $dirs; do
+  for d in "${dirs[@]}"; do   # quoted: an unquoted $dirs drops empty arguments, skipping this check
     [[ -d $d ]] || { print -u2 "ide: not a directory: $d"; return 1; }
     d=${d:A}
     # validate the resolved path: it is pasted into a session file, so it must not inject directives
@@ -56,10 +56,14 @@ killport() {
   kill ${=pids} && print "killport: stopped $pids on port $1"
 }
 
+# _gcof_branches: local branch names. `git branch --format` would also print a pseudo-entry such
+# as "(HEAD detached at abc)" on a detached HEAD, which cannot be checked out.
+_gcof_branches() { git for-each-ref --format='%(refname:short)' refs/heads; }
+
 # gcof [query]: pick a local git branch with fzf and check it out
 gcof() {
   local b
-  b=$(git branch --format='%(refname:short)' | fzf --prompt='branch> ' -q "$1") || return
+  b=$(_gcof_branches | fzf --prompt='branch> ' -q "$1") || return
   git checkout "$b"
 }
 
@@ -67,6 +71,7 @@ gcof() {
 # so a corrupt archive cannot empty an existing file
 _extract_stream() {
   local dest=$1 tmp="$1.extract-$$"; shift
+  [[ -d $dest ]] && { print -u2 "extract: $dest is a directory"; return 1; }   # mv would drop the temp file inside it
   if "$@" > "$tmp"; then mv -- "$tmp" "$dest"; else rm -f -- "$tmp"; return 1; fi
 }
 
@@ -117,7 +122,7 @@ _killport() {
 }
 _gcof() {
   (( CURRENT == 2 )) || return 1
-  local -a branches; branches=(${(f)"$(git branch --format='%(refname:short)' 2>/dev/null)"})
+  local -a branches; branches=(${(f)"$(_gcof_branches 2>/dev/null)"})
   _wanted branches expl 'local branch' compadd -a branches
 }
 compdef _killport killport

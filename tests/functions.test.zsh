@@ -109,4 +109,43 @@ kitty() { cat >/dev/null; return 3; }   # stub: kitty exits 3
 ide "$tmp/ide/plain" >/dev/null 2>&1; rc=$?
 (( rc == 3 )) && pass "ide returns kitty's exit status" || fail "ide returned $rc when kitty exited 3"
 
+# The template needs PROJ and PROJ_NAME, so it must not sit in kitty/sessions, which
+# kitty's goto_session picker (kitty/kitty.conf) lists and would load without them.
+if [[ -r $_IDE_SESSION && ! -e $ROOT/kitty/sessions/dev.kitty-session && ${_IDE_SESSION:h} != $ROOT/kitty/sessions ]]
+then pass "the ide template is outside the session picker folder"
+else fail "the ide template is still in kitty/sessions (_IDE_SESSION=${_IDE_SESSION#$ROOT/})"; fi
+
+# An empty argument must be an error. In zsh an unquoted $array drops empty
+# elements, so the check used to be skipped and kitty started with no session.
+kitty() { cat > $tmp/session.out; }
+: > $tmp/session.out
+ide "" >/dev/null 2>&1; rc=$?
+if (( rc != 0 )) && [[ ! -s $tmp/session.out ]]; then pass "ide refuses an empty argument"
+else fail "ide accepted an empty argument (rc=$rc, session bytes: $(wc -c < $tmp/session.out | tr -d ' '))"; fi
+: > $tmp/session.out
+ide "$tmp/ide/plain" "" >/dev/null 2>&1; rc=$?
+if (( rc != 0 )) && [[ ! -s $tmp/session.out ]]; then pass "ide refuses an empty argument after a valid one"
+else fail "ide accepted an empty second argument (rc=$rc)"; fi
+
+# extract must not drop its temp file inside a directory that has the output's name
+mkdir -p $tmp/z/data && cd $tmp/z
+print hello | gzip -c > data.gz
+extract data.gz >/dev/null 2>&1; rc=$?
+if (( rc != 0 )) && [[ -z "$(print -l data/*(N))" ]]; then pass "extract refuses to write over a directory"
+else fail "extract with a directory named data: rc=$rc, found inside data/: $(print -l data/*(N) | tr '\n' ' ')"; fi
+
+# gcof must list real branches only. On a detached HEAD, git prints a pseudo-entry
+# like "(HEAD detached at abc)" that cannot be checked out.
+git init -q -b main $tmp/repo && cd $tmp/repo
+git -c user.name=t -c user.email=t@t commit -q --allow-empty -m a
+git branch feature
+git -c user.name=t -c user.email=t@t commit -q --allow-empty -m b
+git checkout -q --detach HEAD~1
+fzf() { cat > $tmp/fzf.in; return 1; }   # stub: capture the list gcof offers
+gcof >/dev/null 2>&1
+if [[ "$(sort $tmp/fzf.in | tr '\n' ' ')" == "feature main " ]]; then pass "gcof lists only real branches on a detached HEAD"
+else fail "gcof offered: $(tr '\n' '|' < $tmp/fzf.in)"; fi
+unfunction fzf
+cd $ROOT
+
 (( fails == 0 ))
