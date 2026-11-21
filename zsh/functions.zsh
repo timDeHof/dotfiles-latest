@@ -10,10 +10,12 @@
 #   ide ~/Dev/app       one directory
 #   ide ~/Dev/a ~/Dev/b one tab per directory
 # Builds a session by repeating dev.session once per path with $PROJ and $PROJ_NAME filled in.
+typeset -g _IDE_SESSION=${${(%):-%x}:A:h:h}/kitty/sessions/dev.kitty-session   # repo copy, found from this file's real path
 ide() {
   local -a dirs=("${@:-$PWD}")
   local -a paths
   local d tpl out
+  [[ -r $_IDE_SESSION ]] || { print -u2 "ide: session file not found: $_IDE_SESSION"; return 1; }
   for d in $dirs; do
     [[ -d $d ]] || { print -u2 "ide: not a directory: $d"; return 1; }
     d=${d:A}
@@ -21,7 +23,7 @@ ide() {
     [[ $d == *[[:cntrl:]]* ]] && { print -u2 "ide: path contains control characters"; return 1; }
     paths+=("$d")
   done
-  tpl=$(<~/.config/kitty/dev.session)
+  tpl=$(<$_IDE_SESSION)
   out=$(mktemp -t ide-session) || return 1
   for d in $paths; do print -r -- "${${tpl//\$PROJ_NAME/${d:t}}//\$PROJ/$d}"; done > $out
   kitty --detach --session $out
