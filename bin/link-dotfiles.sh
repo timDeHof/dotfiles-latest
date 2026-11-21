@@ -125,12 +125,12 @@ for entry in "${ENTRIES[@]}"; do
 
   if [[ ! -e "$src" && ! -L "$src" ]]; then
     printf "%-52s ${RED}%s${OFF}\n" "$label" "ERROR source missing: $rel"
-    ((n_err++)); continue
+    ((++n_err)); continue
   fi
 
   if ! guard_ok "$guard"; then
     printf "%-52s ${DIM}%s${OFF}\n" "$label" "skip (${guard} not satisfied)"
-    ((n_skip++)); continue
+    ((++n_skip)); continue
   fi
 
   if [[ -L "$target" ]]; then
@@ -139,21 +139,21 @@ for entry in "${ENTRIES[@]}"; do
     current="$(readlink "$target")"
     if [[ "${current%/}" == "$src" ]]; then
       printf "%-52s ${GREEN}%s${OFF}\n" "$label" "ok"
-      ((n_ok++)); continue
+      ((++n_ok)); continue
     fi
     printf "%-52s ${YELLOW}%s${OFF}\n" "$label" "repoint (was $current)"
-    ((n_repoint++))
+    ((++n_repoint))
   elif [[ -e "$target" ]]; then
     if needs_backup "$target"; then
       printf "%-52s ${YELLOW}%s${OFF}\n" "$label" "backup + replace"
-      ((n_backup++))
+      ((++n_backup))
     else
       printf "%-52s ${YELLOW}%s${OFF}\n" "$label" "replace (repo-owned, no backup)"
-      ((n_repoint++))
+      ((++n_repoint))
     fi
   else
     printf "%-52s ${BLUE}%s${OFF}\n" "$label" "create"
-    ((n_create++))
+    ((++n_create))
   fi
 
   $DRY_RUN && continue
