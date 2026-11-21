@@ -61,4 +61,37 @@ print hello | gzip -c > good.gz
 extract good.gz >/dev/null 2>&1
 [[ "$(<good)" == hello ]] && pass "extract still unpacks a valid .gz" || fail "extract broke a valid .gz"
 
+# ---- ide ------------------------------------------------------------------
+# kitty splits session files on U+0085, U+2028 and U+2029 (checked against kitty
+# 0.49.2) and expands $VAR in every line, with no working escape for a literal $.
+# So ide must refuse such paths instead of pasting them into the session.
+kitty() { cp -- "$3" $tmp/session.out; }   # stub for: kitty --detach --session FILE
+
+# ide_refuses <label> <dir name> [locale]: ide must exit non-zero and write no session
+ide_refuses() {
+  local d=$tmp/ide/$2 rc
+  mkdir -p -- $d || { fail "$1: could not create the test directory"; return; }
+  : > $tmp/session.out
+  LC_ALL=${3:-$LANG} ide $d >/dev/null 2>&1; rc=$?
+  if (( rc != 0 )) && [[ ! -s $tmp/session.out ]]; then pass "ide refuses $1"
+  else fail "ide accepted $1 (rc=$rc, session written: $([[ -s $tmp/session.out ]] && echo yes || echo no))"; fi
+}
+ide_refuses "U+2028 in a name"                    $'p\xe2\x80\xa8launch x'
+ide_refuses "U+2028 in a name (LC_ALL=C)"         $'q\xe2\x80\xa8launch x' C
+ide_refuses "U+2029 in a name"                    $'p\xe2\x80\xa9launch x'
+ide_refuses "U+2029 in a name (LC_ALL=C)"         $'q\xe2\x80\xa9launch x' C
+ide_refuses "U+0085 in a name"                    $'p\xc2\x85launch x'
+ide_refuses "U+0085 in a name (LC_ALL=C)"         $'q\xc2\x85launch x' C
+ide_refuses 'a $ in a name'                       'cost$HOME'
+
+# ordinary names, including a space and non-ASCII, still work and appear verbatim
+mkdir -p -- "$tmp/ide/my proj" "$tmp/ide/café"
+for n in "my proj" "café"; do
+  : > $tmp/session.out
+  ide "$tmp/ide/$n" >/dev/null 2>&1; rc=$?
+  if (( rc == 0 )) && grep -qxF "new_tab $n" $tmp/session.out && grep -qxF "cd ${tmp:A}/ide/$n" $tmp/session.out
+  then pass "ide opens '$n' with the right title and cwd"
+  else fail "ide mishandled '$n' (rc=$rc)"; fi
+done
+
 (( fails == 0 ))

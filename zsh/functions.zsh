@@ -10,6 +10,14 @@
 #   ide ~/Dev/app       one directory
 #   ide ~/Dev/a ~/Dev/b one tab per directory
 # Builds a session by repeating dev.session once per path with $PROJ and $PROJ_NAME filled in.
+# _ide_bad_path <path>: true if the path cannot be written into a kitty session file safely.
+# kitty splits session lines on U+0085, U+2028 and U+2029 as well as on newlines, and expands
+# $VAR in every line with no working escape for a literal $ (checked on kitty 0.49.2).
+# LC_ALL=C makes the match byte-wise, so it does not depend on the user's locale.
+_ide_bad_path() {
+  local LC_ALL=C
+  [[ $1 == *[[:cntrl:]\$]* || $1 == *$'\xe2\x80\xa8'* || $1 == *$'\xe2\x80\xa9'* || $1 == *$'\xc2\x85'* ]]
+}
 typeset -g _IDE_SESSION=${${(%):-%x}:A:h:h}/kitty/sessions/dev.kitty-session   # repo copy, found from this file's real path
 ide() {
   local -a dirs=("${@:-$PWD}")
@@ -19,8 +27,8 @@ ide() {
   for d in $dirs; do
     [[ -d $d ]] || { print -u2 "ide: not a directory: $d"; return 1; }
     d=${d:A}
-    # validate the resolved path: a newline would inject extra directives into the session file
-    [[ $d == *[[:cntrl:]]* ]] && { print -u2 "ide: path contains control characters"; return 1; }
+    # validate the resolved path: it is pasted into a session file, so it must not inject directives
+    _ide_bad_path $d && { print -u2 "ide: unsupported character in path (control character, U+0085, U+2028, U+2029 or \$)"; return 1; }
     paths+=("$d")
   done
   tpl=$(<$_IDE_SESSION)
