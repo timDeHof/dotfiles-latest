@@ -41,4 +41,23 @@ rm $N/alias/default
 got=$(run 'echo ok')
 [[ $got == ok ]] && pass "no default alias: env.zsh still loads cleanly" || fail "no default alias: output [$got]"
 
+# JAVA_HOME and the java found on PATH must be the same JDK: JAVA_HOME/bin has to come before
+# Homebrew's openjdk on PATH (build tools follow JAVA_HOME, everything else follows PATH).
+got=$(HOME=$H zsh -c "source $ROOT/zsh/env.zsh; print -l \$path" 2>/dev/null)
+jh=$(HOME=$H zsh -c "source $ROOT/zsh/env.zsh; print -r -- \$JAVA_HOME" 2>/dev/null)
+paths=(${(f)got})
+ji=${paths[(i)$jh/bin]} oi=${paths[(i)*/opt/openjdk/bin]}
+if (( ji > $#paths )); then fail "JAVA_HOME/bin ($jh/bin) is not on PATH"
+elif (( ji < oi )); then pass "JAVA_HOME/bin comes before Homebrew openjdk on PATH"
+else fail "JAVA_HOME/bin is at PATH position $ji, after openjdk at $oi"; fi
+
+# a missing agentbox install must not print an error in every shell
+err=$(HOME=$H zsh -c "source $ROOT/zsh/env.zsh" 2>&1 >/dev/null)
+[[ $err != *agentbox* ]] && pass "no agentbox install: no source error at startup" || fail "startup error: [$err]"
+
+# .zshenv runs for every zsh, scripts included: it must not fork tty or export GPG_TTY. .zshrc sets it.
+got=$(env -u GPG_TTY HOME=$H ZDOTDIR=$ROOT/zsh zsh -c 'print -r -- ${GPG_TTY-unset}' </dev/null 2>/dev/null)
+[[ $got == unset ]] && pass ".zshenv does not set GPG_TTY for non-interactive shells" || fail "non-interactive shell got GPG_TTY=[$got]"
+grep -q 'GPG_TTY' $ROOT/zsh/.zshrc && pass ".zshrc sets GPG_TTY" || fail "GPG_TTY is not set in .zshrc"
+
 exit $(( fails > 0 ))

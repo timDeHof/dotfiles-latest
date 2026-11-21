@@ -10,6 +10,9 @@ if [[ -f "$FZF_SHELL/key-bindings.zsh" ]]; then
 fi
 unset FZF_SHELL
 
+# gpg-agent needs the terminal for pinentry. $TTY is a zsh builtin, no fork. Interactive shells only.
+export GPG_TTY=$TTY
+
 # =============================================================================
 # Module loader
 # =============================================================================

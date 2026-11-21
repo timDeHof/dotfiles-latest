@@ -49,6 +49,7 @@ export PATH="$HOME/.bun/bin:$PATH"
 
 export PATH=$PATH:$HOME/go/bin
 export PATH="$(brew --prefix)/opt/openjdk/bin:$PATH"
+export PATH="$JAVA_HOME/bin:$PATH"   # after openjdk, so `java` and JAVA_HOME are the same JDK
 
 # .NET global tools (/etc/paths.d/dotnet-cli-tools adds a literal ~ that zsh does not expand)
 path+=("$HOME/.dotnet/tools")
@@ -81,7 +82,7 @@ export PATH="$PATH:$HOME/.docker/bin"
 
 export PATH="${HOME}/.local/bin:${PATH}"
 export PATH="${HOME}/.local/bin/agentbox:${PATH}"
-source "${HOME}/.local/bin/agentbox/agentbox.completion"
+[[ -r ${HOME}/.local/bin/agentbox/agentbox.completion ]] && source "${HOME}/.local/bin/agentbox/agentbox.completion"
 
 # =============================================================================
 # Misc tooling
