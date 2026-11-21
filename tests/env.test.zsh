@@ -37,6 +37,18 @@ rm -f $H/nvm.sh.loaded $H/completion.loaded
 run 'nvm ls' >/dev/null
 [[ -e $H/nvm.sh.loaded && -e $H/completion.loaded ]] && pass "first nvm call loads nvm.sh and bash_completion" || fail "nvm.sh or bash_completion not loaded on first call"
 
+# the default alias is a version prefix: "2" means v2.x, not v20 or v24
+for v in v2.5.0 v20.1.0; do mkdir -p $N/versions/node/$v/bin; print '#!/bin/sh' > $N/versions/node/$v/bin/node; chmod +x $N/versions/node/$v/bin/node; done
+print 2 > $N/alias/default
+got=$(run 'whence -p node')
+[[ $got == $N/versions/node/v2.5.0/bin/node ]] && pass "alias 2 picks v2.x, not v20 or v24" || fail "alias 2 resolved to [$got], expected v2.5.0"
+print 20 > $N/alias/default
+got=$(run 'whence -p node')
+[[ $got == $N/versions/node/v20.1.0/bin/node ]] && pass "alias 20 picks v20.x" || fail "alias 20 resolved to [$got], expected v20.1.0"
+print 24.10.0 > $N/alias/default
+got=$(run 'whence -p node')
+[[ $got == $N/versions/node/v24.10.0/bin/node ]] && pass "a full version alias (24.10.0) picks that version" || fail "alias 24.10.0 resolved to [$got]"
+
 rm $N/alias/default
 got=$(run 'echo ok')
 [[ $got == ok ]] && pass "no default alias: env.zsh still loads cleanly" || fail "no default alias: output [$got]"

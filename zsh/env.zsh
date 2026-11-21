@@ -15,7 +15,7 @@ export NVM_DIR="$HOME/.nvm"
 _nvm_default_bin() {
   setopt localoptions numericglobsort nullglob
   local a; a=$(<"$NVM_DIR/alias/default") 2>/dev/null || return
-  local -a v; v=("$NVM_DIR"/versions/node/v${a#v}*(On))
+  local -a v; v=("$NVM_DIR"/versions/node/v${a#v}(|.*)(On))   # (|.*): "2" matches v2 and v2.x, not v20
   (( $#v )) && print -r -- "$v[1]/bin"
 }
 if [[ -s $NVM_DIR/nvm.sh ]]; then
