@@ -44,7 +44,8 @@ mkcd() {
 # killport <port>: kill the process listening on a TCP port
 killport() {
   [[ $1 == <-> ]] || { print -u2 "usage: killport <port>"; return 1; }
-  local pids; pids=$(lsof -ti :$1 -sTCP:LISTEN)
+  # -iTCP: without the protocol, a UDP socket on the same port would match too
+  local pids; pids=$(lsof -tiTCP:"$1" -sTCP:LISTEN)
   [[ -n $pids ]] || { print -u2 "killport: nothing listening on port $1"; return 1; }
   kill ${=pids} && print "killport: stopped $pids on port $1"
 }
@@ -56,6 +57,13 @@ gcof() {
   git checkout "$b"
 }
 
+# _extract_stream <dest> <cmd...>: run cmd into a temp file and replace dest only if cmd succeeds,
+# so a corrupt archive cannot empty an existing file
+_extract_stream() {
+  local dest=$1 tmp="$1.extract-$$"; shift
+  if "$@" > "$tmp"; then mv -- "$tmp" "$dest"; else rm -f -- "$tmp"; return 1; fi
+}
+
 # extract <archive...>: unpack archives into the current directory, by file extension
 extract() {
   (( $# )) || { print -u2 "usage: extract <archive...>"; return 1; }
@@ -65,9 +73,9 @@ extract() {
     case ${f:l} in
       *.tar|*.tar.gz|*.tgz|*.tar.bz2|*.tbz2|*.tar.xz|*.txz) tar -xf "$f" ;;
       *.zip) unzip -q "$f" ;;
-      *.gz)  gunzip -c "$f" > "${f:t:r}" ;;
-      *.bz2) bunzip2 -c "$f" > "${f:t:r}" ;;
-      *.xz)  unxz -c "$f" > "${f:t:r}" ;;
+      *.gz)  _extract_stream "${f:t:r}" gunzip -c "$f" ;;
+      *.bz2) _extract_stream "${f:t:r}" bunzip2 -c "$f" ;;
+      *.xz)  _extract_stream "${f:t:r}" unxz -c "$f" ;;
       *.7z)  7z x "$f" ;;
       *) print -u2 "extract: unknown archive type: $f"; rc=1 ;;
     esac || rc=1
