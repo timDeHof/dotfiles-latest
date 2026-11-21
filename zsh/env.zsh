@@ -9,8 +9,25 @@ export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                    # loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # loads nvm bash_completion
+# nvm is lazy: sourcing nvm.sh costs about 0.2 s per shell. node and npm come from the default
+# alias on PATH, and the first `nvm` call loads the real nvm.
+# shortcut: only a numeric default alias (e.g. 24) is resolved, not lts/* or node, switch to a plain PATH entry if that changes.
+_nvm_default_bin() {
+  setopt localoptions numericglobsort nullglob
+  local a; a=$(<"$NVM_DIR/alias/default") 2>/dev/null || return
+  local -a v; v=("$NVM_DIR"/versions/node/v${a#v}*(On))
+  (( $#v )) && print -r -- "$v[1]/bin"
+}
+if [[ -s $NVM_DIR/nvm.sh ]]; then
+  _nvm_bin=$(_nvm_default_bin) && [[ -n $_nvm_bin ]] && path=("$_nvm_bin" $path)
+  unset _nvm_bin
+  nvm() {
+    unset -f nvm
+    \. "$NVM_DIR/nvm.sh"
+    [[ -s $NVM_DIR/bash_completion ]] && \. "$NVM_DIR/bash_completion"
+    nvm "$@"
+  }
+fi
 
 # =============================================================================
 # Package managers
