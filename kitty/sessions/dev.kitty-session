@@ -1,0 +1,16 @@
+new_tab $PROJ_NAME
+enabled_layouts splits,stack
+layout splits
+cd $PROJ
+
+# Left: editor.
+launch --title Editor --var pane=editor nvim .
+
+# Upper right: shell for logs or your development server.
+launch --location=vsplit --title logs
+
+# Lower right: shell for tests.
+launch --location=hsplit --title tests
+
+# Start with keyboard focus in the editor.
+focus_matching_window var:pane=editor
