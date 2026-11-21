@@ -8,10 +8,13 @@
 # _ide_bad_path <path>: true if the path cannot be written into a kitty session file safely.
 # kitty splits session lines on U+0085, U+2028 and U+2029 as well as on newlines, and expands
 # $VAR in every line with no working escape for a literal $ (checked on kitty 0.49.2).
+# It also strips trailing whitespace (ASCII and Unicode) from each line, so "cd /x/tw " opens /x/tw.
 # LC_ALL=C makes the match byte-wise, so it does not depend on the user's locale.
 _ide_bad_path() {
   local LC_ALL=C
-  [[ $1 == *[[:cntrl:]\$]* || $1 == *$'\xe2\x80\xa8'* || $1 == *$'\xe2\x80\xa9'* || $1 == *$'\xc2\x85'* ]]
+  [[ $1 == *[[:cntrl:]\$]* || $1 == *$'\xe2\x80\xa8'* || $1 == *$'\xe2\x80\xa9'* || $1 == *$'\xc2\x85'* ||
+     $1 == *' ' || $1 == *$'\xc2\xa0' || $1 == *$'\xe1\x9a\x80' || $1 == *$'\xe2\x80'[$'\x80'-$'\x8a'] ||
+     $1 == *$'\xe2\x80\xaf' || $1 == *$'\xe2\x81\x9f' || $1 == *$'\xe3\x80\x80' ]]
 }
 typeset -g _IDE_SESSION=${${(%):-%x}:A:h:h}/kitty/ide-session.tmpl   # repo copy, found from this file's real path
 # ide [path...]: open the kitty dev layout, one tab per directory
@@ -29,7 +32,7 @@ ide() {
     [[ -d $d ]] || { print -u2 "ide: not a directory: $d"; return 1; }
     d=${d:A}
     # validate the resolved path: it is pasted into a session file, so it must not inject directives
-    _ide_bad_path $d && { print -u2 "ide: unsupported character in path (control character, U+0085, U+2028, U+2029 or \$)"; return 1; }
+    _ide_bad_path $d && { print -u2 "ide: unsupported character in path (control character, U+0085, U+2028, U+2029, \$ or trailing whitespace)"; return 1; }
     paths+=("$d")
   done
   tpl=$(<$_IDE_SESSION)
@@ -70,6 +73,7 @@ gcof() {
 # _extract_stream <dest> <cmd...>: run cmd into a temp file and replace dest only if cmd succeeds,
 # so a corrupt archive cannot empty an existing file
 _extract_stream() {
+  setopt localoptions noclobber   # > then fails if the temp name already exists, even as a symlink
   local dest=$1 tmp="$1.extract-$$"; shift
   [[ -d $dest ]] && { print -u2 "extract: $dest is a directory"; return 1; }   # mv would drop the temp file inside it
   if "$@" > "$tmp"; then mv -- "$tmp" "$dest"; else rm -f -- "$tmp"; return 1; fi

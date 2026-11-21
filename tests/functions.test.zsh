@@ -19,6 +19,7 @@ fail() { print "FAIL $1"; (( ++fails )); }
 
 # start_listener <tcp|udp>: bind 127.0.0.1 on a free port; sets LPORT and LPID
 start_listener() {
+  : > $tmp/$1.port
   python3 -I -c '
 import socket, sys, time
 udp = sys.argv[1] == "udp"
@@ -27,15 +28,49 @@ s.bind(("127.0.0.1", 0))
 if not udp: s.listen()
 print(s.getsockname()[1], flush=True)
 time.sleep(60)' $1 > $tmp/$1.port &
-  LPID=$!; helpers+=($LPID)
+  LPID=$!; helpers+=($LPID)   # (port file is emptied above so a retry waits for the new port)
   local i; for i in {1..50}; do [[ -s $tmp/$1.port ]] && break; sleep 0.1; done
   LPORT=$(<$tmp/$1.port)
 }
 
 alive() { kill -0 $1 2>/dev/null; }
 
+# tcp_port_busy <port>: true if a process listens on that TCP port
+tcp_port_busy() { [[ -n "$(lsof -tiTCP:$1 -sTCP:LISTEN 2>/dev/null)" ]]; }
+
+# start_udp_listener: like start_listener udp, but never on a port a TCP service already holds,
+# because killport would stop that service
+start_udp_listener() {
+  local i
+  for i in {1..20}; do
+    start_listener udp
+    tcp_port_busy $LPORT || return 0
+    kill $LPID 2>/dev/null
+  done
+  print "could not find a UDP port without a TCP listener" >&2; return 1
+}
+
+# ---- test harness guard ---------------------------------------------------
+# TCP and UDP ports are separate. If the UDP fixture happens to get a port number that
+# a real TCP service already uses, killport would stop that service. tcp_port_busy
+# lets the fixture detect this and pick another port.
+python3 -I -c '
+import socket, time
+t = socket.socket(); t.bind(("127.0.0.1", 0)); t.listen()
+p = t.getsockname()[1]
+u = socket.socket(socket.AF_INET, socket.SOCK_DGRAM); u.bind(("127.0.0.1", p))
+print(p, flush=True); time.sleep(30)' > $tmp/both.port &
+helpers+=($!)
+for i in {1..50}; do [[ -s $tmp/both.port ]] && break; sleep 0.1; done
+BOTH=$(<$tmp/both.port)
+tcp_port_busy $BOTH 2>/dev/null && pass "tcp_port_busy sees a TCP listener on a shared port" \
+  || fail "tcp_port_busy did not report the TCP listener on port $BOTH"
+FREE=$(python3 -I -c 'import socket; s=socket.socket(); s.bind(("127.0.0.1",0)); print(s.getsockname()[1])')
+tcp_port_busy $FREE 2>/dev/null; rc=$?
+(( rc == 1 )) && pass "tcp_port_busy returns 1 for a free port" || fail "tcp_port_busy returned $rc for the free port $FREE"
+
 # ---- killport -------------------------------------------------------------
-start_listener udp
+start_udp_listener || { fail "no safe UDP port for the killport test"; exit 1; }
 killport $LPORT >/dev/null 2>&1; rc=$?
 if alive $LPID && (( rc != 0 )); then pass "killport leaves a UDP-only socket alone (rc=$rc)"
 else fail "killport touched a UDP-only socket on port $LPORT (rc=$rc, alive=$(alive $LPID && echo yes || echo no))"; fi
@@ -61,6 +96,21 @@ print hello | gzip -c > good.gz
 extract good.gz >/dev/null 2>&1
 [[ "$(<good)" == hello ]] && pass "extract still unpacks a valid .gz" || fail "extract broke a valid .gz"
 
+# The temp file is named <dest>.extract-<pid>, which someone else can predict. If that
+# name is already a symlink, writing to it must fail instead of following the link.
+mkdir -p $tmp/sym && cd $tmp/sym
+print precious > report; print "not gzip" > report.gz
+ln -s report "report.extract-$$"
+extract report.gz >/dev/null 2>&1
+if [[ "$(<report)" == precious ]]; then pass "extract does not write through a symlinked temp name"
+else fail "extract emptied ./report through a symlinked temp name (content=[$(<report)])"; fi
+rm -f -- "report.extract-$$"
+ln -s nowhere "report.extract-$$"
+extract report.gz >/dev/null 2>&1
+if [[ ! -e nowhere ]]; then pass "extract does not create files through a dangling temp symlink"
+else fail "extract created ./nowhere through a dangling temp symlink"; fi
+cd $ROOT
+
 # ---- ide ------------------------------------------------------------------
 # kitty splits session files on U+0085, U+2028 and U+2029 (checked against kitty
 # 0.49.2) and expands $VAR in every line, with no working escape for a literal $.
@@ -84,6 +134,19 @@ ide_refuses "U+2029 in a name (LC_ALL=C)"         $'q\xe2\x80\xa9launch x' C
 ide_refuses "U+0085 in a name"                    $'p\xc2\x85launch x'
 ide_refuses "U+0085 in a name (LC_ALL=C)"         $'q\xc2\x85launch x' C
 ide_refuses 'a $ in a name'                       'cost$HOME'
+
+# kitty strips trailing whitespace, ASCII and Unicode, from each session line (checked on
+# kitty 0.49.2), so "cd /x/tw<space>" opens /x/tw. A name that ends in whitespace must be refused.
+ide_refuses "a trailing space"                    'tw '
+ide_refuses "a trailing space (LC_ALL=C)"         'tx ' C
+ide_refuses "a trailing U+00A0"                   $'tw\xc2\xa0'
+ide_refuses "a trailing U+1680"                   $'tw\xe1\x9a\x80'
+ide_refuses "a trailing U+2000"                   $'tw\xe2\x80\x80'
+ide_refuses "a trailing U+200A"                   $'tw\xe2\x80\x8a'
+ide_refuses "a trailing U+202F"                   $'tw\xe2\x80\xaf'
+ide_refuses "a trailing U+205F"                   $'tw\xe2\x81\x9f'
+ide_refuses "a trailing U+3000"                   $'tw\xe3\x80\x80'
+ide_refuses "a trailing U+3000 (LC_ALL=C)"        $'tx\xe3\x80\x80' C
 
 # ordinary names, including a space and non-ASCII, still work and appear verbatim
 mkdir -p -- "$tmp/ide/my proj" "$tmp/ide/café"
