@@ -5,11 +5,6 @@
 # =============================================================================
 # Kitty dev session
 # =============================================================================
-# ide [path...]: open the kitty dev layout, one tab per directory
-#   ide                 current directory
-#   ide ~/Dev/app       one directory
-#   ide ~/Dev/a ~/Dev/b one tab per directory
-# Builds a session by repeating dev.session once per path with $PROJ and $PROJ_NAME filled in.
 # _ide_bad_path <path>: true if the path cannot be written into a kitty session file safely.
 # kitty splits session lines on U+0085, U+2028 and U+2029 as well as on newlines, and expands
 # $VAR in every line with no working escape for a literal $ (checked on kitty 0.49.2).
@@ -19,10 +14,16 @@ _ide_bad_path() {
   [[ $1 == *[[:cntrl:]\$]* || $1 == *$'\xe2\x80\xa8'* || $1 == *$'\xe2\x80\xa9'* || $1 == *$'\xc2\x85'* ]]
 }
 typeset -g _IDE_SESSION=${${(%):-%x}:A:h:h}/kitty/sessions/dev.kitty-session   # repo copy, found from this file's real path
+# ide [path...]: open the kitty dev layout, one tab per directory
+#   ide                 current directory
+#   ide ~/Dev/app       one directory
+#   ide ~/Dev/a ~/Dev/b one tab per directory
+# Builds a session by repeating dev.session once per path with $PROJ and $PROJ_NAME filled in,
+# and pipes it to kitty on stdin, so there is no temp file and kitty's exit status is returned.
 ide() {
   local -a dirs=("${@:-$PWD}")
   local -a paths
-  local d tpl out
+  local d tpl
   [[ -r $_IDE_SESSION ]] || { print -u2 "ide: session file not found: $_IDE_SESSION"; return 1; }
   for d in $dirs; do
     [[ -d $d ]] || { print -u2 "ide: not a directory: $d"; return 1; }
@@ -32,10 +33,7 @@ ide() {
     paths+=("$d")
   done
   tpl=$(<$_IDE_SESSION)
-  out=$(mktemp -t ide-session) || return 1
-  for d in $paths; do print -r -- "${${tpl//\$PROJ_NAME/${d:t}}//\$PROJ/$d}"; done > $out
-  kitty --detach --session $out
-  (sleep 10; rm -f $out) &!   # kitty reads the file after detaching, so delete it later
+  for d in $paths; do print -r -- "${${tpl//\$PROJ_NAME/${d:t}}//\$PROJ/$d}"; done | kitty --detach --session -
 }
 compdef _directories ide
 

@@ -65,7 +65,8 @@ extract good.gz >/dev/null 2>&1
 # kitty splits session files on U+0085, U+2028 and U+2029 (checked against kitty
 # 0.49.2) and expands $VAR in every line, with no working escape for a literal $.
 # So ide must refuse such paths instead of pasting them into the session.
-kitty() { cp -- "$3" $tmp/session.out; }   # stub for: kitty --detach --session FILE
+# stub for: kitty --detach --session -   (the session arrives on stdin; anything else is an error)
+kitty() { [[ $1 == --detach && $2 == --session && $3 == - ]] || return 64; cat > $tmp/session.out; }
 
 # ide_refuses <label> <dir name> [locale]: ide must exit non-zero and write no session
 ide_refuses() {
@@ -93,5 +94,19 @@ for n in "my proj" "café"; do
   then pass "ide opens '$n' with the right title and cwd"
   else fail "ide mishandled '$n' (rc=$rc)"; fi
 done
+
+# The session goes to kitty on stdin, so there is no temp file to clean up on a timer
+# (a timer deletes the file too early if kitty is slow to start) and kitty's exit
+# status is not hidden behind a background job.
+mkdir -p -- "$tmp/ide/plain"
+count_sessions() { print -l ${TMPDIR:-/tmp}/ide-session*(N) | grep -c . ; }
+before=$(count_sessions)
+ide "$tmp/ide/plain" >/dev/null 2>&1
+after=$(count_sessions)
+(( after == before )) && pass "ide leaves no temp session file" || fail "ide left $(( after - before )) temp session file(s) in ${TMPDIR:-/tmp}"
+
+kitty() { cat >/dev/null; return 3; }   # stub: kitty exits 3
+ide "$tmp/ide/plain" >/dev/null 2>&1; rc=$?
+(( rc == 3 )) && pass "ide returns kitty's exit status" || fail "ide returned $rc when kitty exited 3"
 
 (( fails == 0 ))
