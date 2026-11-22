@@ -7,3 +7,7 @@
 # Puts /opt/homebrew/bin ahead of /usr/local/bin and adds Homebrew's zsh
 # completions to fpath (must run before compinit in completion.zsh).
 eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# ---------- personal-knowledge MCP ------------
+# opencode.json reads this through {env:PKM_CONFIG}.
+export PKM_CONFIG="$HOME/Dev/Personal/personal-knowledge-mcp/config/pkm.yaml"
