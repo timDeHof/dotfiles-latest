@@ -1,0 +1,16 @@
+# Claude Code with its plan note.
+# Left: claude. Upper right: the newest plan note from the vault, redrawn when it changes.
+# Lower right: a shell for tests.
+new_tab claude-notes
+enabled_layouts tall:bias=60,stack
+layout tall
+cd ~/Dev/home
+
+launch --hold --title claude --var pane=claude claude
+# kitty does not expand $HOME in launch arguments, and a Dock-launched kitty has no
+# Homebrew PATH, so a login shell finds bat and fswatch and expands $HOME.
+launch --title plan zsh -lc 'exec "$HOME/github/dotfiles-latest/kitty/scripts/plan-watch.sh"'
+launch --title shell
+
+focus_matching_window var:pane=claude
+focus_os_window
